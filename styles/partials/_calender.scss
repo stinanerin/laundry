@@ -1,0 +1,34 @@
+body {
+    background-color: rgb(121, 127, 167);
+}
+
+.container {
+    border: 1px solid blue;
+    background-color: palegoldenrod;
+}
+.row {
+    border: 1px solid red;
+    background-color: paleturquoise;
+
+}
+.col {
+    border: 1px solid green;
+    background-color: pink;
+}
+
+.day {
+    min-height: 40px;
+    &:hover {
+        font-weight: 900;
+        background-color: purple;
+        color:white;
+        font-size: 1.5rem;
+    }
+}
+
+.active {
+    font-weight: 900;
+    background-color: purple;
+    color:white;
+    font-size: 1.5rem;
+}
