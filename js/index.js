@@ -36,27 +36,20 @@ let renderMonthCalender = () => {
         // The reamining dates, from the next month, which happen in the current months last week
         nextDays = 7 - lastDay.getDay();
 
-    // // Initates week days container
-    // let days = "";
-
-    console.log(day);
-    console.log(lastDate);
-    console.log(nextDays);
-
+    // Initates week days counter and container
     let weekDays = 0;
     let row;
 
     // Renders the dates from previous month
-    // day = the amount of days from the current week that belong to the previous month
+    // "day" = the amount of days from the current week that belong to the previous month
     for (let x = day; x > 0; x--) {
         // Creates new row for cal days for each week
         if(weekDays % 7 === 0) {
             row = createElement("div", "row g-0");
             daysContainer.append(row);
-
         }
         weekDays ++;
-        row.innerHTML += `<div class="day col">${prevMontshLastDate - x + 1}</div>`;
+        row.innerHTML += `<div class="day col d-flex justify-content-center align-items-center">${prevMontshLastDate - x + 1}</div>`;
     }
     // Renders the dates from the current month
     for (let x = 1 ; x <= lastDate ; x++) {
@@ -65,8 +58,12 @@ let renderMonthCalender = () => {
             row = createElement("div", "row g-0");
             daysContainer.append(row);
         }
+        if(x === today.getDate()) {
+            row.innerHTML += `<div class="today day col d-flex justify-content-center align-items-center">${x}</div>`;
+        } else {
+            row.innerHTML += `<div class="day col d-flex justify-content-center align-items-center">${x}</div>`;
+        }
         weekDays ++;
-        row.innerHTML += `<div class="day col">${x}</div>`;
     }
     // Renders the dates from the next month
     for(let x = 1; x <= nextDays; x++) {
@@ -76,11 +73,11 @@ let renderMonthCalender = () => {
             daysContainer.append(row);
         }
         weekDays ++;
-        row.innerHTML += `<div class="day col">${x}</div>`;
+        row.innerHTML += `<div class="day col d-flex justify-content-center align-items-center">${x}</div>`;
     }
 
     // Updates DOM
-    dateHeader.innerHTML = months[month] + " " + year;
+    dateHeader.innerHTML =  `<h2>${months[month]} ${year}</h2>`;
 
 }
 
