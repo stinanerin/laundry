@@ -1,8 +1,14 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css") layer(bootstrap);
 @layer bootstrap, special-styles;
 @layer special-styles {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: Georgia;
+    margin: 0;
+    padding: 0;
+  }
   body {
     background-color: rgb(121, 127, 167);
+    font-family: monospace;
   }
   .container {
     border: 1px solid blue;
@@ -26,9 +32,13 @@
     font-size: 1.5rem;
   }
   .active {
-    font-weight: 900;
     background-color: purple;
     color: white;
+    font-weight: 900;
+    font-size: 1.5rem;
+  }
+  .today {
+    font-weight: 900;
     font-size: 1.5rem;
   }
 }/*# sourceMappingURL=style.css.map */
