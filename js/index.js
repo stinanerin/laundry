@@ -12,14 +12,12 @@ const calendar = document.querySelector(".calendar"),
     weekdays = Array.from({length: 7}, (e, i) => {
         return new Date(null, null , i).toLocaleDateString("en", {weekday: "long"});
     })
-    console.log(weekdays);
 let today = new Date(),
     month = today.getMonth(),
     year = today.getFullYear();
-// ----------------------- GLOBAL FUNCTIONS -----------------------
 
+// ----------------------- GLOBAL FUNCTIONS -----------------------
 let createElement = (type, aClass, str) => {
-    
     let elem = document.createElement(type);
     elem.className = aClass;
     if(str) {
@@ -29,15 +27,9 @@ let createElement = (type, aClass, str) => {
 }
 
 let renderDayView = () => {
-    console.log("hej");
-
-    let dayBtns = document.querySelectorAll(".day");
-    // console.log(dayBtns);
-    dayBtns.forEach(btn => {
+    document.querySelectorAll(".day").forEach(btn => {
         btn.addEventListener("click", (e) => {
-            console.log("clicked");
             let button = e.target
-            console.log(e.target.innerText);
             let monthName = 
                 button.classList.contains("prevMonth") ? months[month - 1]
                 : button.classList.contains("nextMonth") ? months[month + 1]
@@ -68,9 +60,6 @@ let renderMonthCalender = () => {
         lastDate = lastDay.getDate(),
         // The reamining dates, from the next month, which happen in the current months last week
         nextDays = 7 - lastDay.getDay();
-
-    console.log(lastDay);
-    console.log(lastDate);
     
     // Initates week days counter and container
     let weekDays = 0;
@@ -85,25 +74,21 @@ let renderMonthCalender = () => {
             dayGrid.append(row);
         }
         weekDays ++;
-        console.log(weekDays);
         row.append(createElement("button", "day prevMonth col d-flex justify-content-center align-items-center", prevMontshLastDate - x + 1));
     }
     // Renders the dates from the current month
     for (let x = 1 ; x <= lastDate ; x++) {
         // Creates new row for cal days for each week
         if(weekDays % 7 === 0) {
-            console.log("full week");
-            weekDays = 0
             row = createElement("div", "row g-0");
             dayGrid.append(row);
         }
         if(x === today.getDate()) {
-            row.append(createElement("button", "day col d-flex justify-content-center align-items-center", x));
+            row.append(createElement("button", "today day col d-flex justify-content-center align-items-center", x));
         } else {
             row.append(createElement("button", "day col d-flex justify-content-center align-items-center", x));
         }
         weekDays ++;
-        console.log(weekDays);
     }
     // Renders the dates from the next month
     for(let x = 1; x <= nextDays; x++) {
@@ -114,7 +99,6 @@ let renderMonthCalender = () => {
             dayGrid.append(row);
         }
         weekDays ++;
-        console.log(weekDays);
         row.append(createElement("button", "day nextMonth col d-flex justify-content-center align-items-center", x));
     }
 
