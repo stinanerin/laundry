@@ -12,7 +12,7 @@ const calendar = document.querySelector(".calendar"),
     weekdays = Array.from({length: 7}, (e, i) => {
         return new Date(null, null , i).toLocaleDateString("en", {weekday: "long"});
     })
-    timeslots = ["08:00", "12:00", "17:00"]
+    timeslots = ["08", "12", "17"]
 let today = new Date(),
     month = today.getMonth(),
     year = today.getFullYear();
@@ -30,21 +30,23 @@ let createElement = (type, aClass, str) => {
 let renderDayView = () => {
     document.querySelectorAll(".day").forEach(btn => {
         btn.addEventListener("click", (e) => {
-            let button = e.target
-            let monthName = 
+            const button = e.target
+            const monthName = 
                 button.classList.contains("prevMonth") ? months[month - 1]
                 : button.classList.contains("nextMonth") ? months[month + 1]
                 : months[month]
+            const currentDate = new Date(year, months.indexOf(monthName), button.innerText)
             dayView.innerHTML = `
             <h2 class="row g-0">
-                <span class="weekday col">${weekdays[(new Date(year, months.indexOf(monthName), button.innerText)).getDay()]}</span>
+                <span class="weekday col">${weekdays[currentDate.getDay()]}</span>
                 <span class="date col text-end">${button.innerText} ${monthName}</span>
             </h2>`
-            let div = createElement("div", "row g-0")
+            const div = createElement("div", "row g-0")
             dayView.append(div)
             timeslots.forEach(time => {
                 div.append(createElement("button", "time-slot col", time))
             })
+            bookTime(currentDate)
         })
     })
 }
@@ -109,7 +111,17 @@ let renderMonthCalender = () => {
     renderDayView()
 
 }
-
 renderMonthCalender()
 
-
+let bookTime = (date) => {
+    let timeslots = document.querySelectorAll(".time-slot");
+    console.log(typeof date);
+    console.log(date);
+    // console.log({date});
+    timeslots.forEach(slot => slot.addEventListener("click", (e) => {
+        console.log("choosen", +e.target.innerText);
+        console.log(date);
+        date.setHours(+e.target.innerText, 00, 00);   
+        console.log(date);
+    }))
+}
