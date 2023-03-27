@@ -22,6 +22,9 @@
     border: 1px solid green;
     background-color: pink;
   }
+  .hidden {
+    display: none;
+  }
   .day {
     min-height: 40px;
   }

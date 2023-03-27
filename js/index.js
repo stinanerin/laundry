@@ -1,7 +1,9 @@
 // ----------------------- GLOBAL VARIABLES -----------------------
 const calendar = document.querySelector(".calendar"),
     dayGrid = document.querySelector(".calender-days-grid"),
+    bookingForm = document.querySelector("#bookTime"),
     dayView = document.querySelector(".day-view"),
+    timeBooking = document.querySelector(".booking"),
     dateHeader = document.querySelector(".month-header"),
     prevMonth = document.querySelector(".fa-angle-left"),
     nextMonth = document.querySelector(".fa-angle-right"),
@@ -12,11 +14,11 @@ const calendar = document.querySelector(".calendar"),
     weekdays = Array.from({length: 7}, (e, i) => {
         return new Date(null, null , i).toLocaleDateString("en", {weekday: "long"});
     })
-    timeslots = ["08", "12", "17"]
+    timeslots = ["08", "12", "17"];
 let today = new Date(),
     month = today.getMonth(),
-    year = today.getFullYear();
-
+    year = today.getFullYear(),
+    currentDate;
 // ----------------------- GLOBAL FUNCTIONS -----------------------
 let createElement = (type, aClass, str) => {
     let elem = document.createElement(type);
@@ -26,6 +28,7 @@ let createElement = (type, aClass, str) => {
     }
     return elem;
 }
+
 
 let renderDayView = () => {
     document.querySelectorAll(".day").forEach(btn => {
@@ -37,16 +40,30 @@ let renderDayView = () => {
                 : months[month]
             const currentDate = new Date(year, months.indexOf(monthName), button.innerText)
             dayView.innerHTML = `
-            <h2 class="row g-0">
+            <h2 class="row gx-0">
                 <span class="weekday col">${weekdays[currentDate.getDay()]}</span>
                 <span class="date col text-end">${button.innerText} ${monthName}</span>
-            </h2>`
-            const div = createElement("div", "row g-0")
-            dayView.append(div)
-            timeslots.forEach(time => {
-                div.append(createElement("button", "time-slot col", time))
-            })
-            bookTime(currentDate)
+            </h2>
+            <div class="row gx-0">
+                <div class="col">
+                    <label for="morning">08
+                        <input type="radio" name="time-slot" id="morning" value="08" required>
+                    </label>
+                </div>
+                <div class="col">
+                    <label for="noon">12
+                        <input type="radio" name="time-slot" id="noon" value="12">
+                    </label>
+                </div>
+                <div class="col">
+                    <label for="evening">17
+                        <input type="radio" name="time-slot" id="evening" value="17">
+                    </label>
+                </div>
+                <p class="m-0"></p>
+                <button type="submit" class="btn btn-success">Book</button>
+            </div>`
+            updateChoosenDate(currentDate)
         })
     })
 }
@@ -113,15 +130,17 @@ let renderMonthCalender = () => {
 }
 renderMonthCalender()
 
-let bookTime = (date) => {
-    let timeslots = document.querySelectorAll(".time-slot");
-    console.log(typeof date);
-    console.log(date);
-    // console.log({date});
-    timeslots.forEach(slot => slot.addEventListener("click", (e) => {
-        console.log("choosen", +e.target.innerText);
-        console.log(date);
-        date.setHours(+e.target.innerText, 00, 00);   
-        console.log(date);
+let updateChoosenDate = (date) => {    
+    document.querySelectorAll("input[type='radio'][name='time-slot']").forEach(slot => slot.addEventListener("change", (e) => {
+        date.setHours(e.target.value, 00, 00)
+        currentDate = date
+        bookingForm.querySelector("p").innerHTML = `You have choosen ${date.toLocaleTimeString()} ${date.toLocaleDateString()}. </br>Make sure to book it to complete the process`
     }))
 }
+
+bookingForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    console.log("booked", currentDate);
+
+});
