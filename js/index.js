@@ -12,6 +12,7 @@ const calendar = document.querySelector(".calendar"),
     weekdays = Array.from({length: 7}, (e, i) => {
         return new Date(null, null , i).toLocaleDateString("en", {weekday: "long"});
     })
+    timeslots = ["08:00", "12:00", "17:00"]
 let today = new Date(),
     month = today.getMonth(),
     year = today.getFullYear();
@@ -38,12 +39,12 @@ let renderDayView = () => {
             <h2 class="row g-0">
                 <span class="weekday col">${weekdays[(new Date(year, months.indexOf(monthName), button.innerText)).getDay()]}</span>
                 <span class="date col text-end">${button.innerText} ${monthName}</span>
-            </h2>
-            <div class="row g-0">
-                <button class="time-slot col">08:00</button>
-                <button class="time-slot col">12:00</button>
-                <button class="time-slot col">17:00</button>
-            </div>`
+            </h2>`
+            let div = createElement("div", "row g-0")
+            dayView.append(div)
+            timeslots.forEach(time => {
+                div.append(createElement("button", "time-slot col", time))
+            })
         })
     })
 }
@@ -104,7 +105,7 @@ let renderMonthCalender = () => {
 
     // Updates DOM
     dateHeader.innerHTML =  `<h2>${months[month]} ${year}</h2>`;
-
+    // Iniates day view function for each calender button
     renderDayView()
 
 }
