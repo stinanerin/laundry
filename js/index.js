@@ -19,6 +19,7 @@ let today = new Date(),
     month = today.getMonth(),
     year = today.getFullYear(),
     currentDate;
+    currentList = "63fd07e82a491a4d0882d577";
 // ----------------------- GLOBAL FUNCTIONS -----------------------
 let createElement = (type, aClass, str) => {
     let elem = document.createElement(type);
@@ -134,6 +135,7 @@ let updateChoosenDate = (date) => {
     document.querySelectorAll("input[type='radio'][name='time-slot']").forEach(slot => slot.addEventListener("change", (e) => {
         date.setHours(e.target.value, 00, 00)
         currentDate = date
+        console.log(date);
         bookingForm.querySelector("p").innerHTML = `You have choosen <strong>${date.toLocaleTimeString()} ${date.toLocaleDateString()}</strong>. </br>Make sure to book it to complete the process`
     }))
 }
@@ -142,5 +144,6 @@ bookingForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
     console.log("booked", currentDate);
+    addBooking(currentList, currentDate)
 
 });
