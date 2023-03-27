@@ -95,7 +95,7 @@ let renderMonthCalender = () => {
             dayGrid.append(row);
         }
         weekDays ++;
-        row.append(createElement("button", "day prevMonth col d-flex justify-content-center align-items-center", prevMontshLastDate - x + 1));
+        row.append(createElement("li", "day prevMonth col d-flex justify-content-center align-items-center", prevMontshLastDate - x + 1));
     }
     // Renders the dates from the current month
     for (let x = 1 ; x <= lastDate ; x++) {
@@ -105,9 +105,9 @@ let renderMonthCalender = () => {
             dayGrid.append(row);
         }
         if(x === today.getDate()) {
-            row.append(createElement("button", "today day col d-flex justify-content-center align-items-center", x));
+            row.append(createElement("li", "today day col d-flex justify-content-center align-items-center", x));
         } else {
-            row.append(createElement("button", "day col d-flex justify-content-center align-items-center", x));
+            row.append(createElement("li", "day col d-flex justify-content-center align-items-center", x));
         }
         weekDays ++;
     }
@@ -120,7 +120,7 @@ let renderMonthCalender = () => {
             dayGrid.append(row);
         }
         weekDays ++;
-        row.append(createElement("button", "day nextMonth col d-flex justify-content-center align-items-center", x));
+        row.append(createElement("li", "day nextMonth col d-flex justify-content-center align-items-center", x));
     }
 
     // Updates DOM
@@ -133,8 +133,10 @@ renderMonthCalender()
 
 let updateChoosenDate = (date) => {    
     document.querySelectorAll("input[type='radio'][name='time-slot']").forEach(slot => slot.addEventListener("change", (e) => {
-        date.setHours(e.target.value, 00, 00)
         currentDate = date
+        console.log(date);
+        currentDate.setHours(e.target.value, 00, 00)
+        console.log(currentDate);
         console.log(date);
         bookingForm.querySelector("p").innerHTML = `You have choosen <strong>${date.toLocaleTimeString()} ${date.toLocaleDateString()}</strong>. </br>Make sure to book it to complete the process`
     }))
@@ -142,8 +144,7 @@ let updateChoosenDate = (date) => {
 
 bookingForm.addEventListener('submit', (e) => {
     e.preventDefault();
-
-    console.log("booked", currentDate);
+    console.log("booked");
     addBooking(currentList, currentDate)
 
 });
