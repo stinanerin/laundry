@@ -134,7 +134,7 @@ let updateChoosenDate = (date) => {
     document.querySelectorAll("input[type='radio'][name='time-slot']").forEach(slot => slot.addEventListener("change", (e) => {
         date.setHours(e.target.value, 00, 00)
         currentDate = date
-        bookingForm.querySelector("p").innerHTML = `You have choosen ${date.toLocaleTimeString()} ${date.toLocaleDateString()}. </br>Make sure to book it to complete the process`
+        bookingForm.querySelector("p").innerHTML = `You have choosen <strong>${date.toLocaleTimeString()} ${date.toLocaleDateString()}</strong>. </br>Make sure to book it to complete the process`
     }))
 }
 
