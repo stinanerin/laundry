@@ -1,10 +1,12 @@
 # Laundry room booking system
 
-It's time we all entered the 21st century and left behind those old-fashioned laundry boards. With my system, you can easily book and cancel laundry times from anywhere, and never worry about someone stealing your time.
+It's time we all entered the 21st century and left behind those old-fashioned laundry boards. With my system, you can easily book and cancel laundry times from anywhere.
 
 My ultimate goal is to add a notification feature that sends you a reminder when your laundry time begins and is up, so you'll never forget to move your clothes to the dryer! 
 
 I have started working out a solution just using an API as *backend*, but I am hopeful I will be able to migrate it to a real backend solution with time.
+
+If nothing else I will have learnt a lot.
 
 Wish me luck!
 
