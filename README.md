@@ -8,6 +8,6 @@ I have started working out a solution just using an API as *backend*, but I am h
 
 Wish me luck!
 
-## A girl can dream - features
+## A girl can dream features
 * Notification system
 * Installing hardware preventing anyone but the booker to enter the laundry room, preventing the most pressing issue of our time - laundry room theft!
