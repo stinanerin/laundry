@@ -34,7 +34,7 @@ const createElement = (type, aClass, str, arr) => {
     return elem;
 }
 const diasableElem = (arr) => {
-    document.querySelectorAll("input[type='radio']").forEach(radio => {
+    document.querySelectorAll("input[type='radio'][name='time-slot']").forEach(radio => {
         arr.includes(+radio.value) ? radio.disabled = true : "";
     })
 }
@@ -156,16 +156,14 @@ renderMonthCalender()
 const updateChoosenDate = (date) => {    
     document.querySelectorAll("input[type='radio'][name='time-slot']").forEach(slot => slot.addEventListener("change", (e) => {
         currentDate = date
-        // console.log(date);
         currentDate.setHours(e.target.value, 00, 00)
-        //console.log(currentDate);
-        //console.log(date);
-        bookingForm.querySelector("p").innerHTML = `You have choosen <strong>${date.toLocaleTimeString()} ${date.toLocaleDateString()}</strong>. </br>Make sure to book it to complete the process`
+        bookingForm.querySelector("p").innerHTML = `You have choosen <strong>${currentDate.toLocaleTimeString()} ${currentDate.toLocaleDateString()}</strong>. </br>Make sure to book it to complete the process`
     }))
 }
 
 bookingForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    console.log("booked");
+    // Disabled booked radio
+    e.target.querySelector("input[type='radio']:checked").disabled = true;    
     addBooking(currentList, currentDate)
 });
