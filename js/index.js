@@ -158,11 +158,17 @@ bookingForm.addEventListener('submit', (e) => {
 // ----------------------- ALTER MONTH -----------------------
 
 const alterMonth = (str) => {
-    console.log("hej");
-    console.log(month);
     if(str === "add") {
+        if(month === 11) {
+            year++
+            month = -1
+        }
         month++
     } else {
+        if(month === 0) {
+            year--
+            month = 12
+        }
         month--
     }
     renderMonthCal()
