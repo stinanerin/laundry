@@ -166,4 +166,6 @@ bookingForm.addEventListener('submit', (e) => {
     // Disabled booked radio
     e.target.querySelector("input[type='radio']:checked").disabled = true;    
     addBooking(currentList, currentDate)
+    // Adds the recently booked date to global bookings-arr - avoiding another API-request - which is looped when the day-view is rendered
+    bookings.push(currentDate)
 });
