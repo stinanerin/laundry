@@ -5,8 +5,8 @@ const calendar = document.querySelector(".calendar"),
     dayView = document.querySelector(".day-view"),
     timeBooking = document.querySelector(".booking"),
     dateHeader = document.querySelector(".month-header"),
-    prevMonth = document.querySelector(".fa-angle-left"),
-    nextMonth = document.querySelector(".fa-angle-right"),
+    prevMonth = document.querySelector("#prevMonth"),
+    nextMonth = document.querySelector("#nextMonth"),
     //curtesy of https://gist.github.com/seripap/9eb809268eb8026abd9f
     months = Array.from({length: 12}, (e, i) => {
         return new Date(null, i + 1, null).toLocaleDateString("en", {month: "long"});
@@ -67,7 +67,10 @@ const renderDayView = () => {
     })
 }
 
-const renderMonthCalender = async() => {
+const renderMonthCal = async() => {
+    // Clears calender & booking form when month changes
+    dayGrid.innerHTML = "";
+    dayView.innerHTML = "";
     //todo! bryt ut
     // Fetches all bookings from API
     const arr = await fetchData(currentList)
@@ -92,7 +95,6 @@ const renderMonthCalender = async() => {
     // Renders the dates from previous month
     // "day" = the amount of days from the current week that belong to the previous month
     for (let x = day; x > 0; x--) {
-
         // Creates new row for cal days for each week
         if(weekDays % 7 === 0) {
             row = createElement("div", "row g-0");
@@ -134,7 +136,7 @@ const renderMonthCalender = async() => {
     renderDayView()
 }
 
-renderMonthCalender()
+renderMonthCal()
 
 const updateChoosenDate = (date) => {    
     document.querySelectorAll("input[type='radio'][name='time-slot']").forEach(slot => slot.addEventListener("change", (e) => {
@@ -152,3 +154,19 @@ bookingForm.addEventListener('submit', (e) => {
     // Adds the recently booked date to global bookings-arr - avoiding another API-request - which is looped when the day-view is rendered
     bookings.push(currentDate)
 });
+
+// ----------------------- ALTER MONTH -----------------------
+
+const alterMonth = (str) => {
+    console.log("hej");
+    console.log(month);
+    if(str === "add") {
+        month++
+    } else {
+        month--
+    }
+    renderMonthCal()
+}
+
+prevMonth.addEventListener("click", () => { alterMonth("prev") })
+nextMonth.addEventListener("click", () => { alterMonth("add") })
