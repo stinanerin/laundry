@@ -5,8 +5,8 @@ const calendar = document.querySelector(".calendar"),
     dayView = document.querySelector(".day-view"),
     timeBooking = document.querySelector(".booking"),
     dateHeader = document.querySelector(".month-header"),
-    prevMonth = document.querySelector(".fa-angle-left"),
-    nextMonth = document.querySelector(".fa-angle-right"),
+    prevMonth = document.querySelector("#prevMonth"),
+    nextMonth = document.querySelector("#nextMonth"),
     //curtesy of https://gist.github.com/seripap/9eb809268eb8026abd9f
     months = Array.from({length: 12}, (e, i) => {
         return new Date(null, i + 1, null).toLocaleDateString("en", {month: "long"});
@@ -21,23 +21,6 @@ let today = new Date(),
     currentDate,
     currentList = "63fd07e82a491a4d0882d577",
     bookings;
-// ----------------------- GLOBAL FUNCTIONS -----------------------
-const createElement = (type, aClass, str, arr) => {
-    let elem = document.createElement(type);
-    elem.className = aClass;
-    if(str) {
-        elem.innerText = str
-    }
-    if(arr) {
-
-    }
-    return elem;
-}
-const diasableElem = (arr) => {
-    document.querySelectorAll("input[type='radio'][name='time-slot']").forEach(radio => {
-        arr.includes(+radio.value) ? radio.disabled = true : "";
-    })
-}
 
 const renderDayView = () => {
     document.querySelectorAll(".day").forEach(btn => {
@@ -84,7 +67,10 @@ const renderDayView = () => {
     })
 }
 
-const renderMonthCalender = async() => {
+const renderMonthCal = async() => {
+    // Clears calender & booking form when month changes
+    dayGrid.innerHTML = "";
+    dayView.innerHTML = "";
     //todo! bryt ut
     // Fetches all bookings from API
     const arr = await fetchData(currentList)
@@ -109,7 +95,6 @@ const renderMonthCalender = async() => {
     // Renders the dates from previous month
     // "day" = the amount of days from the current week that belong to the previous month
     for (let x = day; x > 0; x--) {
-
         // Creates new row for cal days for each week
         if(weekDays % 7 === 0) {
             row = createElement("div", "row g-0");
@@ -151,7 +136,7 @@ const renderMonthCalender = async() => {
     renderDayView()
 }
 
-renderMonthCalender()
+renderMonthCal()
 
 const updateChoosenDate = (date) => {    
     document.querySelectorAll("input[type='radio'][name='time-slot']").forEach(slot => slot.addEventListener("change", (e) => {
@@ -169,3 +154,25 @@ bookingForm.addEventListener('submit', (e) => {
     // Adds the recently booked date to global bookings-arr - avoiding another API-request - which is looped when the day-view is rendered
     bookings.push(currentDate)
 });
+
+// ----------------------- ALTER MONTH -----------------------
+
+const alterMonth = (str) => {
+    if(str === "add") {
+        if(month === 11) {
+            year++
+            month = -1
+        }
+        month++
+    } else {
+        if(month === 0) {
+            year--
+            month = 12
+        }
+        month--
+    }
+    renderMonthCal()
+}
+
+prevMonth.addEventListener("click", () => { alterMonth("prev") })
+nextMonth.addEventListener("click", () => { alterMonth("add") })
