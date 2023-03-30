@@ -5,9 +5,9 @@ const fetchData = async(id) => {
     const data = await res.json();
     let arr = data.itemList
     let  objBooking  = arr[arr.length -1];
-    console.log(objBooking);
+    console.log("latest booking", objBooking);
+    return arr
 }
-fetchData("63fd07e82a491a4d0882d577")
 
 const addBooking = async(listId, dateObject, userID) => {
     try {
@@ -23,7 +23,6 @@ const addBooking = async(listId, dateObject, userID) => {
     
         })
         const { list } = await res.json();
-        console.log(list);
     } catch(error) {
         console.log(error);
     }
