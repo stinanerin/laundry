@@ -16,6 +16,7 @@
      <!--  CSS -->
     <link rel="stylesheet" href="styles/style.css">
     <!-- JS -->
+    <script src="js/api.js" defer></script>
     <script src="js/index.js" defer></script>
 </head>
 <body>
@@ -30,13 +31,13 @@
                 <div class="calendar container">
                     <!-- HEADER MONTH - CONTROLLER-->
                     <div class="row d-flex align-items-center">
-                        <div class="col text-start"><button><i class="fas fa-angle-left"></i></button></div>
+                        <div class="col text-start"><button class="btn"><i class="fas fa-angle-left"></i></button></div>
                         <div class="month-header col text-center"></div>
-                        <div class="col text-end"><button><i class="fas fa-angle-right"></i></button></div>
+                        <div class="col text-end"><button class="btn"><i class="fas fa-angle-right"></i></button></div>
                     </div>
                     <!-- WEEKDAYS-->
                     <!--todo! Annan lösning än g-0?-->
-                    <div class="row text-center g-0">
+                    <div class="row text-center gx-0">
                         <div class="col"><h3>Mon</h3></div>
                         <div class="col"><h3>Tue</h3></div>
                         <div class="col"><h3>Wed</h3></div>
@@ -46,16 +47,19 @@
                         <div class="col"><h3>Sun</h3></div>
                     </div>
                     <!-- CALENDER DAYS GRID-->
-                    <div class="calender-days-grid text-center">
+                    <ul class="calender-days-grid text-center p-0">
                         <!-- Grid inserted via JS -->                        
-                    </div>
+                    </ul>
                 </div>
             </div>
             <div class="row">
                 <!-- DAY VIEW -->
-                <div class="day-view container">
-                    <!-- Time-slots inserted via JS -->                        
-                </div>
+                <form id="bookTime" class="container">
+                    <div class="day-view">
+                        <!-- Time-slots inserted via JS -->
+                    </div>
+                    
+                </form>
             </div>
         </div>
     </main>

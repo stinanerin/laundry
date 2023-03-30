@@ -7,5 +7,6 @@ layer(bootstrap);
 @layer special-styles {
     @import "./partials/variables";
     @import "./partials/headings";
+    @import "./partials/global";
     @import "./partials/calender";
 }
