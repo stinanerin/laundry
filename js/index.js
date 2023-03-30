@@ -21,23 +21,6 @@ let today = new Date(),
     currentDate,
     currentList = "63fd07e82a491a4d0882d577",
     bookings;
-// ----------------------- GLOBAL FUNCTIONS -----------------------
-const createElement = (type, aClass, str, arr) => {
-    let elem = document.createElement(type);
-    elem.className = aClass;
-    if(str) {
-        elem.innerText = str
-    }
-    if(arr) {
-
-    }
-    return elem;
-}
-const diasableElem = (arr) => {
-    document.querySelectorAll("input[type='radio'][name='time-slot']").forEach(radio => {
-        arr.includes(+radio.value) ? radio.disabled = true : "";
-    })
-}
 
 const renderDayView = () => {
     document.querySelectorAll(".day").forEach(btn => {
