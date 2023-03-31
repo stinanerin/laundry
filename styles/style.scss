@@ -6,7 +6,10 @@ layer(bootstrap);
 
 @layer special-styles {
     @import "./partials/variables";
+    @import "./partials/mixins";
     @import "./partials/headings";
     @import "./partials/global";
-    @import "./partials/calender";
+    @import "./partials/calendar";
+    @import "./partials/header";
+    @import "./partials/footer";
 }
