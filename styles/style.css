@@ -2,46 +2,92 @@
 @layer bootstrap, special-styles;
 @layer special-styles {
   h1, h2, h3, h4, h5, h6 {
-    font-family: Georgia;
+    font-family: "Poppins", sans-serif;
     margin: 0;
     padding: 0;
+    color: hsl(0deg, 0%, 100%);
   }
   body {
-    background-color: rgb(121, 127, 167);
-    font-family: monospace;
+    font-family: system-ui;
+    color: hsl(0deg, 0%, 100%);
+    font-size: 0.8rem;
   }
-  .container {
-    border: 1px solid blue;
-    background-color: palegoldenrod;
+  html {
+    height: 100%;
   }
-  .row {
-    border: 1px solid red;
-    background-color: paleturquoise;
+  body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    background-color: #2d3d6a;
+    background-image: radial-gradient(circle 610px at 5.2% 51.6%, rgb(5, 8, 114) 0%, rgb(7, 3, 53) 97.5%);
   }
-  .col {
-    border: 1px solid green;
-    background-color: pink;
+  main {
+    padding: 0 1rem;
+  }
+  .main {
+    max-width: 33rem;
+    margin: auto;
+  }
+  i {
+    color: hsl(0deg, 0%, 100%);
   }
   .hidden {
     display: none;
   }
-  .day {
-    min-height: 40px;
+  .submit {
+    background-color: #909ec9;
+    color: hsl(0deg, 0%, 100%);
+    padding: 0.5rem 1rem;
+    min-width: 12rem;
   }
-  .day:hover {
-    font-weight: 900;
-    background-color: purple;
-    color: white;
-    font-size: 1.5rem;
+  .calendar {
+    padding: 3rem 0;
+    border-radius: 0.5rem;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.133) 0%, rgba(255, 255, 255, 0) 100%);
   }
-  .active {
-    background-color: purple;
-    color: white;
-    font-weight: 900;
-    font-size: 1.5rem;
+  .calendar .row {
+    border-radius: 0.5rem;
   }
-  .today {
+  .calendar .day {
+    min-height: 50px;
+    padding: 0.5rem;
+    border-radius: 50px;
+  }
+  .calendar .day:hover, .calendar .day.active, .calendar .day.today {
     font-weight: 900;
-    font-size: 1.5rem;
+    font-size: 1rem;
+    min-width: 50px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.133) 0%, rgba(255, 255, 255, 0.113) 100%);
+  }
+  .calendar .weekdays div {
+    padding: 0 1rem;
+  }
+  .calendar .weekdays div h3 {
+    font-size: 1rem;
+    border-bottom: 1px solid #909ec9;
+    font-weight: 900;
+    color: #909ec9;
+  }
+  .deactivated {
+    color: #909ec9;
+  }
+  .header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0 1rem;
+    margin-top: 1rem;
+    height: 85px;
+  }
+  footer {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.233) 100%);
+    height: 150px;
+    margin-top: auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
   }
 }/*# sourceMappingURL=style.css.map */

@@ -1,17 +1,29 @@
-
-.container {
-    border: 1px solid blue;
-    background-color: palegoldenrod;
+html {
+    height: 100%;
 }
-.row {
-    border: 1px solid red;
-    background-color: paleturquoise;
-
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    background-color: $accent-300;
+    background-image: radial-gradient( circle 610px at 5.2% 51.6%,  rgba(5,8,114,1) 0%, rgba(7,3,53,1) 97.5% );
 }
-.col {
-    border: 1px solid green;
-    background-color: pink;
+main {
+    padding: 0 1rem;
+}
+.main {
+    max-width: 33rem;
+    margin: auto;
+}
+i {
+    color: $p-white;
 }
 .hidden {
     display: none;
+}
+.submit {
+    background-color: $accent-100;
+    color: $p-white;
+    padding: 0.5rem 1rem;
+    min-width: 12rem;
 }

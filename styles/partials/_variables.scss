@@ -1,7 +1,6 @@
 // Fonts
-$heading-primary: Georgia;
-$body: monospace;
-
+$heading-primary: 'Poppins', sans-serif;
+$body: system-ui;
 
 // Colors
 $p-black: hsl(0, 0%, 0%);
@@ -9,10 +8,16 @@ $p-white: hsl(0, 0%, 100%);
 
 $danger-500: hsl(354, 100%, 51%);
 
+$accent-300: #ef9298;
+$accent-300: #46a2be;
+$accent-300: #2d3d6a;
+$accent-100: #909ec9;
+
+$radius: 0.5rem;
+$radius-max: 50px;
 
 // Breakpoints - mobile first
 $sm: "width >= 576px";
 $md: "width >= 768px";
 $lg: "width >= 992px";
 $xl: "width >= 1200px";
-

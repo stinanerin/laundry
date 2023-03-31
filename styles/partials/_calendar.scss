@@ -1,0 +1,39 @@
+.calendar {
+    padding: 3rem 0;
+    border-radius: $radius;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.133) 0%, rgba(255, 255, 255, 0) 100%);    
+    .row {
+        border-radius: $radius;
+    }
+    .day {
+        min-height: 50px;
+        padding: 0.5rem;
+        border-radius: $radius-max;
+        &:hover, &.active, &.today {
+            font-weight: 900;
+            font-size: 1rem;
+            min-width: 50px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.133) 0%, rgba(255, 255, 255, 0.113) 100%);    
+        }
+    }
+    .weekdays {
+        div {
+            padding: 0 1rem;
+            h3 {
+                font-size: 1rem;
+                border-bottom: 1px solid $accent-100;
+                font-weight: 900;
+                color: $accent-100;
+            }
+        }
+    }
+}
+// .today {
+//     font-weight: 900;
+//     font-size: 1rem;
+//     min-width: 40px;
+//     background: linear-gradient(180deg, rgba(255, 255, 255, 0.133) 0%, rgba(255, 255, 255, 0.113) 100%);    
+// }
+.deactivated {
+    color: $accent-100;
+}

@@ -35,11 +35,11 @@ const renderDayView = () => {
             const currentDate = new Date(year, months.indexOf(monthName), date.innerText)
 
             dayView.innerHTML = `
-            <h2 class="row gx-0">
+            <h2 class="row gx-0 mb-4">
                 <span class="weekday col">${weekdays[currentDate.getDay()]}</span>
                 <span class="date col text-end">${date.innerText} ${monthName}</span>
             </h2>
-            <div class="row gx-0">
+            <div class="row gx-0 text-center">
                 <div class="col">
                     <input type="radio" name="time-slot" id="morning" value="08" required>
                     <label for="morning">08</label>
@@ -52,8 +52,10 @@ const renderDayView = () => {
                     <input type="radio" name="time-slot" id="evening" value="17">
                     <label for="evening">17</label>
                 </div>
-                <p class="m-0"></p>
-                <button type="submit" class="btn btn-success">Book</button>
+                <div class="mt-4">
+                    <p class="m-0"></p>
+                </div>
+                <div class="mt-4"><button type="submit" class="btn submit">Book</button></div>
             </div>`
             updateChoosenDate(currentDate)
 
@@ -97,7 +99,7 @@ const renderMonthCal = async() => {
     for (let x = day; x > 0; x--) {
         // Creates new row for cal days for each week
         if(weekDays % 7 === 0) {
-            row = createElement("div", "row g-0");
+            row = createElement("div", "row mb-2 g-0");
             dayGrid.append(row);
         }
         weekDays ++;
@@ -108,7 +110,7 @@ const renderMonthCal = async() => {
     for (let x = 1 ; x <= lastDate ; x++) {
         // Creates new row for cal days for each week
         if(weekDays % 7 === 0) {
-            row = createElement("div", "row g-0");
+            row = createElement("div", "row mb-2 g-0");
             dayGrid.append(row);
         }
         if(x === today.getDate()) {
