@@ -35,14 +35,21 @@
   .hidden {
     display: none;
   }
-  .submit {
+  .primary-btn {
     background-color: #909ec9;
     color: hsl(0deg, 0%, 100%);
     padding: 0.5rem 1rem;
     min-width: 12rem;
   }
+  .btn {
+    border-color: transparent;
+    border-radius: 0.5rem;
+  }
+  .btn:hover {
+    box-shadow: inset 0 0 0.75em 0 #909ec9, 0 0 1em 0 #909ec9;
+    -webkit-box-shadow: inset 0 0 0.75em 0 #909ec9, 0 0 1em 0 #909ec9;
+  }
   .calendar {
-    padding: 3rem 0;
     border-radius: 0.5rem;
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.133) 0%, rgba(255, 255, 255, 0) 100%);
   }
@@ -60,6 +67,10 @@
     min-width: 50px;
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.133) 0%, rgba(255, 255, 255, 0.113) 100%);
   }
+  .calendar .day:hover {
+    box-shadow: inset 0 0 0.75em 0 #909ec9, 0 0 1em 0 #909ec9;
+    -webkit-box-shadow: inset 0 0 0.75em 0 #909ec9, 0 0 1em 0 #909ec9;
+  }
   .calendar .weekdays div {
     padding: 0 1rem;
   }
@@ -71,16 +82,13 @@
   }
   .deactivated {
     color: #909ec9;
+    background-color: grey;
   }
   .header {
-    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0;
-    margin: 0 1rem;
-    margin-top: 1rem;
-    height: 85px;
+    height: 100px;
   }
   footer {
     background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.233) 100%);

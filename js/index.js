@@ -35,27 +35,29 @@ const renderDayView = () => {
             const currentDate = new Date(year, months.indexOf(monthName), date.innerText)
 
             dayView.innerHTML = `
-            <h2 class="row gx-0 mb-4">
-                <span class="weekday col">${weekdays[currentDate.getDay()]}</span>
-                <span class="date col text-end">${date.innerText} ${monthName}</span>
-            </h2>
-            <div class="row gx-0 text-center">
-                <div class="col">
-                    <input type="radio" name="time-slot" id="morning" value="08" required>
-                    <label for="morning">08</label>
+            <div class="mb-5">
+                <h2 class="row gx-0 mb-4">
+                    <span class="weekday col">${weekdays[currentDate.getDay()]}</span>
+                    <span class="date col text-end">${date.innerText} ${monthName}</span>
+                </h2>
+                <div class="row gx-0 text-center">
+                    <div class="col">
+                        <input type="radio" name="time-slot" id="morning" value="08" required>
+                        <label for="morning">08</label>
+                    </div>
+                    <div class="col">
+                        <input type="radio" name="time-slot" id="noon" value="12">
+                        <label for="noon">12</label>
+                    </div>
+                    <div class="col">
+                        <input type="radio" name="time-slot" id="evening" value="17">
+                        <label for="evening">17</label>
+                    </div>
+                    <div class="mt-4">
+                        <p class="m-0"></p>
+                    </div>
+                    <div class="mt-4"><button type="submit" class="btn primary-btn">Book</button></div>
                 </div>
-                <div class="col">
-                    <input type="radio" name="time-slot" id="noon" value="12">
-                    <label for="noon">12</label>
-                </div>
-                <div class="col">
-                    <input type="radio" name="time-slot" id="evening" value="17">
-                    <label for="evening">17</label>
-                </div>
-                <div class="mt-4">
-                    <p class="m-0"></p>
-                </div>
-                <div class="mt-4"><button type="submit" class="btn submit">Book</button></div>
             </div>`
             updateChoosenDate(currentDate)
 
