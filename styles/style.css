@@ -61,7 +61,7 @@
     padding: 0.5rem;
     border-radius: 50px;
   }
-  .calendar .day:hover:not(.deactivated), .calendar .day.active, .calendar .day.today {
+  .calendar .day:hover:not(.deactivated), .calendar .day.active, .calendar .day.today:not(.deactivated) {
     cursor: pointer;
     font-weight: 900;
     font-size: 1rem;
@@ -74,7 +74,7 @@
   }
   .calendar .day.deactivated {
     color: #909ec9;
-    background-color: grey;
+    background-color: rgba(128, 128, 128, 0.2);
   }
   .calendar .weekdays div {
     padding: 0 1rem;
