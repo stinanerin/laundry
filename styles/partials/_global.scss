@@ -21,9 +21,21 @@ i {
 .hidden {
     display: none;
 }
-.submit {
+.primary-btn {
     background-color: $accent-100;
     color: $p-white;
     padding: 0.5rem 1rem;
     min-width: 12rem;
+}
+.btn {
+    border-color: transparent;
+    border-radius: $radius;
+    &:hover {
+        box-shadow: 
+            inset 0 0 0.75em 0 $accent-100,
+            0 0 1em 0 $accent-100;
+        -webkit-box-shadow: 
+            inset 0 0 0.75em 0 $accent-100,
+            0 0 1em 0 $accent-100;
+    }
 }

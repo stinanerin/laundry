@@ -23,7 +23,7 @@ let today = new Date(),
     bookings;
 
 const renderDayView = () => {
-    document.querySelectorAll(".day").forEach(btn => {
+    document.querySelectorAll(".day:not(.deactivated)").forEach(btn => {
         btn.addEventListener("click", (e) => {
             const date = e.target
             let bookedTimes;
@@ -35,27 +35,29 @@ const renderDayView = () => {
             const currentDate = new Date(year, months.indexOf(monthName), date.innerText)
 
             dayView.innerHTML = `
-            <h2 class="row gx-0 mb-4">
-                <span class="weekday col">${weekdays[currentDate.getDay()]}</span>
-                <span class="date col text-end">${date.innerText} ${monthName}</span>
-            </h2>
-            <div class="row gx-0 text-center">
-                <div class="col">
-                    <input type="radio" name="time-slot" id="morning" value="08" required>
-                    <label for="morning">08</label>
+            <div class="mb-5">
+                <h2 class="row gx-0 mb-4">
+                    <span class="weekday col">${weekdays[currentDate.getDay()]}</span>
+                    <span class="date col text-end">${date.innerText} ${monthName}</span>
+                </h2>
+                <div class="row gx-0 text-center">
+                    <div class="col">
+                        <input type="radio" name="time-slot" id="morning" value="08" required>
+                        <label for="morning">08</label>
+                    </div>
+                    <div class="col">
+                        <input type="radio" name="time-slot" id="noon" value="12">
+                        <label for="noon">12</label>
+                    </div>
+                    <div class="col">
+                        <input type="radio" name="time-slot" id="evening" value="17">
+                        <label for="evening">17</label>
+                    </div>
+                    <div class="mt-4">
+                        <p class="m-0"></p>
+                    </div>
+                    <div class="mt-4"><button type="submit" class="btn primary-btn">Book</button></div>
                 </div>
-                <div class="col">
-                    <input type="radio" name="time-slot" id="noon" value="12">
-                    <label for="noon">12</label>
-                </div>
-                <div class="col">
-                    <input type="radio" name="time-slot" id="evening" value="17">
-                    <label for="evening">17</label>
-                </div>
-                <div class="mt-4">
-                    <p class="m-0"></p>
-                </div>
-                <div class="mt-4"><button type="submit" class="btn submit">Book</button></div>
             </div>`
             updateChoosenDate(currentDate)
 
@@ -70,6 +72,7 @@ const renderDayView = () => {
 }
 
 const renderMonthCal = async() => {
+    console.log(month);
     // Clears calender & booking form when month changes
     dayGrid.innerHTML = "";
     dayView.innerHTML = "";
@@ -96,6 +99,7 @@ const renderMonthCal = async() => {
 
     // Renders the dates from previous month
     // "day" = the amount of days from the current week that belong to the previous month
+    let currentMonth = month - 1
     for (let x = day; x > 0; x--) {
         // Creates new row for cal days for each week
         if(weekDays % 7 === 0) {
@@ -103,9 +107,9 @@ const renderMonthCal = async() => {
             dayGrid.append(row);
         }
         weekDays ++;
-        
-        row.append(createElement("li", "day prevMonth col d-flex justify-content-center align-items-center", prevMontshLastDate - x + 1));
+        row.append(createElement("li", `${hasDatePassed(year, currentMonth, prevMontshLastDate - x + 1)} day prevMonth col d-flex justify-content-center align-items-center`, prevMontshLastDate - x + 1));
     }
+
     // Renders the dates from the current month
     for (let x = 1 ; x <= lastDate ; x++) {
         // Creates new row for cal days for each week
@@ -114,13 +118,15 @@ const renderMonthCal = async() => {
             dayGrid.append(row);
         }
         if(x === today.getDate()) {
-            row.append(createElement("li", "today day col d-flex justify-content-center align-items-center", x));
+            row.append(createElement("li", `today ${hasDatePassed(year, month, x)} day col d-flex justify-content-center align-items-center`, x));
         } else {
-            row.append(createElement("li", "day col d-flex justify-content-center align-items-center", x));
+            row.append(createElement("li", `${hasDatePassed(year, month, x)} day col d-flex justify-content-center align-items-center`, x));
         }
         weekDays ++;
     }
+
     // Renders the dates from the next month
+    currentMonth = month + 1
     for(let x = 1; x <= nextDays; x++) {
         // Creates new row for cal days for each week
         //todo! bryt ut
@@ -129,7 +135,7 @@ const renderMonthCal = async() => {
             dayGrid.append(row);
         }
         weekDays ++;
-        row.append(createElement("li", "day nextMonth col d-flex justify-content-center align-items-center", x));
+        row.append(createElement("li", `${hasDatePassed(year, currentMonth, x)} day nextMonth col d-flex justify-content-center align-items-center`, x));
     }
 
     // Updates DOM
@@ -175,6 +181,13 @@ const alterMonth = (str) => {
     }
     renderMonthCal()
 }
-
 prevMonth.addEventListener("click", () => { alterMonth("prev") })
 nextMonth.addEventListener("click", () => { alterMonth("add") })
+
+// ----------------------- DISABLE PASSED DATES -----------------------
+
+let hasDatePassed = (year, month, day) => {
+    date = new Date(year, month, day)
+    // Create a new date of the existing dates to cancel out the time
+    return new Date(date.toDateString()) < new Date(today.toDateString()) ? "deactivated" : "";
+}
