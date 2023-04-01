@@ -1,0 +1,15 @@
+form {
+    input[type="radio"]{
+        margin-right: 0.5rem;
+        &[disabled] 
+        {
+            cursor: not-allowed;
+            border-color: $accent-100;
+            background-color: $accent-100;
+        }
+    }
+    input[type="radio"][disabled] + label {
+        cursor: not-allowed;
+        color: $accent-100;
+    }
+}
