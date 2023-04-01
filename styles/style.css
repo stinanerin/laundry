@@ -61,27 +61,20 @@
     padding: 0.5rem;
     border-radius: 50px;
   }
-  .calendar .day:hover, .calendar .day.active, .calendar .day.today {
+  .calendar .day:hover:not(.deactivated), .calendar .day.active, .calendar .day.today:not(.deactivated) {
+    cursor: pointer;
     font-weight: 900;
     font-size: 1rem;
     min-width: 50px;
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.133) 0%, rgba(255, 255, 255, 0.113) 100%);
   }
-  .calendar .day:hover {
+  .calendar .day:hover:not(.deactivated) {
     box-shadow: inset 0 0 0.75em 0 #909ec9, 0 0 1em 0 #909ec9;
     -webkit-box-shadow: inset 0 0 0.75em 0 #909ec9, 0 0 1em 0 #909ec9;
   }
   .calendar .day.deactivated {
     color: #909ec9;
-    background-color: grey;
-  }
-  .calendar .day.deactivated:hover {
-    font-weight: normal;
-    font-size: 0.8rem;
-    min-width: 50px;
-    box-shadow: none;
-    -webkit-box-shadow: none;
-    background: none grey;
+    background-color: rgba(128, 128, 128, 0.2);
   }
   .calendar .weekdays div {
     padding: 0 1rem;
