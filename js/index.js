@@ -106,8 +106,8 @@ const renderMonthCal = async() => {
             row = createElement("div", "row mb-2 g-0");
             dayGrid.append(row);
         }
-        weekDays ++;
         row.append(createElement("li", `${hasDatePassed(year, currentMonth, prevMontshLastDate - x + 1)} day prevMonth col d-flex justify-content-center align-items-center`, prevMontshLastDate - x + 1));
+        weekDays ++;
     }
 
     // Renders the dates from the current month
@@ -117,11 +117,7 @@ const renderMonthCal = async() => {
             row = createElement("div", "row mb-2 g-0");
             dayGrid.append(row);
         }
-        if(x === today.getDate()) {
-            row.append(createElement("li", `today ${hasDatePassed(year, month, x)} day col d-flex justify-content-center align-items-center`, x));
-        } else {
-            row.append(createElement("li", `${hasDatePassed(year, month, x)} day col d-flex justify-content-center align-items-center`, x));
-        }
+        row.append(createElement("li", `${checkIfDayisToday(year, month, x)} ${hasDatePassed(year, month, x)} day col d-flex justify-content-center align-items-center`, x));
         weekDays ++;
     }
 
@@ -135,7 +131,7 @@ const renderMonthCal = async() => {
             dayGrid.append(row);
         }
         weekDays ++;
-        row.append(createElement("li", `${hasDatePassed(year, currentMonth, x)} day nextMonth col d-flex justify-content-center align-items-center`, x));
+        row.append(createElement("li", `${checkIfDayisToday(year, currentMonth, x)} ${hasDatePassed(year, currentMonth, x)} day nextMonth col d-flex justify-content-center align-items-center`, x));
     }
 
     // Updates DOM
@@ -190,4 +186,8 @@ let hasDatePassed = (year, month, day) => {
     date = new Date(year, month, day)
     // Create a new date of the existing dates to cancel out the time
     return new Date(date.toDateString()) < new Date(today.toDateString()) ? "deactivated" : "";
+}
+
+let checkIfDayisToday = (year, month, day) => {
+    return today.toDateString() === new Date(year, month, day).toDateString() ? "today" : ""
 }
