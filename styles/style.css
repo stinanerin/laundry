@@ -87,11 +87,14 @@
   }
   form input[type=radio] {
     margin-right: 0.5rem;
+    cursor: pointer;
+  }
+  form input[type=radio] + label {
+    cursor: pointer;
   }
   form input[type=radio][disabled] {
     cursor: not-allowed;
     border-color: #909ec9;
-    background-color: #909ec9;
   }
   form input[type=radio][disabled] + label {
     cursor: not-allowed;
