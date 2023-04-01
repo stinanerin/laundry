@@ -187,6 +187,7 @@ nextMonth.addEventListener("click", () => { alterMonth("add") })
 // ----------------------- DISABLE PASSED DATES -----------------------
 
 let hasDatePassed = (year, month, day) => {
-    return new Date(year, month, day) < today ? "deactivated" : "";
-    // console.log(new Date(year, month, day),"ej<" , today);
+    date = new Date(year, month, day)
+    // Create a new date of the existing dates to cancel out the time
+    return new Date(date.toDateString()) < new Date(today.toDateString()) ? "deactivated" : "";
 }
