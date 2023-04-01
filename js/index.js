@@ -72,6 +72,7 @@ const renderDayView = () => {
 }
 
 const renderMonthCal = async() => {
+    console.log(month);
     // Clears calender & booking form when month changes
     dayGrid.innerHTML = "";
     dayView.innerHTML = "";
@@ -98,6 +99,7 @@ const renderMonthCal = async() => {
 
     // Renders the dates from previous month
     // "day" = the amount of days from the current week that belong to the previous month
+    let currentMonth = month - 1
     for (let x = day; x > 0; x--) {
         // Creates new row for cal days for each week
         if(weekDays % 7 === 0) {
@@ -105,9 +107,9 @@ const renderMonthCal = async() => {
             dayGrid.append(row);
         }
         weekDays ++;
-        
-        row.append(createElement("li", "day prevMonth col d-flex justify-content-center align-items-center", prevMontshLastDate - x + 1));
+        row.append(createElement("li", `${hasDatePassed(year, currentMonth, prevMontshLastDate - x + 1)} day prevMonth col d-flex justify-content-center align-items-center`, prevMontshLastDate - x + 1));
     }
+
     // Renders the dates from the current month
     for (let x = 1 ; x <= lastDate ; x++) {
         // Creates new row for cal days for each week
@@ -116,13 +118,15 @@ const renderMonthCal = async() => {
             dayGrid.append(row);
         }
         if(x === today.getDate()) {
-            row.append(createElement("li", "today day col d-flex justify-content-center align-items-center", x));
+            row.append(createElement("li", `today ${hasDatePassed(year, month, x)} day col d-flex justify-content-center align-items-center`, x));
         } else {
-            row.append(createElement("li", "day col d-flex justify-content-center align-items-center", x));
+            row.append(createElement("li", `${hasDatePassed(year, month, x)} day col d-flex justify-content-center align-items-center`, x));
         }
         weekDays ++;
     }
+
     // Renders the dates from the next month
+    currentMonth = month + 1
     for(let x = 1; x <= nextDays; x++) {
         // Creates new row for cal days for each week
         //todo! bryt ut
@@ -131,7 +135,7 @@ const renderMonthCal = async() => {
             dayGrid.append(row);
         }
         weekDays ++;
-        row.append(createElement("li", "day nextMonth col d-flex justify-content-center align-items-center", x));
+        row.append(createElement("li", `${hasDatePassed(year, currentMonth, x)} day nextMonth col d-flex justify-content-center align-items-center`, x));
     }
 
     // Updates DOM
@@ -177,6 +181,12 @@ const alterMonth = (str) => {
     }
     renderMonthCal()
 }
-
 prevMonth.addEventListener("click", () => { alterMonth("prev") })
 nextMonth.addEventListener("click", () => { alterMonth("add") })
+
+// ----------------------- DISABLE PASSED DATES -----------------------
+
+let hasDatePassed = (year, month, day) => {
+    return new Date(year, month, day) < today ? "deactivated" : "";
+    // console.log(new Date(year, month, day),"ej<" , today);
+}

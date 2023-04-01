@@ -5,7 +5,7 @@ const fetchData = async(id) => {
     const data = await res.json();
     let arr = data.itemList
     let  objBooking  = arr[arr.length -1];
-    console.log("latest booking", objBooking);
+    // console.log("latest booking", objBooking);
     return arr
 }
 
