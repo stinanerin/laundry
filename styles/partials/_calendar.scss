@@ -25,6 +25,14 @@
         &.deactivated {
             color: $accent-100;
             background-color: grey;
+            &:hover {
+                font-weight: normal;
+                font-size: 0.8rem;
+                min-width: 50px;
+                box-shadow: none; 
+                -webkit-box-shadow: none;
+                background: none grey;
+            }
         }
     }
     .weekdays {

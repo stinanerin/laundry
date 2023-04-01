@@ -71,6 +71,18 @@
     box-shadow: inset 0 0 0.75em 0 #909ec9, 0 0 1em 0 #909ec9;
     -webkit-box-shadow: inset 0 0 0.75em 0 #909ec9, 0 0 1em 0 #909ec9;
   }
+  .calendar .day.deactivated {
+    color: #909ec9;
+    background-color: grey;
+  }
+  .calendar .day.deactivated:hover {
+    font-weight: normal;
+    font-size: 0.8rem;
+    min-width: 50px;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    background: none grey;
+  }
   .calendar .weekdays div {
     padding: 0 1rem;
   }
@@ -79,10 +91,6 @@
     border-bottom: 1px solid #909ec9;
     font-weight: 900;
     color: #909ec9;
-  }
-  .deactivated {
-    color: #909ec9;
-    background-color: grey;
   }
   .header {
     display: flex;

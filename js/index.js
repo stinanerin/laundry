@@ -23,7 +23,7 @@ let today = new Date(),
     bookings;
 
 const renderDayView = () => {
-    document.querySelectorAll(".day").forEach(btn => {
+    document.querySelectorAll(".day:not(.deactivated)").forEach(btn => {
         btn.addEventListener("click", (e) => {
             const date = e.target
             let bookedTimes;
