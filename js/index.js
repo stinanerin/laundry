@@ -128,10 +128,11 @@ const renderMonthCal = async() => {
 
     // Renders the dates from the next month
     currentMonth = month + 1
-    for(let x = 1; x <= nextDays; x++) {
+    for(let x = 1; x <= nextDays && nextDays !== 7; x++) {
         // Creates new row for cal days for each week
         //todo! bryt ut
         if(weekDays % 7 === 0) {
+            console.log("tja");
             row = createElement("div", "row g-0");
             dayGrid.append(row);
         }
