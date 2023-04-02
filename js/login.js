@@ -11,3 +11,4 @@ loginForm.addEventListener("submit", (e) => {
 let validateLogin = (email, pwd) => {
     console.log(email, pwd);
 }
+

@@ -99,7 +99,13 @@
   }
   form input[type=radio][disabled] + label {
     cursor: not-allowed;
+  }
+  form input[type=radio] + label {
+    color: hsl(0deg, 0%, 100%);
+  }
+  form label {
     color: #909ec9;
+    font-weight: 800;
   }
   .header {
     display: flex;
