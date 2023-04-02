@@ -25,15 +25,18 @@ let today = new Date(),
 const renderDayView = () => {
     document.querySelectorAll(".day:not(.deactivated)").forEach(btn => {
         btn.addEventListener("click", (e) => {
-            const date = e.target
-            let bookedTimes;
+            // If another day has the active class - remove it
+            document.querySelector(".active") ? document.querySelector(".active").classList.remove("active") : "";
 
+            const date = e.target
+            date.classList.add("active")
+            
             const monthName = date.classList.contains("prevMonth") ? months[month - 1]
-                : date.classList.contains("nextMonth") ? months[month + 1]
-                : months[month]
+            : date.classList.contains("nextMonth") ? months[month + 1]
+            : months[month]
             
             const currentDate = new Date(year, months.indexOf(monthName), date.innerText)
-
+            
             dayView.innerHTML = `
             <div class="mb-5">
                 <h2 class="row gx-0 mb-4">
@@ -60,7 +63,8 @@ const renderDayView = () => {
                 </div>
             </div>`
             updateChoosenDate(currentDate)
-
+            
+            let bookedTimes;
             // Checks if currentDate is already booked
             // Returns every date obj that matches the current looped date - otherwise []]
             const match = bookings.filter(date => date.toLocaleDateString() === currentDate.toLocaleDateString())
@@ -185,7 +189,10 @@ nextMonth.addEventListener("click", () => { alterMonth("add") })
 let hasDatePassed = (year, month, day) => {
     date = new Date(year, month, day)
     // Create a new date of the existing dates to cancel out the time
-    return new Date(date.toDateString()) < new Date(today.toDateString()) ? "deactivated" : "";
+    if(new Date(date.toDateString()) < new Date(today.toDateString())) {
+        
+        return "deactivated"  
+    } 
 }
 
 let checkIfDayisToday = (year, month, day) => {

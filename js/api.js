@@ -4,6 +4,7 @@ const fetchData = async(id) => {
     const res = await fetch(`${API_BASE_URL}lists/${id}`)
     const data = await res.json();
     let arr = data.itemList
+    console.log(arr);
     let  objBooking  = arr[arr.length -1];
     // console.log("latest booking", objBooking);
     return arr
