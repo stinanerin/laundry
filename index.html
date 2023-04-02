@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="styles/style.css">
     <!-- JS -->
     <script src="js/helper.js" defer></script>
+    <script src="js/login.js" defer></script>
     <script src="js/api.js" defer></script>
     <script src="js/index.js" defer></script>
 </head>
@@ -29,9 +30,40 @@
         <h1>Laundry</h1>
     </header>
     <main>
+
+        <div class="pt-5 ">
+            <!--! LOGIN FORM -->
+            <form class="container" id="loginForm">
+                <div class="row gy-3 ">
+                    <!-- EMAIL -->
+                    <div class="form-group">
+                        <label for="loginEmail" class="form-label">Email address</label>
+                        <input class="form-control input" id="loginEmail" type="email" placeholder="Enter email" required/>
+                    </div>
+                    <!-- PWD -->
+                    <div class="form-group">
+                        <label for="loginPWD" class="form-label">Password</label>
+                        <input class="form-control input" id="loginPWD" type="password" placeholder="Enter password" required/>
+                    </div>
+                    <!-- <p class="text-end">Forgot password?</p> -->
+                </div>
+                <!--todo ALERT -->
+                <!-- <div class="login-alert-container"></div> -->
+                <!-- SUBMIT BTN -->
+                <div class="d-flex justify-content-center my-5">
+                    <button class="btn primary-btn" type="submit">Sign in</button>
+                </div>
+            </form>
+
+            <!-- LINK REGISTER FORM  -->
+            <div class="text-center pb-5">
+                <p>Not registered? <span class="link" id="registerUserLink">Register now</span></p>
+            </div>
+        </div>
+
         <div class="container main">
             <div class="row">
-                <!-- CALENDER-->
+                <!--! CALENDER-->
                 <div class="calendar container pb-5">
                     <!-- HEADER MONTH - CONTROLLER-->
                     <header class="row d-flex align-items-center m-0 my-5">
