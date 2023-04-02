@@ -1,6 +1,4 @@
-
 // ----------------------- LOGIN -----------------------
-
 const loginForm = document.querySelector('#loginForm');
 
 loginForm.addEventListener("submit", (e) => {
@@ -11,4 +9,3 @@ loginForm.addEventListener("submit", (e) => {
 let validateLogin = (email, pwd) => {
     console.log(email, pwd);
 }
-

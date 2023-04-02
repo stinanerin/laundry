@@ -1,9 +1,15 @@
+const loginUserLink  = document.querySelector('#loginLink'),
+    loginContainer =  document.querySelector("#loginWrapper"),
+    registerUserLink  = document.querySelector('#registerLink'),
+    registerContainer = document.querySelector("#registerWrapper"),
+    registerUserForm = document.querySelector("#registerUser");
 
-const registerUserForm = document.querySelector("#registerUser")
+//-------------------------------------------- TOGGLE REGISTER / LOGIN VIEW ---------------------------------------------------
+loginUserLink.addEventListener("click", () => { toggleClass([registerContainer, loginContainer], "hidden") })
+registerUserLink.addEventListener("click", () => { toggleClass([registerContainer, loginContainer], "hidden") })
 
 registerUserForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    
     console.log("register");
 
     const fullName = document.querySelector('#FullName'),
@@ -14,3 +20,4 @@ registerUserForm.addEventListener("submit", (e) => {
     console.log(fullName.value, email.value, pwd.value, pwdConf.value);
 
 })
+
