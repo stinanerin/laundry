@@ -27,3 +27,20 @@ const addBooking = async(listId, dateObject, userID) => {
         console.log(error);
     }
 }
+
+// ----------------------- CREATE USER IN API -----------------------
+const createUser = async(name, email, pwd) => {
+    const res = await fetch(`${API_BASE_URL}lists/6429d84525fc8200e0300328/items`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            username: name,
+            email: email,
+            password: pwd,
+        }),
+    });
+    const { list } = await res.json();
+    console.log(list.itemList);
+}
