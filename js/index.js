@@ -76,7 +76,6 @@ const renderDayView = () => {
 }
 
 const renderMonthCal = async() => {
-    console.log(month);
     // Clears calender & booking form when month changes
     dayGrid.innerHTML = "";
     dayView.innerHTML = "";
@@ -84,13 +83,15 @@ const renderMonthCal = async() => {
     // Fetches all bookings from API
     const arr = await fetchData(currentList)
     bookings = arr.map(date => new Date(date.booking))
-
     const firstDay = new Date(year, month, 1),
         // The day of the week for the current date
         day = firstDay.getDay() - 1,
+        // day = firstDay.getDay() === 0 ? firstDay.getDay() : firstDay.getDay() - 1,
         // The previous months last date
         prevLastDay = new Date(year, month, 0),
         prevMontshLastDate = prevLastDay.getDate(),
+        // The spill over dates from the month before
+        prevDays = prevLastDay.getDay();
         // Current months last date
         lastDay = new Date(year, month + 1, 0),
         lastDate = lastDay.getDate(),
@@ -104,7 +105,7 @@ const renderMonthCal = async() => {
     // Renders the dates from previous month
     // "day" = the amount of days from the current week that belong to the previous month
     let currentMonth = month - 1
-    for (let x = day; x > 0; x--) {
+    for (let x = 1; x <= prevDays; x++) {
         // Creates new row for cal days for each week
         if(weekDays % 7 === 0) {
             row = createElement("div", "row mb-2 g-0");
@@ -127,15 +128,16 @@ const renderMonthCal = async() => {
 
     // Renders the dates from the next month
     currentMonth = month + 1
-    for(let x = 1; x <= nextDays; x++) {
+    for(let x = 1; x <= nextDays && nextDays !== 7; x++) {
         // Creates new row for cal days for each week
         //todo! bryt ut
         if(weekDays % 7 === 0) {
+            console.log("tja");
             row = createElement("div", "row g-0");
             dayGrid.append(row);
         }
-        weekDays ++;
         row.append(createElement("li", `${checkIfDayisToday(year, currentMonth, x)} ${hasDatePassed(year, currentMonth, x)} day nextMonth col d-flex justify-content-center align-items-center`, x));
+        weekDays ++;
     }
 
     // Updates DOM
