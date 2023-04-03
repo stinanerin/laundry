@@ -7,9 +7,38 @@ form {
             border-color: $accent-100;
             background-color: $accent-100;
         }
+        &[disabled] + label {
+            cursor: not-allowed;
+        }
     }
-    input[type="radio"][disabled] + label {
-        cursor: not-allowed;
+    input[type="radio"] + label {
+        color: $p-white;
+    }
+    label {
         color: $accent-100;
+        font-weight: 800;
+    }
+    .alert-danger {
+        border-color: $danger-500;
+        padding: 0.5rem 1rem;
+        margin: 0;
+        .fa-solid {
+            color: $danger-500;
+        }
+    }
+    .error {
+        color: $danger-500;
+        border-color: $danger-500;
+        -webkit-text-fill-color: $danger-500;
+        box-shadow: 0 0 0px 1000px $danger-500 inset;
+        -webkit-box-shadow: 0 0 0px 1000px $danger-50 inset;
+        transition: background-color 5000s ease-in-out 0s;
+        &:-webkit-autofill, &:-webkit-autofill:focus { 
+            border-color: $danger-500;
+            -webkit-text-fill-color: $danger-500;
+            box-shadow: 0 0 0px 1000px $danger-500 inset;
+            -webkit-box-shadow: 0 0 0px 1000px $danger-50 inset;
+            transition: background-color 5000s ease-in-out 0s;
+        }
     }
 }

@@ -22,6 +22,8 @@
     <!-- JS -->
     <script src="js/helper.js" defer></script>
     <script src="js/api.js" defer></script>
+    <script src="js/register.js" defer></script>
+    <script src="js/login.js" defer></script>
     <script src="js/index.js" defer></script>
 </head>
 <body>
@@ -29,9 +31,105 @@
         <h1>Laundry</h1>
     </header>
     <main>
-        <div class="container main">
+
+        <div class="login-register pt-5">
+            <!--! REGISTER FORM -->
+            <div id="registerWrapper">
+                <form class="container main" id="registerUser">
+                    <h2 class="text-center">Register</h2>
+                    <div class="row gy-3">
+                        <!-- NAME -->
+                        <div class="form-group">
+                            <label for="FullName" class="form-label">Full name</label>
+                            <input class="form-control input" id="FullName" type="text" placeholder="Enter full name" required/>
+                        </div>
+                        <!-- EMAIL -->
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email address</label>
+                            <input class="form-control input " id="email" type="email" placeholder="Enter email" required/>
+                        </div>
+                         <!-- ALERT EMAIL -->
+                         <div id="emailAlert" class="m-0 hidden">
+                            <div class="alert alert-danger container m-0 mt-3" role="alert">
+                                <div class="row">
+                                    <div class="col-auto">
+                                        <i class="fa-solid fa-triangle-exclamation"></i>
+                                    </div>
+                                    <div class="col">
+                                        <span>This email is already registered</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- PWD -->
+                        <div class="form-group">
+                            <label for="pwd" class="form-label">Password</label>
+                            <input class="form-control input" id="pwd" type="password" placeholder="Enter password" required/>
+                        </div>
+                        <!-- ALERT PWD -->
+                        <div id="passwordAlert" class="m-0 hidden">
+                            <div class="alert alert-danger container m-0 mt-3" role="alert">
+                                <div class="row">
+                                    <div class="col-auto">
+                                        <i class="fa-solid fa-triangle-exclamation"></i>
+                                    </div>
+                                    <div class="col">
+                                        <span class="error">The password confirmation does not match</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- CONF. PWD -->
+                        <div class="form-group">
+                            <label for="pwdConf" class="form-label">Password confirmation</label>
+                            <input class="form-control input" id="pwdConf" type="password" placeholder="Confirm password" required/>
+                        </div>
+                        <!-- SUBMIT -->
+                        <div class="d-flex justify-content-center my-5">
+                            <button class="btn primary-btn" type="submit">Sign up</button>
+                        </div>
+                    </div>
+                </form>
+                 <!-- LINK LOGIN -->
+                 <div class="text-center pb-5">
+                    <p>Already registered? <span class="link" id="loginLink">Log in here</span></p>
+                </div>
+            </div>
+            <!--! LOGIN FORM -->
+            <div id="loginWrapper" class="hidden">
+                <form class="container main" id="loginForm">
+                    <h2 class="text-center">Log in</h2>
+                    <div class="row gy-3 ">
+                        <!-- EMAIL -->
+                        <div class="form-group">
+                            <label for="loginEmail" class="form-label">Email address</label>
+                            <input class="form-control input" id="loginEmail" type="email" placeholder="Enter email" required/>
+                        </div>
+                        <!-- ALERT -->
+                        <div class="login-alert-container"></div>
+                        <!-- PWD -->
+                        <div class="form-group">
+                            <label for="loginPWD" class="form-label">Password</label>
+                            <input class="form-control input" id="loginPWD" type="password" placeholder="Enter password" required/>
+                        </div>
+                        <!-- <p class="text-end">Forgot password?</p> -->
+                    </div>
+                    
+                    <!-- SUBMIT -->
+                    <div class="d-flex justify-content-center my-5">
+                        <button class="btn primary-btn" type="submit">Sign in</button>
+                    </div>
+                </form>
+                <!-- LINK REGISTER FORM  -->
+                <div class="text-center pb-5">
+                    <p>Not registered? <span class="link" id="registerLink">Register now</span></p>
+                </div>
+            </div>
+        </div>  
+
+        <div id="calenderWrapper" class="container main hidden">
             <div class="row">
-                <!-- CALENDER-->
+                <!--! CALENDER-->
                 <div class="calendar container pb-5">
                     <!-- HEADER MONTH - CONTROLLER-->
                     <header class="row d-flex align-items-center m-0 my-5">
