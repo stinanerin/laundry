@@ -107,6 +107,30 @@
     color: #909ec9;
     font-weight: 800;
   }
+  form .alert-danger {
+    border-color: hsl(354deg, 100%, 51%);
+    padding: 0.5rem 1rem;
+    margin: 0;
+  }
+  form .alert-danger .fa-solid {
+    color: hsl(354deg, 100%, 51%);
+  }
+  form .error {
+    color: hsl(354deg, 100%, 51%);
+    border-color: hsl(354deg, 100%, 51%);
+    -webkit-text-fill-color: hsl(354deg, 100%, 51%);
+    box-shadow: 0 0 0px 1000px hsl(354deg, 100%, 51%) inset;
+    -webkit-box-shadow: 0 0 0px 1000px hsl(355deg, 70%, 91%) inset;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+  form .error:-webkit-autofill, form .error:-webkit-autofill:focus {
+    border-color: hsl(354deg, 100%, 51%);
+    -webkit-text-fill-color: hsl(354deg, 100%, 51%);
+    box-shadow: 0 0 0px 1000px hsl(354deg, 100%, 51%) inset;
+    -webkit-box-shadow: 0 0 0px 1000px hsl(355deg, 70%, 91%) inset;
+    -webkit-transition: background-color 5000s ease-in-out 0s;
+    transition: background-color 5000s ease-in-out 0s;
+  }
   .header {
     display: flex;
     align-items: center;

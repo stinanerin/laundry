@@ -2,7 +2,8 @@ const loginUserLink  = document.querySelector('#loginLink'),
     loginContainer =  document.querySelector("#loginWrapper"),
     registerUserLink  = document.querySelector('#registerLink'),
     registerContainer = document.querySelector("#registerWrapper"),
-    registerUserForm = document.querySelector("#registerUser");
+    registerUserForm = document.querySelector("#registerUser"),
+    calender = document.querySelector('#calenderWrapper');
 
 // ----------------------- TOGGLE REGISTER / LOGIN VIEW -----------------------
 loginUserLink.addEventListener("click", () => { toggleClass([registerContainer, loginContainer], "hidden") })

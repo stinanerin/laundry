@@ -79,6 +79,8 @@
                             <label for="loginEmail" class="form-label">Email address</label>
                             <input class="form-control input" id="loginEmail" type="email" placeholder="Enter email" required/>
                         </div>
+                        <!-- ALERT -->
+                        <div class="login-alert-container"></div>
                         <!-- PWD -->
                         <div class="form-group">
                             <label for="loginPWD" class="form-label">Password</label>
@@ -86,9 +88,8 @@
                         </div>
                         <!-- <p class="text-end">Forgot password?</p> -->
                     </div>
-                    <!--todo ALERT -->
-                    <!-- <div class="login-alert-container"></div> -->
-                    <!-- SUBMIT BTN -->
+                    
+                    <!-- SUBMIT -->
                     <div class="d-flex justify-content-center my-5">
                         <button class="btn primary-btn" type="submit">Sign in</button>
                     </div>
@@ -100,7 +101,7 @@
             </div>
         </div>  
 
-        <div class="container main">
+        <div id="calenderWrapper" class="container main hidden">
             <div class="row">
                 <!--! CALENDER-->
                 <div class="calendar container pb-5">
