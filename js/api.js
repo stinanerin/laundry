@@ -29,6 +29,7 @@ const addBooking = async(listId, dateObject, userID) => {
 }
 
 // ----------------------- CREATE USER IN API -----------------------
+//todo! add try catch
 const createUser = async(name, email, pwd) => {
     const res = await fetch(`${API_BASE_URL}lists/6429d84525fc8200e0300328/items`, {
         method: "POST",

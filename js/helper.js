@@ -18,3 +18,5 @@ const diasableElem = (arr) => {
 const toggleClass = (arr, aClass) => {
     arr.forEach(elem => elem.classList.toggle(aClass))
 }
+const setItem = (key, value) => localStorage.setItem(key, JSON.stringify(value));
+const getitem = key => JSON.parse(localStorage.getItem(key));
