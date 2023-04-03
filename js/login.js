@@ -29,7 +29,7 @@ let validateLogin = (arr, mail, pwd) => {
                     <i class="fa-solid fa-triangle-exclamation"></i>
                 </div>
                 <div class="col">
-                    <span>Invalid email or password</span>
+                    <span class="error">Invalid email or password</span>
                 </div>
             </div>
         </div>`

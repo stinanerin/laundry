@@ -104,8 +104,9 @@
     color: hsl(0deg, 0%, 100%);
   }
   form label {
-    color: #909ec9;
-    font-weight: 800;
+    color: hsl(0deg, 0%, 100%);
+    font-weight: 700;
+    font-family: "Poppins", sans-serif;
   }
   form .alert-danger {
     border-color: hsl(354deg, 100%, 51%);
