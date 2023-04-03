@@ -30,20 +30,16 @@ registerUserForm.addEventListener("submit", (e) => {
 
 // ----------------------- VALIDATION - REGISTER USER -----------------------
 const validateRegisterUser = async(name, email, password, confPwd) => {
-    console.log(name, email, password, confPwd);
-
     const userArr = await fetchData("6429d84525fc8200e0300328")
-    console.log(userArr);
     const checkUniqueEmail = user => user.email !== email;
-
+    
+    // If email is unique and pwds match 
     if(userArr.every(checkUniqueEmail) && password === confPwd) {
-        console.log("create user!");
         // Cretes user in API
         createUser(name, email, password, confPwd);
         toggleClass([calender, registerContainer], "hidden")
-
+    // If email is not unique and pwds do not match 
     } else if (!userArr.every(checkUniqueEmail) && password !== confPwd) {
-        console.log("email already registered & pwds do not match");
         // Hidden
         pwdAlert.classList.remove("hidden")
         emailAlert.classList.remove("hidden")
@@ -51,9 +47,8 @@ const validateRegisterUser = async(name, email, password, confPwd) => {
         pwd.classList.add("error");
         pwdConf.classList.add("error");
         regEmail.classList.add("error");
-
+    // If email is not unique 
     } else if(!userArr.every(checkUniqueEmail)) {
-        console.log("email already registered - pwds OK!");
         // Hidden
         pwdAlert.classList.add("hidden")
         emailAlert.classList.remove("hidden")
@@ -61,8 +56,8 @@ const validateRegisterUser = async(name, email, password, confPwd) => {
         pwd.classList.remove("error");
         pwdConf.classList.remove("error");
         regEmail.classList.add("error");
+    // If pwds do not match 
     } else {
-        console.log("pwds do not match - email OK!");
         // Hidden
         pwdAlert.classList.remove("hidden")
         emailAlert.classList.add("hidden")
