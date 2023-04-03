@@ -53,6 +53,19 @@
                             <label for="pwd" class="form-label">Password</label>
                             <input class="form-control input" id="pwd" type="password" placeholder="Enter password" required/>
                         </div>
+                        <!-- ALERT PWD -->
+                        <div id="passwordAlert" class="m-0 hidden">
+                            <div class="alert alert-danger container m-0 mt-3" role="alert">
+                                <div class="row">
+                                    <div class="col-auto">
+                                        <i class="fa-solid fa-triangle-exclamation"></i>
+                                    </div>
+                                    <div class="col">
+                                        <span class="error">The password confirmation does not match</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <!-- CONF. PWD -->
                         <div class="form-group">
                             <label for="pwdConf" class="form-label">Password confirmation</label>
