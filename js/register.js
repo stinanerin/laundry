@@ -4,8 +4,8 @@ const loginUserLink  = document.querySelector('#loginLink'),
     registerContainer = document.querySelector("#registerWrapper"),
     registerUserForm = document.querySelector("#registerUser"),
     calender = document.querySelector('#calenderWrapper'),
-    pwdAlert = document.querySelector("#passwordAlert");
-    // emailAlert = document.querySelector(".reg-alert-container")
+    pwdAlert = document.querySelector("#passwordAlert"),
+    emailAlert = document.querySelector("#emailAlert");
 
 let fullName,
     regEmail,
@@ -34,36 +34,41 @@ const validateRegisterUser = async(name, email, password, confPwd) => {
 
     const userArr = await fetchData("6429d84525fc8200e0300328")
     console.log(userArr);
-    const checkUniqueUser = user => user.email !== email;
+    const checkUniqueEmail = user => user.email !== email;
 
-    if(userArr.every(checkUniqueUser) && password === confPwd) {
+    if(userArr.every(checkUniqueEmail) && password === confPwd) {
         console.log("create user!");
         // Cretes user in API
         createUser(name, email, password, confPwd);
         toggleClass([calender, registerContainer], "hidden")
 
-    } else if (!userArr.every(checkUniqueUser) && password !== confPwd) {
+    } else if (!userArr.every(checkUniqueEmail) && password !== confPwd) {
         console.log("email already registered & pwds do not match");
         // Hidden
         pwdAlert.classList.remove("hidden")
+        emailAlert.classList.remove("hidden")
         // Error
         pwd.classList.add("error");
         pwdConf.classList.add("error");
+        regEmail.classList.add("error");
 
-
-    } else if(!userArr.every(checkUniqueUser)) {
+    } else if(!userArr.every(checkUniqueEmail)) {
         console.log("email already registered - pwds OK!");
         // Hidden
         pwdAlert.classList.add("hidden")
+        emailAlert.classList.remove("hidden")
         // Error
         pwd.classList.remove("error");
         pwdConf.classList.remove("error");
+        regEmail.classList.add("error");
     } else {
         console.log("pwds do not match - email OK!");
         // Hidden
         pwdAlert.classList.remove("hidden")
+        emailAlert.classList.add("hidden")
         // Error
         pwd.classList.add("error");
         pwdConf.classList.add("error");
+        regEmail.classList.remove("error");
     }
 }
