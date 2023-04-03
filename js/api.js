@@ -43,5 +43,8 @@ const createUser = async(name, email, pwd) => {
         }),
     });
     const { list } = await res.json();
-    console.log(list.itemList);
+
+    // Find latest registered user and adds to local storage as signed in
+    const user  = list.itemList[list.itemList.length -1];
+    setItem("user", user._id);
 }
