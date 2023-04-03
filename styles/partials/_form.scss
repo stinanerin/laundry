@@ -15,8 +15,9 @@ form {
         color: $p-white;
     }
     label {
-        color: $accent-100;
-        font-weight: 800;
+        color: $p-white;
+        font-weight: 700;
+        font-family: $heading-primary;
     }
     .alert-danger {
         border-color: $danger-500;
