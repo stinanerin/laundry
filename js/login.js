@@ -1,7 +1,7 @@
 // ----------------------- LOGIN -----------------------
 const loginForm = document.querySelector('#loginForm');
-let email;
-let password;
+let email, 
+    password;
 
 loginForm.addEventListener("submit", async(e) => {
     e.preventDefault();
