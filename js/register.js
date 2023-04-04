@@ -37,9 +37,9 @@ const validateRegisterUser = async(name, email, password, confPwd) => {
     if(userArr.every(checkUniqueEmail) && password === confPwd) {
         // Cretes user in API
         createUser(name, email, password, confPwd);
-        checkSignedInUser()
         calender.classList.remove("hidden")
         registerContainer.classList.add("hidden")
+        checkSignedInUser()
     // If email is not unique and pwds do not match 
     } else if (!userArr.every(checkUniqueEmail) && password !== confPwd) {
         // Hidden
