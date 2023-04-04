@@ -9,7 +9,7 @@ const fetchData = async(id) => {
     return arr
 }
 
-const addBooking = async(listId, dateObject, userID) => {
+const addBooking = async(listId, dateObject) => {
     try {
         const res = await fetch(`${API_BASE_URL}lists/${listId}/items`, {
             method: "POST",
@@ -18,7 +18,7 @@ const addBooking = async(listId, dateObject, userID) => {
             },
             body: JSON.stringify({
                 booking: dateObject,
-                user_id: userID
+                user_id: getitem("user")
             }),
     
         })
