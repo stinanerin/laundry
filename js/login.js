@@ -38,6 +38,6 @@ let validateLogin = (arr, mail, pwd) => {
     }
 }
 
-// ----------------------- LOGIN CHECK -----------------------
+// ----------------------- CHECK IF USER IS ALREADY LOGGED IN -----------------------
 
 getitem("user") ? toggleClass([registerContainer, calender], "hidden") : ""
