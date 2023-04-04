@@ -20,7 +20,6 @@ const addBooking = async(listId, dateObject) => {
                 booking: dateObject,
                 user_id: getitem("user")
             }),
-    
         })
         const { list } = await res.json();
     } catch(error) {
@@ -43,8 +42,10 @@ const createUser = async(name, email, pwd) => {
         }),
     });
     const { list } = await res.json();
-
+    
     // Find latest registered user and adds to local storage as signed in
     const user  = list.itemList[list.itemList.length -1];
-    setItem("user", user._id);
+    console.log(user);
+    
+    setItem("user", [user._id, user.username]);
 }

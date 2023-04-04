@@ -145,6 +145,14 @@
     align-items: center;
     min-width: 20%;
   }
+  .header .header-child:first-child {
+    justify-content: flex-start;
+    padding: 0 12px;
+  }
+  .header .header-child:first-child p {
+    margin: 0;
+    padding-left: 1rem;
+  }
   .header .header-child:last-child {
     justify-content: flex-end;
   }

@@ -3,8 +3,11 @@
 const logout = () => {
     // If a user is set in local - storage log them out
     if(getitem("user")) {
+        checkSignedInUser()
         setItem("user", "")
-        toggleClass([registerContainer, calender], "hidden")
+        calender.classList.add("hidden")
+        registerContainer.classList.remove("hidden")
+        loginContainer.classList.add("hidden")
     }
 }
 

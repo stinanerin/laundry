@@ -158,7 +158,7 @@ const updateChoosenDate = (date) => {
 
 bookingForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    // Disabled booked radio
+    // Disables booked radio
     e.target.querySelector("input[type='radio']:checked").disabled = true;    
     addBooking(currentList, currentDate)
     // Adds the recently booked date to global bookings-arr - avoiding another API-request - which is looped when the day-view is rendered

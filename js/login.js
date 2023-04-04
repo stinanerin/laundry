@@ -18,8 +18,10 @@ let validateLogin = (arr, mail, pwd) => {
 
     if(arr.find(findUser)) {
         console.log("user exists");
-        setItem("user", arr.find(findUser)._id);
-        toggleClass([calender, loginContainer], "hidden")
+        setItem("user", [arr.find(findUser)._id, arr.find(findUser).username]);
+        checkSignedInUser()
+        calender.classList.remove("hidden")
+        loginContainer.classList.add("hidden")
     } else {
         console.log("user doesn´t exist");
         document.querySelector(".login-alert-container").innerHTML = `
@@ -40,4 +42,18 @@ let validateLogin = (arr, mail, pwd) => {
 
 // ----------------------- CHECK IF USER IS ALREADY LOGGED IN -----------------------
 
-getitem("user") ? toggleClass([registerContainer, calender], "hidden") : ""
+const checkSignedInUser = () => {
+    let div = document.querySelector(".header-child")
+    if(getitem("user") && !div.innerHTML) {
+        console.log("auto inlogg");
+        div.innerHTML = `
+        <i class="fa-regular fa-user"></i>
+        <p>${getitem("user")[1]}</p>
+        `
+    } else {
+        console.log("ingen gammal inloggning kvar");
+        div.innerHTML = "";
+    } 
+}
+
+checkSignedInUser()
