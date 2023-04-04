@@ -135,8 +135,21 @@
   .header {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     height: 100px;
+    padding: 0 1rem;
+  }
+  .header .header-child {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 20%;
+  }
+  .header .header-child:last-child {
+    justify-content: flex-end;
+  }
+  .header .header-child button img {
+    width: 20px;
   }
   footer {
     background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.233) 100%);
