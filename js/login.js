@@ -37,3 +37,7 @@ let validateLogin = (arr, mail, pwd) => {
         password.classList.add("error");
     }
 }
+
+// ----------------------- CHECK IF USER IS ALREADY LOGGED IN -----------------------
+
+getitem("user") ? toggleClass([registerContainer, calender], "hidden") : ""
