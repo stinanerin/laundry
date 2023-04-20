@@ -56,7 +56,7 @@
   input, input:active, input:focus,
 input:-webkit-autofill,
 input:-webkit-autofill:focus,
-input:-webkit-autofill:active, select {
+input:-webkit-autofill:active, input[data-autocompleted], select {
     /* fallback for old browsers */
     background: hsl(0deg, 0%, 0%);
     background: linear-gradient(270deg, rgba(255, 255, 255, 0.46) 0%, rgba(253, 253, 253, 0) 100%);
@@ -67,23 +67,54 @@ input:-webkit-autofill:active, select {
     font-family: system-ui;
     color: hsl(0deg, 0%, 100%);
     font-size: 0.875rem;
+    /* Almost working autocomplete styling */
+    -webkit-transition: background-color 600000s 0s, color 600000s 0s;
+    transition: background-color 600000s 0s, color 600000s 0s;
   }
   input::placeholder, input:active::placeholder, input:focus::placeholder,
 input:-webkit-autofill::placeholder,
 input:-webkit-autofill:focus::placeholder,
-input:-webkit-autofill:active::placeholder, select::placeholder {
+input:-webkit-autofill:active::placeholder, input[data-autocompleted]::placeholder, select::placeholder {
     font-family: system-ui;
     color: hsl(0deg, 0%, 100%);
   }
   input:not(select), input:active:not(select), input:focus:not(select),
 input:-webkit-autofill:not(select),
 input:-webkit-autofill:focus:not(select),
-input:-webkit-autofill:active:not(select), select:not(select) {
+input:-webkit-autofill:active:not(select), input[data-autocompleted]:not(select), select:not(select) {
     padding: 0.5rem 1.5rem;
   }
   input:active, input:focus, input:-webkit-autofill:focus, input:-webkit-autofill:active, select:hover {
     box-shadow: inset 0 0 0.75em 0 rgba(255, 255, 255, 0.46), 0 0 1em 0 rgba(255, 255, 255, 0.46);
     -webkit-box-shadow: inset 0 0 0.75em 0 rgba(255, 255, 255, 0.46), 0 0 1em 0 rgba(255, 255, 255, 0.46);
+  }
+  input[data-autocompleted] {
+    /* fallback for old browsers */
+    background: hsl(0deg, 0%, 0%);
+    background: linear-gradient(270deg, rgba(255, 255, 255, 0.46) 0%, rgba(253, 253, 253, 0) 100%);
+    background: -webkit-linear-gradient(270deg, rgba(255, 255, 255, 0.46) 0%, rgba(253, 253, 253, 0) 100%);
+    border: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+         appearance: none;
+    font-family: system-ui;
+    color: hsl(0deg, 0%, 100%);
+    font-size: 0.875rem;
+  }
+  input[data-autocompleted]::-moz-placeholder {
+    font-family: system-ui;
+    color: hsl(0deg, 0%, 100%);
+  }
+  input[data-autocompleted]:-ms-input-placeholder {
+    font-family: system-ui;
+    color: hsl(0deg, 0%, 100%);
+  }
+  input[data-autocompleted]::placeholder {
+    font-family: system-ui;
+    color: hsl(0deg, 0%, 100%);
+  }
+  input[data-autocompleted]:not(select) {
+    padding: 0.5rem 1.5rem;
   }
   .calendar {
     border-radius: 0.5rem;
