@@ -46,3 +46,9 @@ i {
     text-decoration: underline;
     color: $accent-100;
 }
+input, input:active, input:focus, 
+    input:-webkit-autofill, 
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active, select {
+        @include element-gradient($transparent-50, $transparent-100, $p-white, $body);
+}

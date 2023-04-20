@@ -53,6 +53,34 @@
     text-decoration: underline;
     color: #909ec9;
   }
+  input, input:active, input:focus,
+input:-webkit-autofill,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active, select {
+    /* fallback for old browsers */
+    background: hsl(0deg, 0%, 0%);
+    background: linear-gradient(270deg, rgba(255, 255, 255, 0.46) 0%, rgba(253, 253, 253, 0) 100%);
+    background: -webkit-linear-gradient(270deg, rgba(255, 255, 255, 0.46) 0%, rgba(253, 253, 253, 0) 100%);
+    border: none;
+    -webkit-appearance: none;
+    appearance: none;
+    font-family: system-ui;
+    color: hsl(0deg, 0%, 100%);
+    font-size: 0.875rem;
+  }
+  input::placeholder, input:active::placeholder, input:focus::placeholder,
+input:-webkit-autofill::placeholder,
+input:-webkit-autofill:focus::placeholder,
+input:-webkit-autofill:active::placeholder, select::placeholder {
+    font-family: system-ui;
+    color: hsl(0deg, 0%, 100%);
+  }
+  input:not(select), input:active:not(select), input:focus:not(select),
+input:-webkit-autofill:not(select),
+input:-webkit-autofill:focus:not(select),
+input:-webkit-autofill:active:not(select), select:not(select) {
+    padding: 0.5rem 1.5rem;
+  }
   .calendar {
     border-radius: 0.5rem;
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.133) 0%, rgba(255, 255, 255, 0) 100%);
