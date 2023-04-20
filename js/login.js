@@ -18,6 +18,7 @@ let validateLogin = (arr, mail, pwd) => {
 
     if(arr.find(findUser)) {
         console.log("user exists");
+        // console.log(arr.find(findUser));
         setItem("user", [arr.find(findUser)._id, arr.find(findUser).username]);
         calender.classList.remove("hidden")
         loginContainer.classList.add("hidden")

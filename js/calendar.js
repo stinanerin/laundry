@@ -68,6 +68,7 @@ const renderDayView = () => {
             // Checks if currentDate is already booked
             // Returns every date obj that matches the current looped date - otherwise []]
             const match = bookings.filter(date => date.toLocaleDateString() === currentDate.toLocaleDateString())
+
             match.length > 0 ? bookedTimes = match.map(date => date.getHours()) : ""
             // If current date is already booked - disable radio for time slots
             bookedTimes ? diasableElem(bookedTimes) : ""
@@ -82,7 +83,14 @@ const renderMonthCal = async() => {
     //todo! bryt ut
     // Fetches all bookings from API
     const arr = await fetchData(currentList)
+    //! nytt
+    console.log(arr);
+    console.log(getitem("user")[0]);
+    let signedInUserBooking = arr.find(booking => booking.user_id === getitem("user")[0])
+    console.log("signedInUserBooking", new Date(signedInUserBooking.booking));
+    //! slut nytt
     bookings = arr.map(date => new Date(date.booking))
+    console.log("bookings", bookings);
     const firstDay = new Date(year, month, 1),
         // The day of the week for the current date
         day = firstDay.getDay() - 1,
