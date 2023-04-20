@@ -34,12 +34,7 @@ i {
     border-color: transparent;
     border-radius: $radius;
     &:hover {
-        box-shadow: 
-            inset 0 0 0.75em 0 $accent-100,
-            0 0 1em 0 $accent-100;
-        -webkit-box-shadow: 
-            inset 0 0 0.75em 0 $accent-100,
-            0 0 1em 0 $accent-100;
+       @include glow($accent-100);
     }
 }
 .link {
@@ -47,8 +42,11 @@ i {
     color: $accent-100;
 }
 input, input:active, input:focus, 
-    input:-webkit-autofill, 
-    input:-webkit-autofill:focus,
-    input:-webkit-autofill:active, select {
-        @include element-gradient($transparent-50, $transparent-100, $p-white, $body);
+input:-webkit-autofill, 
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active, select {
+    @include element-gradient($transparent-50, $transparent-100, $p-white, $body);
+}
+input:active, input:focus, input:-webkit-autofill:focus, input:-webkit-autofill:active, select:hover  {
+    @include glow;
 }

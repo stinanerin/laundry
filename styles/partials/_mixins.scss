@@ -19,3 +19,11 @@
     }
 }
 
+@mixin glow ($color: $transparent-50) {
+    box-shadow: 
+            inset 0 0 0.75em 0 $color,
+            0 0 1em 0 $color;
+    -webkit-box-shadow: 
+        inset 0 0 0.75em 0 $color,
+        0 0 1em 0 $color;
+};
