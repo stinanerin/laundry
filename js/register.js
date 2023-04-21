@@ -5,12 +5,11 @@ const loginUserLink  = document.querySelector('#loginLink'),
     registerUserForm = document.querySelector("#registerUser"),
     calender = document.querySelector('#calenderWrapper'),
     pwdAlert = document.querySelector("#passwordAlert"),
-    emailAlert = document.querySelector("#emailAlert");
-
-let fullName,
-    regEmail,
-    pwd,
-    pwdConf;
+    emailAlert = document.querySelector("#emailAlert"),
+    fullName = document.querySelector('#FullName'),
+    regEmail = document.querySelector('#email'),
+    pwd = document.querySelector('#pwd'),
+    pwdConf = document.querySelector('#pwdConf');
 
 // ----------------------- TOGGLE BETWEEN REGISTER / LOGIN VIEW -----------------------
 loginUserLink.addEventListener("click", () => { toggleClass([registerContainer, loginContainer], "hidden") })
@@ -20,52 +19,57 @@ registerUserLink.addEventListener("click", () => { toggleClass([registerContaine
 registerUserForm.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    fullName = document.querySelector('#FullName'),
-    regEmail = document.querySelector('#email'),
-    pwd = document.querySelector('#pwd'),
-    pwdConf = document.querySelector('#pwdConf');
-
-    validateRegisterUser(fullName.value, regEmail.value, pwd.value, pwdConf.value)
+    registerUser()
 })
 
-// ----------------------- VALIDATION - REGISTER USER -----------------------
-const validateRegisterUser = async(name, email, password, confPwd) => {
+const registerUser = async() => {
     const userArr = await fetchData("6429d84525fc8200e0300328")
+    //! todo error handling
+    console.log(userArr);
+    validateRegisterUser(userArr, fullName.value, regEmail.value, pwd.value, pwdConf.value)
+}
+
+// ----------------------- VALIDATION - REGISTER USER -----------------------
+const validateRegisterUser = async(userArr, name, email, password, confPwd) => {
     const checkUniqueEmail = user => user.email !== email;
     
     // If email is unique and pwds match 
     if(userArr.every(checkUniqueEmail) && password === confPwd) {
         // Cretes user in API
         createUser(name, email, password, confPwd);
+<<<<<<< HEAD
         calender.classList.remove("hidden")
         registerContainer.classList.add("hidden")
         checkSignedInUser()
+=======
+        toggleClass([calender, registerContainer], "hidden")
+        clearValue([fullName, regEmail, pwd, pwdConf])
+        addClass([pwdAlert, emailAlert], "hidden")
+        removeClass([fullName, regEmail, pwd, pwdConf], "error");
+>>>>>>> 7fdf9b8db51d68af1f20b701171fa942b7c6b41a
     // If email is not unique and pwds do not match 
     } else if (!userArr.every(checkUniqueEmail) && password !== confPwd) {
         // Hidden
-        pwdAlert.classList.remove("hidden")
-        emailAlert.classList.remove("hidden")
+        removeClass([pwdAlert, emailAlert], "hidden")
         // Error
-        pwd.classList.add("error");
-        pwdConf.classList.add("error");
-        regEmail.classList.add("error");
+        addClass([pwd, pwdConf, regEmail], "error");
+
     // If email is not unique 
     } else if(!userArr.every(checkUniqueEmail)) {
         // Hidden
-        pwdAlert.classList.add("hidden")
-        emailAlert.classList.remove("hidden")
+        addClass([pwdAlert, emailAlert], "hidden");
         // Error
-        pwd.classList.remove("error");
-        pwdConf.classList.remove("error");
-        regEmail.classList.add("error");
+        removeClass([pwd, pwdConf], "error")
+        addClass([regEmail], "error");
+
     // If pwds do not match 
     } else {
         // Hidden
-        pwdAlert.classList.remove("hidden")
-        emailAlert.classList.add("hidden")
+        removeClass([pwdAlert], "hidden")
+        addClass([emailAlert], "hidden");
+
         // Error
-        pwd.classList.add("error");
-        pwdConf.classList.add("error");
-        regEmail.classList.remove("error");
+        addClass([pwd, pwdConf], "error");
+        removeClass([regEmail], "error")
     }
 }

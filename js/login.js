@@ -1,48 +1,50 @@
 // ----------------------- LOGIN -----------------------
-const loginForm = document.querySelector('#loginForm');
-let email, 
-    password;
+const loginForm = document.querySelector('#loginForm'),
+    loginError = document.querySelector(".login-alert-container"),
+    email = document.querySelector('#loginEmail'),
+    password = document.querySelector('#loginPWD');
 
-loginForm.addEventListener("submit", async(e) => {
-    e.preventDefault();
+
+loginForm.addEventListener("submit", (e) => {
+    e.preventDefault()
+
+    login()
+})
+
+const login = async() => {
     const users = await fetchData("6429d84525fc8200e0300328")
-    email = document.querySelector('#loginEmail')
-    password = document.querySelector('#loginPWD')
+    //! todo error handling
     validateLogin(users, email.value, password.value)
-});
+}
 
-let validateLogin = (arr, mail, pwd) => {
-    console.log(arr, mail, pwd);
+const validateLogin = (arr, mail, pwd) => {
     //todo bryt ut?
     const findUser = user => user.email === mail && user.password === pwd;
 
     if(arr.find(findUser)) {
         console.log("user exists");
+<<<<<<< HEAD
         // console.log(arr.find(findUser));
         setItem("user", [arr.find(findUser)._id, arr.find(findUser).username]);
         calender.classList.remove("hidden")
         loginContainer.classList.add("hidden")
         checkSignedInUser()
+=======
+        clearValue([email, password])
+        clearElem([loginError])
+        removeClass([email, password], "error");
+
+        addSession(arr.find(findUser))
+>>>>>>> 7fdf9b8db51d68af1f20b701171fa942b7c6b41a
     } else {
         console.log("user doesn´t exist");
-        document.querySelector(".login-alert-container").innerHTML = `
-        <div class="alert alert-danger container" role="alert">
-            <div class="row">
-                <div class="col-auto">
-                    <i class="fa-solid fa-triangle-exclamation"></i>
-                </div>
-                <div class="col">
-                    <span class="error">Invalid email or password</span>
-                </div>
-            </div>
-        </div>`
-        email.classList.add("error");
-        password.classList.add("error");
+        displayError(loginError, "Invalid email or password")
+        addClass([email, password], "error");
     }
 }
 
-// ----------------------- CHECK IF USER IS ALREADY LOGGED IN -----------------------
 
+<<<<<<< HEAD
 const checkSignedInUser = () => {
     let div = document.querySelector(".header-child")
     if(getitem("user")) {
@@ -61,3 +63,19 @@ const checkSignedInUser = () => {
 }
 
 checkSignedInUser()
+=======
+// ----------------------- ERROR MESSAGE BOX FORMS -----------------------
+const displayError = (wrapper, message) => {
+    wrapper.innerHTML = `
+    <div class="alert alert-danger container" role="alert">
+        <div class="row">
+            <div class="col-auto">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <div class="col">
+                <span> ${message}</span>
+            </div>
+        </div>
+    </div>`
+}
+>>>>>>> 7fdf9b8db51d68af1f20b701171fa942b7c6b41a

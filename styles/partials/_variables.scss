@@ -9,10 +9,13 @@ $p-white: hsl(0, 0%, 100%);
 $danger-500: hsl(354, 100%, 51%);
 $danger-50: hsl(355,70%,91%);
 
-$accent-300: #ef9298;
-$accent-300: #46a2be;
 $accent-300: #2d3d6a;
 $accent-100: #909ec9;
+
+$transparent-50: rgba(255, 255, 255, 0.46);
+$transparent-100: rgba(253, 253, 253, 0);
+
+
 
 $radius: 0.5rem;
 $radius-max: 50px;

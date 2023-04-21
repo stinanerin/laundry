@@ -41,17 +41,82 @@
     padding: 0.5rem 1rem;
     min-width: 12rem;
   }
-  .btn {
-    border-color: transparent;
+  .primary-btn {
+    border: none;
     border-radius: 0.5rem;
   }
-  .btn:hover {
-    box-shadow: inset 0 0 0.75em 0 #909ec9, 0 0 1em 0 #909ec9;
-    -webkit-box-shadow: inset 0 0 0.75em 0 #909ec9, 0 0 1em 0 #909ec9;
+  .primary-btn:hover {
+    box-shadow: inset 0 0 0.75em 0 #909ec9, 0 0 1em 0.2em #909ec9;
+    -webkit-box-shadow: inset 0 0 0.75em 0 #909ec9, 0 0 1em 0.2em #909ec9;
+    background-color: transparent;
   }
   .link {
     text-decoration: underline;
     color: #909ec9;
+    cursor: pointer;
+  }
+  input:not([type=radio]), input:active:not([type=radio]), input:focus:not([type=radio]),
+input:-webkit-autofill:not([type=radio]),
+input:-webkit-autofill:focus:not([type=radio]),
+input:-webkit-autofill:active:not([type=radio]), input[data-autocompleted]:not([type=radio]), select:not([type=radio]) {
+    /* fallback for old browsers */
+    background: hsl(0deg, 0%, 0%);
+    background: linear-gradient(270deg, rgba(255, 255, 255, 0.46) 0%, rgba(253, 253, 253, 0) 100%);
+    background: -webkit-linear-gradient(270deg, rgba(255, 255, 255, 0.46) 0%, rgba(253, 253, 253, 0) 100%);
+    border: none;
+    -webkit-appearance: none;
+    appearance: none;
+    font-family: system-ui;
+    color: hsl(0deg, 0%, 100%);
+    font-size: 0.875rem;
+    /* Almost working autocomplete styling */
+    -webkit-transition: background-color 600000s 0s, color 600000s 0s;
+    transition: background-color 600000s 0s, color 600000s 0s;
+  }
+  input:not([type=radio])::placeholder, input:active:not([type=radio])::placeholder, input:focus:not([type=radio])::placeholder,
+input:-webkit-autofill:not([type=radio])::placeholder,
+input:-webkit-autofill:focus:not([type=radio])::placeholder,
+input:-webkit-autofill:active:not([type=radio])::placeholder, input[data-autocompleted]:not([type=radio])::placeholder, select:not([type=radio])::placeholder {
+    font-family: system-ui;
+    color: hsl(0deg, 0%, 100%);
+  }
+  input:not([type=radio]):not(select), input:active:not([type=radio]):not(select), input:focus:not([type=radio]):not(select),
+input:-webkit-autofill:not([type=radio]):not(select),
+input:-webkit-autofill:focus:not([type=radio]):not(select),
+input:-webkit-autofill:active:not([type=radio]):not(select), input[data-autocompleted]:not([type=radio]):not(select), select:not([type=radio]):not(select) {
+    padding: 0.5rem 1.5rem;
+  }
+  input:active:not([type=radio]), input:focus:not([type=radio]), input:-webkit-autofill:focus:not([type=radio]), input:-webkit-autofill:active:not([type=radio]), select:hover:not([type=radio]) {
+    box-shadow: inset 0 0 0.75em 0 rgba(255, 255, 255, 0.46), 0 0 1em 0.2em rgba(255, 255, 255, 0.46);
+    -webkit-box-shadow: inset 0 0 0.75em 0 rgba(255, 255, 255, 0.46), 0 0 1em 0.2em rgba(255, 255, 255, 0.46);
+  }
+  input[data-autocompleted] {
+    /* fallback for old browsers */
+    background: hsl(0deg, 0%, 0%);
+    background: linear-gradient(270deg, rgba(255, 255, 255, 0.46) 0%, rgba(253, 253, 253, 0) 100%);
+    background: -webkit-linear-gradient(270deg, rgba(255, 255, 255, 0.46) 0%, rgba(253, 253, 253, 0) 100%);
+    border: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+         appearance: none;
+    font-family: system-ui;
+    color: hsl(0deg, 0%, 100%);
+    font-size: 0.875rem;
+  }
+  input[data-autocompleted]::-moz-placeholder {
+    font-family: system-ui;
+    color: hsl(0deg, 0%, 100%);
+  }
+  input[data-autocompleted]:-ms-input-placeholder {
+    font-family: system-ui;
+    color: hsl(0deg, 0%, 100%);
+  }
+  input[data-autocompleted]::placeholder {
+    font-family: system-ui;
+    color: hsl(0deg, 0%, 100%);
+  }
+  input[data-autocompleted]:not(select) {
+    padding: 0.5rem 1.5rem;
   }
   .calendar {
     border-radius: 0.5rem;
@@ -110,6 +175,7 @@
   }
   form .alert-danger {
     border-color: hsl(354deg, 100%, 51%);
+    color: hsl(354deg, 100%, 51%);
     padding: 0.5rem 1rem;
     margin: 0;
   }
@@ -122,15 +188,13 @@
     -webkit-text-fill-color: hsl(354deg, 100%, 51%);
     box-shadow: 0 0 0px 1000px hsl(354deg, 100%, 51%) inset;
     -webkit-box-shadow: 0 0 0px 1000px hsl(355deg, 70%, 91%) inset;
-    transition: background-color 5000s ease-in-out 0s;
   }
-  form .error:-webkit-autofill, form .error:-webkit-autofill:focus {
+  form .error:-webkit-autofill, form .error:-webkit-autofill:focus, form .error:-webkit-autofill:active, form .error:active, form .error:focus {
+    color: hsl(354deg, 100%, 51%);
     border-color: hsl(354deg, 100%, 51%);
     -webkit-text-fill-color: hsl(354deg, 100%, 51%);
     box-shadow: 0 0 0px 1000px hsl(354deg, 100%, 51%) inset;
     -webkit-box-shadow: 0 0 0px 1000px hsl(355deg, 70%, 91%) inset;
-    -webkit-transition: background-color 5000s ease-in-out 0s;
-    transition: background-color 5000s ease-in-out 0s;
   }
   .header {
     display: flex;
