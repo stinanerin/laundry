@@ -25,7 +25,9 @@ const addClass = (arr, aClass) => {
 const removeClass = (arr, aClass) => {
     arr.forEach(elem => elem.classList.remove(aClass))
 }
-
+const clearElem = (arr) => {
+    arr.forEach(elem => elem.innerHTML = "")
+}
 // ----------------------- LOCAL STORAGE - SET & GET -----------------------
 const setItem = (key, value) => localStorage.setItem(key, JSON.stringify(value));
 const getitem = key => JSON.parse(localStorage.getItem(key));

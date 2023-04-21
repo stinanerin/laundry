@@ -37,19 +37,17 @@
         <div class="header-child">
             <h1>Laundry</h1>
         </div>
-        <div class="header-child">
-            <button id="logoutBtn" class="btn border-0" aria-label="Log out button">
-                <img class="logout" src="assets/icons/logout.svg"  aria-hidden="true" alt=""/>
-            </button>
+        <div class="header-child" id="userIcons">
+            
         </div>
     </header>
     <main>
 
         <div class="login-register pt-5">
             <!--! REGISTER FORM -->
-            <div id="registerWrapper">
+            <div id="registerWrapper" class="hidden">
                 <form class="container main" id="registerUser">
-                    <h2 class="text-center">Register</h2>
+                    <h2 class="text-center">Create an account</h2>
                     <div class="row gy-3">
                         <!-- NAME -->
                         <div class="form-group">
@@ -109,16 +107,16 @@
                 </div>
             </div>
             <!--! LOGIN FORM -->
-            <div id="loginWrapper" class="hidden">
+            <div id="loginWrapper" >
                 <form class="container main" id="loginForm">
-                    <h2 class="text-center">Log in</h2>
+                    <h2 class="text-center">Welcome back</h2>
                     <div class="row gy-3 ">
                         <!-- EMAIL -->
                         <div class="form-group">
                             <label for="loginEmail" class="form-label">Email address</label>
                             <input class="form-control input" id="loginEmail" type="email" placeholder="Enter email" required/>
                         </div>
-                        <!-- ALERT -->
+                        <!--! ALERT -->
                         <div class="login-alert-container"></div>
                         <!-- PWD -->
                         <div class="form-group">
@@ -130,12 +128,12 @@
                     
                     <!-- SUBMIT -->
                     <div class="d-flex justify-content-center my-5">
-                        <button class="btn primary-btn" type="submit">Sign in</button>
+                        <button class="btn primary-btn" type="submit">Log in</button>
                     </div>
                 </form>
                 <!-- LINK REGISTER FORM  -->
                 <div class="text-center pb-5">
-                    <p>Not registered? <span class="link" id="registerLink">Register now</span></p>
+                    <p>Don't have an account? <span class="link" id="registerLink">Register now</span></p>
                 </div>
             </div>
         </div>  
