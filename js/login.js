@@ -14,12 +14,10 @@ loginForm.addEventListener("submit", (e) => {
 const login = async() => {
     const users = await fetchData("6429d84525fc8200e0300328")
     //! todo error handling
-    console.log(users);
     validateLogin(users, email.value, password.value)
 }
 
 const validateLogin = (arr, mail, pwd) => {
-    console.log(arr, mail, pwd);
     //todo bryt ut?
     const findUser = user => user.email === mail && user.password === pwd;
 

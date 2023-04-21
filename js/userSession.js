@@ -2,9 +2,10 @@ const userIcons = document.querySelector("#userIcons")
 
 // ----------------------- ADD USER TO SESSION STORAGE -----------------------
 const addSession = (user) => {
-    console.log(user);
-    //todo! set userName
-    setItem("user", user._id);
+    setItem("user", {
+        name: user.username,
+        id: user._id,
+    });
     checkSession()
 }
 
@@ -13,7 +14,7 @@ const checkSession = () => {
     if (getitem("user")){
         addClass([loginContainer, registerContainer], "hidden")
         removeClass([calender], "hidden")
-        displayUser(getitem("user"))
+        displayUser(getitem("user").name)
     } else {
         clearElem([userIcons])
     }
@@ -23,7 +24,7 @@ const displayUser = (userName) => {
     //todo! display userName
     userIcons.innerHTML =` 
     <div class="d-flex align-items-center ">
-        <p class="m-0 pe-2" id="userName">Welcome ${userName}!</p>
+        <p class="m-0 pe-2" id="userName">Welcome ${toUpperCaseStr(userName)}!</p>
         <i class="fa-regular fa-user"></i>
     </div>
     <div id="logoutWrapper" >
