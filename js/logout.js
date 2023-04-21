@@ -1,11 +1,8 @@
 // ----------------------- LOG OUT -----------------------
 
 const logout = () => {
-    // If a user is set in local - storage log them out
-    if(getitem("user")) {
-        setItem("user", "")
-        toggleClass([registerContainer, calender], "hidden")
-    }
+    localStorage.removeItem("user");
+    toggleClass([loginContainer, calender], "hidden")
+    checkSession()
 }
 
-document.querySelector("#logoutBtn").addEventListener("click", logout)
