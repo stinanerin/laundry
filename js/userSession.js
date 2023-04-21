@@ -42,7 +42,7 @@ const findUsersBooking = (arr) => {
     // Returns the booking object of the signed in user if it exists - otherwise undefined
     let signedInUserBooking = arr.find(booking => booking.user_id === userObj.id)
     if(signedInUserBooking) {
-        console.log("signedInUserBooking object", signedInUserBooking);
+        // console.log("signedInUserBooking object", signedInUserBooking);
         return new Date(signedInUserBooking.booking)
     }
     return

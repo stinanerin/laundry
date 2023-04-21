@@ -85,7 +85,8 @@ const renderMonthCal = async() => {
 
     //!todo limit signed in user to book multiple times?
     const userBookedTime = findUsersBooking(arr)
-    // console.log("userBookedTime", userBookedTime);
+    console.log("userBookedTime", userBookedTime);
+    console.log(userBookedTime.getDate());
 
 
     bookings = arr.map(date => new Date(date.booking))
@@ -192,12 +193,16 @@ const alterMonth = (str) => {
 
 // ----------------------- DISABLE PASSED DATES -----------------------
 
-let hasDatePassed = (year, month, day) => {
+const hasDatePassed = (year, month, day) => {
     date = new Date(year, month, day)
     // Create a new date of the existing dates to cancel out the time
     return new Date(date.toDateString()) < new Date(today.toDateString()) ? "deactivated" : "";
 }
 
-let checkIfDayisToday = (year, month, day) => {
-    return today.toDateString() === new Date(year, month, day).toDateString() ? "today" : ""
+const checkIfDayisToday = (year, month, day) => {
+    return areDatesEqual(today, new Date(year, month, day)) ? "today" : ""
+}
+
+const areDatesEqual = (d1, d2) => {
+    return d1.toDateString() === d2.toDateString()
 }

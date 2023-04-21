@@ -221,7 +221,7 @@ input:-webkit-autofill:active:not([type=radio]):not(select), input[data-autocomp
     justify-content: flex-end;
   }
   .header .header-child button img {
-    width: 20px;
+    width: 1rem;
   }
   footer {
     background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.233) 100%);
