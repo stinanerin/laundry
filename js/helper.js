@@ -31,6 +31,7 @@ const clearElem = (arr) => {
 const clearValue = (arr) => {
     arr.forEach(elem => elem.value = "")
 }
+const toUpperCaseStr = (str) => str.split(" ").map(word => {return word[0].toUpperCase() + word.slice(1)}).join(" ")
 // ----------------------- LOCAL STORAGE - SET & GET -----------------------
 const setItem = (key, value) => localStorage.setItem(key, JSON.stringify(value));
 const getitem = key => JSON.parse(localStorage.getItem(key));
