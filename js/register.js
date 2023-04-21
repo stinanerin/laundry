@@ -11,9 +11,7 @@ const loginUserLink  = document.querySelector('#loginLink'),
     pwd = document.querySelector('#pwd'),
     pwdConf = document.querySelector('#pwdConf');
 
-// ----------------------- TOGGLE BETWEEN REGISTER / LOGIN VIEW -----------------------
-loginUserLink.addEventListener("click", () => { toggleClass([registerContainer, loginContainer], "hidden") })
-registerUserLink.addEventListener("click", () => { toggleClass([registerContainer, loginContainer], "hidden") })
+
 
 // ----------------------- REGISTER USER FORM -----------------------
 registerUserForm.addEventListener("submit", (e) => {

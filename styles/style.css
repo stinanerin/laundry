@@ -127,7 +127,7 @@ input:-webkit-autofill:active:not([type=radio]):not(select), input[data-autocomp
   }
   .calendar .day {
     min-height: 50px;
-    padding: 0.5rem;
+    margin: 0.5rem;
     border-radius: 50px;
   }
   .calendar .day:hover:not(.deactivated), .calendar .day.active, .calendar .day.today:not(.deactivated) {

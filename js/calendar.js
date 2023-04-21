@@ -7,7 +7,7 @@ const calendar = document.querySelector(".calendar"),
     dateHeader = document.querySelector(".month-header"),
     prevMonth = document.querySelector("#prevMonth"),
     nextMonth = document.querySelector("#nextMonth"),
-    //curtesy of https://gist.github.com/seripap/9eb809268eb8026abd9f
+    // curtesy of https://gist.github.com/seripap/9eb809268eb8026abd9f
     months = Array.from({length: 12}, (e, i) => {
         return new Date(null, i + 1, null).toLocaleDateString("en", {month: "long"});
     });
@@ -24,24 +24,23 @@ let today = new Date(),
 
 const renderDayView = () => {
     document.querySelectorAll(".day:not(.deactivated)").forEach(btn => {
-        btn.addEventListener("click", (e) => {
+        btn.addEventListener("click", () => {
             // If another day has the active class - remove it
             document.querySelector(".active") ? document.querySelector(".active").classList.remove("active") : "";
-
-            const date = e.target
-            date.classList.add("active")
+           
+            btn.classList.add("active")
             
-            const monthName = date.classList.contains("prevMonth") ? months[month - 1]
-            : date.classList.contains("nextMonth") ? months[month + 1]
+            const monthName = btn.classList.contains("prevMonth") ? months[month - 1]
+            : btn.classList.contains("nextMonth") ? months[month + 1]
             : months[month]
             
-            const currentDate = new Date(year, months.indexOf(monthName), date.innerText)
+            const currentDate = new Date(year, months.indexOf(monthName), btn.innerText)
 
             dayView.innerHTML = `
             <div class="mb-5">
                 <h2 class="row gx-0 mb-4">
                     <span class="weekday col">${weekdays[currentDate.getDay()]}</span>
-                    <span class="date col text-end">${date.innerText} ${monthName}</span>
+                    <span class="date col text-end">${btn.innerText} ${monthName}</span>
                 </h2>
                 <div class="row gx-0 text-center">
                     <div class="col d-flex justify-content-center align-items-center">
@@ -83,14 +82,15 @@ const renderMonthCal = async() => {
     //todo! bryt ut
     // Fetches all bookings from API
     const arr = await fetchData(currentList)
-    //! nytt
-    console.log(arr);
-    console.log(getitem("user")[0]);
-    let signedInUserBooking = arr.find(booking => booking.user_id === getitem("user")[0])
-    console.log("signedInUserBooking", new Date(signedInUserBooking.booking));
-    //! slut nytt
+
+    //!todo limit signed in user to book multiple times?
+    const userBookedTime = findUsersBooking(arr)
+    // console.log("userBookedTime", userBookedTime);
+
+
     bookings = arr.map(date => new Date(date.booking))
     console.log("bookings", bookings);
+
     const firstDay = new Date(year, month, 1),
         // The day of the week for the current date
         day = firstDay.getDay() - 1,
@@ -154,8 +154,6 @@ const renderMonthCal = async() => {
     renderDayView()
 }
 
-renderMonthCal()
-
 const updateChoosenDate = (date) => {    
     document.querySelectorAll("input[type='radio'][name='time-slot']").forEach(slot => slot.addEventListener("change", (e) => {
         currentDate = date
@@ -191,7 +189,6 @@ const alterMonth = (str) => {
     }
     renderMonthCal()
 }
-
 
 // ----------------------- DISABLE PASSED DATES -----------------------
 

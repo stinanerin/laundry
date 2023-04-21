@@ -23,7 +23,7 @@ const addBooking = async(listId, dateObject) => {
             },
             body: JSON.stringify({
                 booking: dateObject,
-                user_id: getitem("user")[0]
+                user_id: getitem("user").id
             }),
         })
         const { list } = await res.json();
