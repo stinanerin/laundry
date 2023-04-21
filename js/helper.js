@@ -9,6 +9,7 @@ const createElement = (type, aClass, str, arr) => {
     }
     return elem;
 }
+//! todo - make dynamic
 const diasableElem = (arr) => {
     document.querySelectorAll("input[type='radio'][name='time-slot']")
     .forEach(radio => {

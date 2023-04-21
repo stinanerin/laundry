@@ -44,12 +44,12 @@ i {
 input, input:active, input:focus, 
 input:-webkit-autofill, 
 input:-webkit-autofill:focus,
-input:-webkit-autofill:active, input[data-autocompleted], select {
+input:-webkit-autofill:active, input[data-autocompleted], select, input:not[type="radio"]{
     @include element-gradient($transparent-50, $transparent-100, $p-white, $body);
     /* Almost working autocomplete styling */
     transition: background-color 600000s 0s, color 600000s 0s;
 }
-input:active, input:focus, input:-webkit-autofill:focus, input:-webkit-autofill:active, select:hover  {
+input:active, input:focus, input:-webkit-autofill:focus, input:-webkit-autofill:active, select:hover, input:not[type="radio"]  {
     @include glow;
 }
 

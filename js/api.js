@@ -1,12 +1,17 @@
 const API_BASE_URL = "https://nackademin-item-tracker.herokuapp.com/"
 // 642163c3a74e209fd250ff45
 const fetchData = async(id) => {
-    const res = await fetch(`${API_BASE_URL}lists/${id}`)
-    const data = await res.json();
-    let arr = data.itemList
-    let  objBooking  = arr[arr.length -1];
-    // console.log("latest booking", objBooking);
-    return arr
+    try {
+        const res = await fetch(`${API_BASE_URL}lists/${id}`)
+        const data = await res.json();
+        let arr = data.itemList
+        let  objBooking  = arr[arr.length -1];
+        // console.log("latest booking", objBooking);
+        return arr
+    } catch(error) {
+        console.log(error);
+        return error
+    }
 }
 
 const addBooking = async(listId, dateObject, userID) => {
