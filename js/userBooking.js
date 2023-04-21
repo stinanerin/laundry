@@ -27,11 +27,7 @@ const welcomeMsg = (booking) => {
     `<div class="text-center my-5">
         <p>Welcome back <b>${toUpperCaseStr(userObj.name)}</b>!</p>
         <p>${booking 
-            ? "Your next laundry time is " + 
-                new Intl.DateTimeFormat("en-GB", {
-                    dateStyle: "full",
-                    timeStyle: "short",
-                }).format(booking)
+            ? "Your next laundry time is " + dateToText(booking)
             : "You have no booked times"}</p
     </div>`
     loginContainer.insertAdjacentElement("afterend", div)

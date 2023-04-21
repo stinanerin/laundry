@@ -158,9 +158,8 @@ const renderMonthCal = async() => {
 
 const updateChoosenDate = (date) => {    
     document.querySelectorAll("input[type='radio'][name='time-slot']").forEach(slot => slot.addEventListener("change", (e) => {
-        currentDate = date
-        currentDate.setHours(e.target.value, 00, 00)
-        bookingForm.querySelector("p").innerHTML = `You have choosen <strong>${currentDate.toLocaleTimeString()} ${currentDate.toLocaleDateString()}</strong>. </br>Make sure to book it to complete the process`
+        date.setHours(e.target.value, 00, 00)
+        bookingForm.querySelector("p").innerHTML = `You have choosen <strong>${dateToText(date)}</strong>. </br>Make sure to book it to complete the process`
     }))
 }
 
