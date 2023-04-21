@@ -86,7 +86,7 @@ const renderMonthCal = async() => {
     //!todo limit signed in user to book multiple times?
     const userBookedTime = findUsersBooking(arr)
     console.log("userBookedTime", userBookedTime);
-    console.log(userBookedTime.getDate());
+
 
 
     bookings = arr.map(date => new Date(date.booking))
@@ -114,13 +114,15 @@ const renderMonthCal = async() => {
     // Renders the dates from previous month
     // "day" = the amount of days from the current week that belong to the previous month
     let currentMonth = month - 1
+
+    //!todo break out each rendering of days by pushing the dates to three arrays.
     for (let x = 1; x <= prevDays; x++) {
         // Creates new row for cal days for each week
         if(weekDays % 7 === 0) {
             row = createElement("div", "row mb-2 g-0");
             dayGrid.append(row);
         }
-        row.append(createElement("li", `${hasDatePassed(year, currentMonth, prevMontshLastDate - x + 1)} day prevMonth col d-flex justify-content-center align-items-center`, prevMontshLastDate - x + 1));
+        row.append(createElement("li", `${hasDatePassed(year, currentMonth, prevMontshLastDate - x + 1)} ${isDayBooked(userBookedTime, year, month, x)} day prevMonth col d-flex justify-content-center align-items-center`, prevMontshLastDate - x + 1));
         weekDays ++;
     }
 
@@ -131,7 +133,8 @@ const renderMonthCal = async() => {
             row = createElement("div", "row mb-2 g-0");
             dayGrid.append(row);
         }
-        row.append(createElement("li", `${checkIfDayisToday(year, month, x)} ${hasDatePassed(year, month, x)} day col d-flex justify-content-center align-items-center`, x));
+
+        row.append(createElement("li", `${checkIfDayisToday(year, month, x)} ${hasDatePassed(year, month, x)} ${isDayBooked(userBookedTime, year, month, x)} day col d-flex justify-content-center align-items-center`, x));
         weekDays ++;
     }
 
@@ -145,7 +148,7 @@ const renderMonthCal = async() => {
             row = createElement("div", "row g-0");
             dayGrid.append(row);
         }
-        row.append(createElement("li", `${checkIfDayisToday(year, currentMonth, x)} ${hasDatePassed(year, currentMonth, x)} day nextMonth col d-flex justify-content-center align-items-center`, x));
+        row.append(createElement("li", `${checkIfDayisToday(year, currentMonth, x)} ${hasDatePassed(year, currentMonth, x)} ${isDayBooked(userBookedTime, year, month, x)} day nextMonth col d-flex justify-content-center align-items-center`, x));
         weekDays ++;
     }
 
@@ -201,6 +204,10 @@ const hasDatePassed = (year, month, day) => {
 
 const checkIfDayisToday = (year, month, day) => {
     return areDatesEqual(today, new Date(year, month, day)) ? "today" : ""
+}
+
+const isDayBooked = (bookedTime, year, month, day) => {
+    return areDatesEqual(bookedTime, new Date(year, month, day)) ? "booked" : ""
 }
 
 const areDatesEqual = (d1, d2) => {
