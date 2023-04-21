@@ -23,19 +23,11 @@ const validateLogin = (arr, mail, pwd) => {
 
     if(arr.find(findUser)) {
         console.log("user exists");
-<<<<<<< HEAD
-        // console.log(arr.find(findUser));
-        setItem("user", [arr.find(findUser)._id, arr.find(findUser).username]);
-        calender.classList.remove("hidden")
-        loginContainer.classList.add("hidden")
-        checkSignedInUser()
-=======
         clearValue([email, password])
         clearElem([loginError])
         removeClass([email, password], "error");
 
         addSession(arr.find(findUser))
->>>>>>> 7fdf9b8db51d68af1f20b701171fa942b7c6b41a
     } else {
         console.log("user doesn´t exist");
         displayError(loginError, "Invalid email or password")
@@ -43,8 +35,7 @@ const validateLogin = (arr, mail, pwd) => {
     }
 }
 
-
-<<<<<<< HEAD
+//!ta bort?
 const checkSignedInUser = () => {
     let div = document.querySelector(".header-child")
     if(getitem("user")) {
@@ -62,8 +53,8 @@ const checkSignedInUser = () => {
     } 
 }
 
-checkSignedInUser()
-=======
+// checkSignedInUser()
+
 // ----------------------- ERROR MESSAGE BOX FORMS -----------------------
 const displayError = (wrapper, message) => {
     wrapper.innerHTML = `
@@ -78,4 +69,3 @@ const displayError = (wrapper, message) => {
         </div>
     </div>`
 }
->>>>>>> 7fdf9b8db51d68af1f20b701171fa942b7c6b41a

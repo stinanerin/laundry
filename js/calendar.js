@@ -191,8 +191,7 @@ const alterMonth = (str) => {
     }
     renderMonthCal()
 }
-prevMonth.addEventListener("click", () => { alterMonth("prev") })
-nextMonth.addEventListener("click", () => { alterMonth("add") })
+
 
 // ----------------------- DISABLE PASSED DATES -----------------------
 

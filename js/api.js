@@ -34,27 +34,8 @@ const addBooking = async(listId, dateObject) => {
 
 // ----------------------- CREATE USER IN API -----------------------
 const createUser = async(name, email, pwd) => {
-<<<<<<< HEAD
-    const res = await fetch(`${API_BASE_URL}lists/6429d84525fc8200e0300328/items`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            username: name,
-            email: email,
-            password: pwd,
-        }),
-    });
-    const { list } = await res.json();
-    
-    // Find latest registered user and adds to local storage as signed in
-    const user  = list.itemList[list.itemList.length -1];
-    console.log(user);
-    
-    setItem("user", [user._id, user.username]);
-=======
     try {
+        //todo! Change lsit
         const res = await fetch(`${API_BASE_URL}lists/6429d84525fc8200e0300328/items`, {
             method: "POST",
             headers: {
@@ -76,5 +57,4 @@ const createUser = async(name, email, pwd) => {
         //todo! display errror
 
     }
->>>>>>> 7fdf9b8db51d68af1f20b701171fa942b7c6b41a
 }
