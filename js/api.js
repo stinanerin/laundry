@@ -27,6 +27,7 @@ const addBooking = async(listId, dateObject) => {
             }),
         })
         const { list } = await res.json();
+        
     } catch(error) {
         console.log(error);
     }

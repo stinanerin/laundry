@@ -26,7 +26,7 @@ const checkSession = () => {
 const displayUserIcons = () => {
     userIcons.innerHTML =` 
     <div class="d-flex align-items-center ">
-        <p class="m-0 pe-2" id="userName">Welcome ${toUpperCaseStr(userObj.name)}!</p>
+        <p class="m-0 pe-2" id="userName"><b>${toUpperCaseStr(userObj.name)}</b></p>
         <i class="fa-regular fa-user"></i>
     </div>
     <div id="logoutWrapper" >
@@ -34,16 +34,4 @@ const displayUserIcons = () => {
             <img class="logout" src="assets/icons/logout.svg"  aria-hidden="true" alt=""/>
         </button>
     </div>`
-}
-/**
-* @param {array}  arr - array of all bookings
-*/ 
-const findUsersBooking = (arr) => {
-    // Returns the booking object of the signed in user if it exists - otherwise undefined
-    let signedInUserBooking = arr.find(booking => booking.user_id === userObj.id)
-    if(signedInUserBooking) {
-        // console.log("signedInUserBooking object", signedInUserBooking);
-        return new Date(signedInUserBooking.booking)
-    }
-    return
 }

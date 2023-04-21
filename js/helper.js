@@ -1,6 +1,8 @@
 const createElement = (type, aClass, str, arr) => {
     let elem = document.createElement(type);
-    elem.className = aClass;
+    if(aClass) {
+        elem.className = aClass;
+    }
     if(str) {
         elem.innerText = str
     }

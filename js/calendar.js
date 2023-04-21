@@ -23,24 +23,24 @@ let today = new Date(),
     bookings;
 
 const renderDayView = () => {
-    document.querySelectorAll(".day:not(.deactivated)").forEach(btn => {
-        btn.addEventListener("click", () => {
+    dayGrid.querySelectorAll(".day:not(.deactivated)").forEach(li => {
+        li.addEventListener("click", () => {
             // If another day has the active class - remove it
-            document.querySelector(".active") ? document.querySelector(".active").classList.remove("active") : "";
+            dayGrid.querySelector(".active") ? dayGrid.querySelector(".active").classList.remove("active") : "";
            
-            btn.classList.add("active")
+            addClass([li], "active")
             
-            const monthName = btn.classList.contains("prevMonth") ? months[month - 1]
-            : btn.classList.contains("nextMonth") ? months[month + 1]
+            const monthName = li.classList.contains("prevMonth") ? months[month - 1]
+            : li.classList.contains("nextMonth") ? months[month + 1]
             : months[month]
             
-            const currentDate = new Date(year, months.indexOf(monthName), btn.innerText)
+            const currentDate = new Date(year, months.indexOf(monthName), li.innerText)
 
             dayView.innerHTML = `
             <div class="mb-5">
                 <h2 class="row gx-0 mb-4">
                     <span class="weekday col">${weekdays[currentDate.getDay()]}</span>
-                    <span class="date col text-end">${btn.innerText} ${monthName}</span>
+                    <span class="date col text-end">${li.innerText} ${monthName}</span>
                 </h2>
                 <div class="row gx-0 text-center">
                     <div class="col d-flex justify-content-center align-items-center">
@@ -85,12 +85,10 @@ const renderMonthCal = async() => {
 
     //!todo limit signed in user to book multiple times?
     const userBookedTime = findUsersBooking(arr)
-    console.log("userBookedTime", userBookedTime);
-
-
+    // console.log("userBookedTime", userBookedTime);
 
     bookings = arr.map(date => new Date(date.booking))
-    console.log("bookings", bookings);
+    // console.log("bookings", bookings);
 
     const firstDay = new Date(year, month, 1),
         // The day of the week for the current date
@@ -170,9 +168,11 @@ bookingForm.addEventListener('submit', (e) => {
     e.preventDefault();
     // Disables booked radio
     e.target.querySelector("input[type='radio']:checked").disabled = true;    
+    //!todo check so the booking is ok, then push to local array
     addBooking(currentList, currentDate)
     // Adds the recently booked date to global bookings-arr - avoiding another API-request - which is looped when the day-view is rendered
     bookings.push(currentDate)
+    //todo! Add booked class on the li-tag directly after succesfull booking
 });
 
 // ----------------------- ALTER MONTH -----------------------
