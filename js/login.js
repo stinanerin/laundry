@@ -26,7 +26,6 @@ const validateLogin = (arr, mail, pwd) => {
     if(arr.find(findUser)) {
         console.log("user exists");
         addSession(arr.find(findUser))
-        toggleClass([calender, loginContainer], "hidden")
     } else {
         //todo! break out
         console.log("user doesn´t exist");
