@@ -30,16 +30,18 @@ i {
     padding: 0.5rem 1rem;
     min-width: 12rem;
 }
-.btn {
-    border-color: transparent;
+.primary-btn {
+    border: none;
     border-radius: $radius;
     &:hover {
        @include glow($accent-100);
+       background-color: transparent;
     }
 }
 .link {
     text-decoration: underline;
     color: $accent-100;
+    cursor: pointer;
 }
 input, input:active, input:focus, 
 input:-webkit-autofill, 
