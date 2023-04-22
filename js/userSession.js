@@ -39,7 +39,6 @@ const displayUserIcons = () => {
 }
 
 const renderAccountPage = () => {
-    console.log("account");
     clearElem([calender])
 
     welcomeMsg(usersBooking);

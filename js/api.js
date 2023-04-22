@@ -9,6 +9,7 @@ const fetchData = async(id) => {
         // console.log("latest booking", objBooking);
         return arr
     } catch(error) {
+        //todo! display errror
         console.log(error);
         return error
     }
@@ -31,6 +32,7 @@ const addBooking = async(listId, dateObject) => {
             const { list } = await res.json();
             
         } catch(error) {
+            //todo! display errror
             console.log(error);
         }
     }
@@ -59,6 +61,18 @@ const createUser = async(name, email, pwd) => {
         
     } catch (error) {
         //todo! display errror
-
+        console.log(error);
+    }
+}
+const deleteBooking = async(listId, item) => {
+    try {
+        return await fetch(`${API_BASE_URL}lists/${listId}/items/${item._id}`,
+            {
+            method: "DELETE",
+            }
+        );
+    } catch(error) {
+        //todo! display errror
+        console.log(error);
     }
 }
