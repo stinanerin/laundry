@@ -58,7 +58,7 @@ const renderDayView = () => {
                     <div class="mt-4">
                         <p class="m-0"></p>
                     </div>
-                    <div class="mt-4"><button type="submit" class="btn primary-btn">Book</button></div>
+                    <div class="mt-4"><button type="submit" class="button primary-btn">Book</button></div>
                 </div>
             </div>`
             updateChoosenDate(currentDate)
@@ -82,6 +82,7 @@ const renderMonthCal = async() => {
     //todo! bryt ut
     // Fetches all bookings from API
     const arr = await fetchData(currentList)
+    console.log(arr);
 
     //!todo limit signed in user to book multiple times?
     const userBookedTime = findUsersBooking(arr)
@@ -156,10 +157,12 @@ const renderMonthCal = async() => {
     renderDayView()
 }
 
-const updateChoosenDate = (date) => {    
+const updateChoosenDate = (date) => { 
     document.querySelectorAll("input[type='radio'][name='time-slot']").forEach(slot => slot.addEventListener("change", (e) => {
-        date.setHours(e.target.value, 00, 00)
-        bookingForm.querySelector("p").innerHTML = `You have choosen <strong>${dateToText(date)}</strong>. </br>Make sure to book it to complete the process`
+        currentDate = date
+        /* Sets time to  */
+        currentDate.setHours(e.target.value, 00, 00)
+        bookingForm.querySelector("p").innerHTML = `You have choosen <strong>${dateToText(currentDate)}</strong>. </br>Make sure to book it to complete the process`
     }))
 }
 
@@ -206,7 +209,9 @@ const checkIfDayisToday = (year, month, day) => {
 }
 
 const isDayBooked = (bookedTime, year, month, day) => {
-    return areDatesEqual(bookedTime, new Date(year, month, day)) ? "booked" : ""
+    if(bookedTime) {
+        return areDatesEqual(bookedTime, new Date(year, month, day)) ? "booked" : ""
+    }
 }
 
 const areDatesEqual = (d1, d2) => {

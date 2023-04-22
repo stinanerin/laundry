@@ -35,19 +35,29 @@
   .hidden {
     display: none;
   }
-  .primary-btn {
-    background-color: #909ec9;
-    color: hsl(0deg, 0%, 100%);
+  .button {
     padding: 0.5rem 1rem;
     min-width: 12rem;
-  }
-  .primary-btn {
     border: none;
     border-radius: 0.5rem;
+    font-weight: 700;
   }
-  .primary-btn:hover {
+  .button.primary-btn {
+    background-color: #909ec9;
+    color: hsl(0deg, 0%, 100%);
+  }
+  .button.primary-btn:hover {
     box-shadow: inset 0 0 0.75em 0 #909ec9, 0 0 1em 0.2em #909ec9;
     -webkit-box-shadow: inset 0 0 0.75em 0 #909ec9, 0 0 1em 0.2em #909ec9;
+    background-color: transparent;
+  }
+  .button.danger-btn {
+    background-color: hsl(354deg, 100%, 51%);
+    color: hsl(0deg, 0%, 100%);
+  }
+  .button.danger-btn:hover {
+    box-shadow: inset 0 0 0.75em 0 hsl(354deg, 100%, 51%), 0 0 1em 0.2em hsl(354deg, 100%, 51%);
+    -webkit-box-shadow: inset 0 0 0.75em 0 hsl(354deg, 100%, 51%), 0 0 1em 0.2em hsl(354deg, 100%, 51%);
     background-color: transparent;
   }
   .link {

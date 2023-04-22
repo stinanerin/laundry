@@ -24,20 +24,31 @@ i {
 .hidden {
     display: none;
 }
-.primary-btn {
-    background-color: $accent-100;
-    color: $p-white;
+.button {
     padding: 0.5rem 1rem;
     min-width: 12rem;
-}
-.primary-btn {
     border: none;
     border-radius: $radius;
-    &:hover {
-       @include glow($accent-100);
-       background-color: transparent;
+    font-weight: 700;
+    &.primary-btn {
+        background-color: $accent-100;
+        color: $p-white;
+        &:hover {
+            @include glow($accent-100);
+            background-color: transparent;
+         }
     }
+    &.danger-btn {
+        background-color: $danger-500;
+        color: $p-white;
+        &:hover {
+           @include glow($danger-500);
+           background-color: transparent;
+        }
+    }
+
 }
+
 .link {
     text-decoration: underline;
     color: $accent-100;

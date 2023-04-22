@@ -15,6 +15,7 @@ const fetchData = async(id) => {
 }
 
 const addBooking = async(listId, dateObject) => {
+    console.log(dateObject);
     try {
         const res = await fetch(`${API_BASE_URL}lists/${listId}/items`, {
             method: "POST",
