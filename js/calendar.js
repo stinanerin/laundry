@@ -20,7 +20,8 @@ let today = new Date(),
     year = today.getFullYear(),
     currentDate,
     currentList = "63fd07e82a491a4d0882d577",
-    bookings;
+    bookings,
+    usersBooking;
 
 const renderDayView = () => {
     dayGrid.querySelectorAll(".day:not(.deactivated)").forEach(li => {
@@ -58,18 +59,18 @@ const renderDayView = () => {
                     <div class="mt-4">
                         <p class="m-0"></p>
                     </div>
-                    <div class="mt-4"><button type="submit" class="button primary-btn">Book</button></div>
+                    <div class="mt-4"><button type="submit" class="button primary-btn" ${usersBooking ? "disabled" : ""}>Book</button></div>
                 </div>
             </div>`
             updateChoosenDate(currentDate)
-
+            //todo - break out as function
             let bookedTimes;
             // Checks if currentDate is already booked
-            // Returns every date obj that matches the current looped date - otherwise []]
+            // Returns every date obj that matches the current looped date - otherwise []
             const match = bookings.filter(date => date.toLocaleDateString() === currentDate.toLocaleDateString())
-
+            // If bookings exists in currentDate - get the time slots
             match.length > 0 ? bookedTimes = match.map(date => date.getHours()) : ""
-            // If current date is already booked - disable radio for time slots
+            // If current date is already booked - disable radio for booked time slots
             bookedTimes ? diasableElem(bookedTimes) : ""
         })
     })
@@ -82,11 +83,11 @@ const renderMonthCal = async() => {
     //todo! bryt ut
     // Fetches all bookings from API
     const arr = await fetchData(currentList)
-    console.log(arr);
+    console.log("bookings array", arr);
 
     //!todo limit signed in user to book multiple times?
-    const userBookedTime = findUsersBooking(arr)
-    // console.log("userBookedTime", userBookedTime);
+    usersBooking = findUsersBooking(arr)
+    console.log("userBookedTime", usersBooking);
 
     bookings = arr.map(date => new Date(date.booking))
     // console.log("bookings", bookings);
@@ -121,7 +122,7 @@ const renderMonthCal = async() => {
             row = createElement("div", "row mb-2 g-0");
             dayGrid.append(row);
         }
-        row.append(createElement("li", `${hasDatePassed(year, currentMonth, prevMontshLastDate - x + 1)} ${isDayBooked(userBookedTime, year, month, x)} day prevMonth col d-flex justify-content-center align-items-center`, prevMontshLastDate - x + 1));
+        row.append(createElement("li", `${hasDatePassed(year, currentMonth, prevMontshLastDate - x + 1)} ${isDayBooked(usersBooking, year, month, x)} day prevMonth col d-flex justify-content-center align-items-center`, prevMontshLastDate - x + 1));
         weekDays ++;
     }
 
@@ -133,7 +134,7 @@ const renderMonthCal = async() => {
             dayGrid.append(row);
         }
 
-        row.append(createElement("li", `${checkIfDayisToday(year, month, x)} ${hasDatePassed(year, month, x)} ${isDayBooked(userBookedTime, year, month, x)} day col d-flex justify-content-center align-items-center`, x));
+        row.append(createElement("li", `${checkIfDayisToday(year, month, x)} ${hasDatePassed(year, month, x)} ${isDayBooked(usersBooking, year, month, x)} day col d-flex justify-content-center align-items-center`, x));
         weekDays ++;
     }
 
@@ -147,7 +148,7 @@ const renderMonthCal = async() => {
             row = createElement("div", "row g-0");
             dayGrid.append(row);
         }
-        row.append(createElement("li", `${checkIfDayisToday(year, currentMonth, x)} ${hasDatePassed(year, currentMonth, x)} ${isDayBooked(userBookedTime, year, month, x)} day nextMonth col d-flex justify-content-center align-items-center`, x));
+        row.append(createElement("li", `${checkIfDayisToday(year, currentMonth, x)} ${hasDatePassed(year, currentMonth, x)} ${isDayBooked(usersBooking, year, month, x)} day nextMonth col d-flex justify-content-center align-items-center`, x));
         weekDays ++;
     }
 
@@ -158,12 +159,14 @@ const renderMonthCal = async() => {
 }
 
 const updateChoosenDate = (date) => { 
-    document.querySelectorAll("input[type='radio'][name='time-slot']").forEach(slot => slot.addEventListener("change", (e) => {
+    document.querySelectorAll("input[type='radio'][name='time-slot']").forEach(slot => 
+        slot.addEventListener("change", (e) => {
         currentDate = date
         /* Sets time to  */
         currentDate.setHours(e.target.value, 00, 00)
         bookingForm.querySelector("p").innerHTML = `You have choosen <strong>${dateToText(currentDate)}</strong>. </br>Make sure to book it to complete the process`
-    }))
+        }
+    ))
 }
 
 bookingForm.addEventListener('submit', (e) => {
@@ -171,6 +174,7 @@ bookingForm.addEventListener('submit', (e) => {
     // Disables booked radio
     e.target.querySelector("input[type='radio']:checked").disabled = true;    
     //!todo check so the booking is ok, then push to local array
+    //!todo check so the booking is ok - then disable booked radio btn
     addBooking(currentList, currentDate)
     // Adds the recently booked date to global bookings-arr - avoiding another API-request - which is looped when the day-view is rendered
     bookings.push(currentDate)

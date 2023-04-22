@@ -7,8 +7,8 @@ const findUsersBooking = (arr) => {
     if(signedInUserBooking) {
         console.log("booking from api",signedInUserBooking.booking);
         const bookingDateObj = new Date(signedInUserBooking.booking)
-        console.log("bookingDateObj",bookingDateObj);
-        console.log(bookingDateObj.toLocaleTimeString(), bookingDateObj.toLocaleDateString());
+        // console.log("bookingDateObj",bookingDateObj);
+        // console.log(bookingDateObj.toLocaleTimeString(), bookingDateObj.toLocaleDateString());
         welcomeMsg(bookingDateObj);
         return bookingDateObj;
     }
@@ -18,11 +18,12 @@ const welcomeMsg = (booking) => {
     const div = createElement("div", "text-center")
     // console.log(new Date(booking));
     div.innerHTML =
-    `<div class="text-center my-5">
+    `<div class="my-5">
         <p>Welcome back <b>${toUpperCaseStr(userObj.name)}</b>!</p>
-        <p>${booking 
-            ? "Your next laundry time is <b>" + dateToText(booking) + "</b>"
-            : "You have no booked times"}</p>
+       ${booking 
+            ? " <p>Your next laundry time is <b>" + dateToText(booking) + "</b></p>" + 
+            "<p>Do you want to book another time? Cancel your scheduled time below first.</p>"
+            : " <p>You have no booked times"}</p>
         ${booking ? "<button id='delBooking' class='button danger-btn' >Cancel</button>" : ""}
     </div>`
     loginContainer.insertAdjacentElement("afterend", div)

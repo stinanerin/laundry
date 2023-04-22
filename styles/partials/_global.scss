@@ -34,19 +34,26 @@ i {
         background-color: $accent-100;
         color: $p-white;
         &:hover {
-            @include glow($accent-100);
-            background-color: transparent;
-         }
+            &:not(&:disabled) {
+                @include glow($accent-100);
+                background-color: transparent;
+            }  
+        }
     }
     &.danger-btn {
         background-color: $danger-500;
         color: $p-white;
         &:hover {
-           @include glow($danger-500);
-           background-color: transparent;
+            &:not(&:disabled) {
+                @include glow($danger-500);
+                background-color: transparent;
+            }  
         }
     }
-
+    &:disabled {
+        background-color: rgb(112, 112, 112);
+        color: rgb(231, 228, 228);
+    }
 }
 
 .link {
