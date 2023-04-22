@@ -35,6 +35,25 @@ const validateLogin = (arr, mail, pwd) => {
     }
 }
 
+//!ta bort?
+const checkSignedInUser = () => {
+    let div = document.querySelector(".header-child")
+    if(getitem("user")) {
+        console.log("auto inlogg");
+        div.innerHTML = `
+        <i class="fa-regular fa-user"></i>
+        <p>${getitem("user")[1]}</p>`
+        if(div.innerHTML) {
+            calender.classList.remove("hidden")
+            registerContainer.classList.add("hidden")
+        }
+    } else {
+        console.log("ingen gammal inloggning kvar");
+        div.innerHTML = "";
+    } 
+}
+
+// checkSignedInUser()
 
 // ----------------------- ERROR MESSAGE BOX FORMS -----------------------
 const displayError = (wrapper, message) => {

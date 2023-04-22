@@ -5,8 +5,9 @@
         border-radius: $radius;
     }
     .day {
+        position: relative;
         min-height: 50px;
-        padding: 0.5rem;
+        margin: 0.5rem;
         border-radius: $radius-max;
         &:hover:not(.deactivated), &.active, &.today:not(.deactivated) {
             cursor: pointer;
@@ -27,6 +28,12 @@
             color: $accent-100;
             background-color: rgb(128, 128, 128, 0.2);
         }
+        &.booked:after {
+            @include dot($booked);
+            position: absolute;
+            top: 0.7rem;
+            right: 0.4rem;
+        }   
     }
     .weekdays {
         div {

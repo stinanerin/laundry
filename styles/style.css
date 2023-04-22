@@ -35,20 +35,34 @@
   .hidden {
     display: none;
   }
-  .primary-btn {
-    background-color: #909ec9;
-    color: hsl(0deg, 0%, 100%);
+  .button {
+    border-radius: 50px;
     padding: 0.5rem 1rem;
     min-width: 12rem;
-  }
-  .primary-btn {
     border: none;
-    border-radius: 0.5rem;
+    font-weight: 700;
   }
-  .primary-btn:hover {
+  .button.primary-btn {
+    background-color: #909ec9;
+    color: hsl(0deg, 0%, 100%);
+  }
+  .button.primary-btn:hover:not(.button.primary-btn:hover:disabled) {
     box-shadow: inset 0 0 0.75em 0 #909ec9, 0 0 1em 0.2em #909ec9;
     -webkit-box-shadow: inset 0 0 0.75em 0 #909ec9, 0 0 1em 0.2em #909ec9;
     background-color: transparent;
+  }
+  .button.danger-btn {
+    background-color: hsl(354deg, 100%, 51%);
+    color: hsl(0deg, 0%, 100%);
+  }
+  .button.danger-btn:hover:not(.button.danger-btn:hover:disabled) {
+    box-shadow: inset 0 0 0.75em 0 hsl(354deg, 100%, 51%), 0 0 1em 0.2em hsl(354deg, 100%, 51%);
+    -webkit-box-shadow: inset 0 0 0.75em 0 hsl(354deg, 100%, 51%), 0 0 1em 0.2em hsl(354deg, 100%, 51%);
+    background-color: transparent;
+  }
+  .button:disabled {
+    background-color: rgb(112, 112, 112);
+    color: rgb(231, 228, 228);
   }
   .link {
     text-decoration: underline;
@@ -64,6 +78,7 @@ input:-webkit-autofill:active:not([type=radio]), input[data-autocompleted]:not([
     background: linear-gradient(270deg, rgba(255, 255, 255, 0.46) 0%, rgba(253, 253, 253, 0) 100%);
     background: -webkit-linear-gradient(270deg, rgba(255, 255, 255, 0.46) 0%, rgba(253, 253, 253, 0) 100%);
     border: none;
+    border-radius: 50px;
     -webkit-appearance: none;
     appearance: none;
     font-family: system-ui;
@@ -96,6 +111,7 @@ input:-webkit-autofill:active:not([type=radio]):not(select), input[data-autocomp
     background: linear-gradient(270deg, rgba(255, 255, 255, 0.46) 0%, rgba(253, 253, 253, 0) 100%);
     background: -webkit-linear-gradient(270deg, rgba(255, 255, 255, 0.46) 0%, rgba(253, 253, 253, 0) 100%);
     border: none;
+    border-radius: 50px;
     -webkit-appearance: none;
     -moz-appearance: none;
          appearance: none;
@@ -126,8 +142,9 @@ input:-webkit-autofill:active:not([type=radio]):not(select), input[data-autocomp
     border-radius: 0.5rem;
   }
   .calendar .day {
+    position: relative;
     min-height: 50px;
-    padding: 0.5rem;
+    margin: 0.5rem;
     border-radius: 50px;
   }
   .calendar .day:hover:not(.deactivated), .calendar .day.active, .calendar .day.today:not(.deactivated) {
@@ -145,6 +162,17 @@ input:-webkit-autofill:active:not([type=radio]):not(select), input[data-autocomp
     color: #909ec9;
     background-color: rgba(128, 128, 128, 0.2);
   }
+  .calendar .day.booked:after {
+    content: "";
+    display: block;
+    width: 0.35rem;
+    height: 0.35rem;
+    background-color: rgb(173, 97, 227);
+    border-radius: 50px;
+    position: absolute;
+    top: 0.7rem;
+    right: 0.4rem;
+  }
   .calendar .weekdays div {
     padding: 0 1rem;
   }
@@ -156,14 +184,28 @@ input:-webkit-autofill:active:not([type=radio]):not(select), input[data-autocomp
   }
   form input[type=radio] {
     margin-right: 0.5rem;
+    /* DISABLED RADIO */
   }
   form input[type=radio][disabled] {
     cursor: not-allowed;
-    border-color: #909ec9;
-    background-color: #909ec9;
+    background-color: rgb(112, 112, 112);
+    position: relative;
+    height: 13px;
+    width: 13px;
+    box-sizing: border-box;
+  }
+  form input[type=radio][disabled]:after {
+    position: absolute;
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50px;
+    background-color: rgb(112, 112, 112);
   }
   form input[type=radio][disabled] + label {
     cursor: not-allowed;
+    color: rgb(231, 228, 228);
   }
   form input[type=radio] + label {
     color: hsl(0deg, 0%, 100%);
@@ -209,11 +251,19 @@ input:-webkit-autofill:active:not([type=radio]):not(select), input[data-autocomp
     align-items: center;
     min-width: 20%;
   }
+  .header .header-child:first-child {
+    justify-content: flex-start;
+    padding: 0 12px;
+  }
+  .header .header-child:first-child p {
+    margin: 0;
+    padding-left: 1rem;
+  }
   .header .header-child:last-child {
     justify-content: flex-end;
   }
   .header .header-child button img {
-    width: 20px;
+    width: 1rem;
   }
   footer {
     background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.233) 100%);

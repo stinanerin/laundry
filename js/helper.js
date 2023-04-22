@@ -1,6 +1,8 @@
 const createElement = (type, aClass, str, arr) => {
     let elem = document.createElement(type);
-    elem.className = aClass;
+    if(aClass) {
+        elem.className = aClass;
+    }
     if(str) {
         elem.innerText = str
     }
@@ -35,3 +37,11 @@ const toUpperCaseStr = (str) => str.split(" ").map(word => {return word[0].toUpp
 // ----------------------- LOCAL STORAGE - SET & GET -----------------------
 const setItem = (key, value) => localStorage.setItem(key, JSON.stringify(value));
 const getitem = key => JSON.parse(localStorage.getItem(key));
+
+const dateToText = (dateObj) => {
+    console.log("dateObj", dateObj);
+    return new Intl.DateTimeFormat("en-GB", {
+        dateStyle: "full",
+        timeStyle: "short",
+    }).format(dateObj)
+}

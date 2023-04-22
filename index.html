@@ -25,8 +25,9 @@
     <script src="js/register.js" defer></script>
     <script src="js/login.js" defer></script>
     <script src="js/logout.js" defer></script>
-    <script src="js/userSession.js" defer></script>
     <script src="js/calendar.js" defer></script>
+    <script src="js/userSession.js" defer></script>
+    <script src="js/userBooking.js" defer></script>
     <script src="js/main.js" defer></script>
 </head>
 <body>
@@ -35,7 +36,7 @@
             
         </div>
         <div class="header-child">
-            <h1>Laundry</h1>
+            <h1 onclick="window.location.reload()">Laundry</h1>
         </div>
         <div class="header-child" id="userIcons">
             
@@ -43,7 +44,7 @@
     </header>
     <main>
 
-        <div class="login-register pt-5">
+        <div class="mt-5">
             <!--! REGISTER FORM -->
             <div id="registerWrapper" class="hidden">
                 <form class="container main" id="registerUser">
@@ -97,7 +98,7 @@
                         </div>
                         <!-- SUBMIT -->
                         <div class="d-flex justify-content-center my-5">
-                            <button class="btn primary-btn" type="submit">Sign up</button>
+                            <button class="button primary-btn" type="submit">Sign up</button>
                         </div>
                     </div>
                 </form>
@@ -128,7 +129,7 @@
                     
                     <!-- SUBMIT -->
                     <div class="d-flex justify-content-center my-5">
-                        <button class="btn primary-btn" type="submit">Log in</button>
+                        <button class="button primary-btn" type="submit">Log in</button>
                     </div>
                 </form>
                 <!-- LINK REGISTER FORM  -->
@@ -136,46 +137,52 @@
                     <p>Don't have an account? <span class="link" id="registerLink">Register now</span></p>
                 </div>
             </div>
-        </div>  
+            <div id="welcomeMsg">
+                
+            </div>
 
-        <div id="calenderWrapper" class="container main hidden">
-            <div class="row">
-                <!--! CALENDER-->
-                <div class="calendar container pb-5">
-                    <!-- HEADER MONTH - CONTROLLER-->
-                    <header class="row d-flex align-items-center m-0 my-5">
-                        <div class="col-auto text-start"><button class="btn border-0" id="prevMonth"><i class="fas fa-angle-left"></i></button></div>
-                        <div class="month-header col text-center"></div>
-                        <div class="col-auto text-end"><button class="btn border-0" id="nextMonth"><i class="fas fa-angle-right"></i></button></div>
-                    </header>
-                    <!-- WEEKDAYS-->
-                    <div class="weekdays row text-center mb-3 gx-0">
-                        <div class="col"><h3>M</h3></div>
-                        <div class="col"><h3>T</h3></div>
-                        <div class="col"><h3>W</h3></div>
-                        <div class="col"><h3>T</h3></div>
-                        <div class="col"><h3>F</h3></div>
-                        <div class="col"><h3>S</h3></div>
-                        <div class="col"><h3>S</h3></div>
+            <div id="calenderWrapper" class="container main hidden">
+                <div class="row">
+                    <!--! CALENDER-->
+                    <div class="calendar container pb-5">
+                        <!-- HEADER MONTH - CONTROLLER-->
+                        <header class="row d-flex align-items-center m-0 my-5">
+                            <div class="col-auto text-start"><button class="btn border-0" id="prevMonth"><i class="fas fa-angle-left"></i></button></div>
+                            <div class="month-header col text-center"></div>
+                            <div class="col-auto text-end"><button class="btn border-0" id="nextMonth"><i class="fas fa-angle-right"></i></button></div>
+                        </header>
+                        <!-- WEEKDAYS-->
+                        <div class="weekdays row text-center mb-3 gx-0">
+                            <div class="col"><h3>M</h3></div>
+                            <div class="col"><h3>T</h3></div>
+                            <div class="col"><h3>W</h3></div>
+                            <div class="col"><h3>T</h3></div>
+                            <div class="col"><h3>F</h3></div>
+                            <div class="col"><h3>S</h3></div>
+                            <div class="col"><h3>S</h3></div>
+                        </div>
+                        <!-- CALENDER DAYS GRID-->
+                        <ul class="calender-days-grid text-center p-0">
+                            <!-- Grid inserted via JS -->                        
+                        </ul>
                     </div>
-                    <!-- CALENDER DAYS GRID-->
-                    <ul class="calender-days-grid text-center p-0">
-                        <!-- Grid inserted via JS -->                        
-                    </ul>
+                </div>
+                <div class="row">
+                    <!-- DAY VIEW -->
+                    <form id="bookTime" class="container">
+                        <div class="day-view">
+                            <!-- Time-slots inserted via JS -->
+                        </div>
+                    </form>
                 </div>
             </div>
-            <div class="row">
-                <!-- DAY VIEW -->
-                <form id="bookTime" class="container">
-                    <div class="day-view">
-                        <!-- Time-slots inserted via JS -->
-                    </div>
-                </form>
-            </div>
-        </div>
+        </div>  
+
     </main>
+
     <footer>
         <p>Copyright © 2023</p>
     </footer>
+
 </body>
 </html>

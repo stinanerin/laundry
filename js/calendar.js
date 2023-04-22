@@ -7,7 +7,7 @@ const calendar = document.querySelector(".calendar"),
     dateHeader = document.querySelector(".month-header"),
     prevMonth = document.querySelector("#prevMonth"),
     nextMonth = document.querySelector("#nextMonth"),
-    //curtesy of https://gist.github.com/seripap/9eb809268eb8026abd9f
+    // curtesy of https://gist.github.com/seripap/9eb809268eb8026abd9f
     months = Array.from({length: 12}, (e, i) => {
         return new Date(null, i + 1, null).toLocaleDateString("en", {month: "long"});
     });
@@ -20,56 +20,57 @@ let today = new Date(),
     year = today.getFullYear(),
     currentDate,
     currentList = "63fd07e82a491a4d0882d577",
-    bookings;
+    bookings,
+    usersBooking;
 
 const renderDayView = () => {
-    document.querySelectorAll(".day:not(.deactivated)").forEach(btn => {
-        btn.addEventListener("click", (e) => {
+    dayGrid.querySelectorAll(".day:not(.deactivated)").forEach(li => {
+        li.addEventListener("click", () => {
             // If another day has the active class - remove it
-            document.querySelector(".active") ? document.querySelector(".active").classList.remove("active") : "";
-
-            const date = e.target
-            date.classList.add("active")
+            dayGrid.querySelector(".active") ? dayGrid.querySelector(".active").classList.remove("active") : "";
+           
+            addClass([li], "active")
             
-            const monthName = date.classList.contains("prevMonth") ? months[month - 1]
-            : date.classList.contains("nextMonth") ? months[month + 1]
+            const monthName = li.classList.contains("prevMonth") ? months[month - 1]
+            : li.classList.contains("nextMonth") ? months[month + 1]
             : months[month]
             
-            const currentDate = new Date(year, months.indexOf(monthName), date.innerText)
+            const currentDate = new Date(year, months.indexOf(monthName), li.innerText)
 
             dayView.innerHTML = `
             <div class="mb-5">
                 <h2 class="row gx-0 mb-4">
                     <span class="weekday col">${weekdays[currentDate.getDay()]}</span>
-                    <span class="date col text-end">${date.innerText} ${monthName}</span>
+                    <span class="date col text-end">${li.innerText} ${monthName}</span>
                 </h2>
                 <div class="row gx-0 text-center">
                     <div class="col d-flex justify-content-center align-items-center">
-                        <input type="radio" name="time-slot" id="morning" value="08" required>
+                        <input type="radio" name="time-slot" id="morning" value="08" required/>
                         <label for="morning">08</label>
                     </div>
-                    <div class="col d-flex justify-content-center align-items-center">
+                    <div class="col d-flex justify-content-center align-items-center"/>
                         <input type="radio" name="time-slot" id="noon" value="12">
                         <label for="noon">12</label>
                     </div>
-                    <div class="col d-flex justify-content-center align-items-center">
+                    <div class="col d-flex justify-content-center align-items-center"/>
                         <input type="radio" name="time-slot" id="evening" value="17">
                         <label for="evening">17</label>
                     </div>
                     <div class="mt-4">
                         <p class="m-0"></p>
                     </div>
-                    <div class="mt-4"><button type="submit" class="btn primary-btn">Book</button></div>
+                    <div class="mt-4"><button type="submit" class="button primary-btn" ${usersBooking ? "disabled" : ""}>Book</button></div>
                 </div>
             </div>`
             updateChoosenDate(currentDate)
-
+            //todo - break out as function
             let bookedTimes;
             // Checks if currentDate is already booked
-            // Returns every date obj that matches the current looped date - otherwise []]
+            // Returns every date obj that matches the current looped date - otherwise []
             const match = bookings.filter(date => date.toLocaleDateString() === currentDate.toLocaleDateString())
+            // If bookings exists in currentDate - get the time slots
             match.length > 0 ? bookedTimes = match.map(date => date.getHours()) : ""
-            // If current date is already booked - disable radio for time slots
+            // If current date is already booked - disable radio for booked time slots
             bookedTimes ? diasableElem(bookedTimes) : ""
         })
     })
@@ -82,7 +83,15 @@ const renderMonthCal = async() => {
     //todo! bryt ut
     // Fetches all bookings from API
     const arr = await fetchData(currentList)
+    console.log("bookings array", arr);
+
+    //!todo limit signed in user to book multiple times?
+    usersBooking = findUsersBooking(arr)
+    console.log("userBookedTime", usersBooking);
+
     bookings = arr.map(date => new Date(date.booking))
+    // console.log("bookings", bookings);
+
     const firstDay = new Date(year, month, 1),
         // The day of the week for the current date
         day = firstDay.getDay() - 1,
@@ -105,13 +114,15 @@ const renderMonthCal = async() => {
     // Renders the dates from previous month
     // "day" = the amount of days from the current week that belong to the previous month
     let currentMonth = month - 1
+
+    //!todo break out each rendering of days by pushing the dates to three arrays.
     for (let x = 1; x <= prevDays; x++) {
         // Creates new row for cal days for each week
         if(weekDays % 7 === 0) {
             row = createElement("div", "row mb-2 g-0");
             dayGrid.append(row);
         }
-        row.append(createElement("li", `${hasDatePassed(year, currentMonth, prevMontshLastDate - x + 1)} day prevMonth col d-flex justify-content-center align-items-center`, prevMontshLastDate - x + 1));
+        row.append(createElement("li", `${hasDatePassed(year, currentMonth, prevMontshLastDate - x + 1)} ${isDayBooked(usersBooking, year, month, x)} day prevMonth col d-flex justify-content-center align-items-center`, prevMontshLastDate - x + 1));
         weekDays ++;
     }
 
@@ -122,7 +133,8 @@ const renderMonthCal = async() => {
             row = createElement("div", "row mb-2 g-0");
             dayGrid.append(row);
         }
-        row.append(createElement("li", `${checkIfDayisToday(year, month, x)} ${hasDatePassed(year, month, x)} day col d-flex justify-content-center align-items-center`, x));
+
+        row.append(createElement("li", `${checkIfDayisToday(year, month, x)} ${hasDatePassed(year, month, x)} ${isDayBooked(usersBooking, year, month, x)} day col d-flex justify-content-center align-items-center`, x));
         weekDays ++;
     }
 
@@ -136,7 +148,7 @@ const renderMonthCal = async() => {
             row = createElement("div", "row g-0");
             dayGrid.append(row);
         }
-        row.append(createElement("li", `${checkIfDayisToday(year, currentMonth, x)} ${hasDatePassed(year, currentMonth, x)} day nextMonth col d-flex justify-content-center align-items-center`, x));
+        row.append(createElement("li", `${checkIfDayisToday(year, currentMonth, x)} ${hasDatePassed(year, currentMonth, x)} ${isDayBooked(usersBooking, year, month, x)} day nextMonth col d-flex justify-content-center align-items-center`, x));
         weekDays ++;
     }
 
@@ -146,23 +158,27 @@ const renderMonthCal = async() => {
     renderDayView()
 }
 
-renderMonthCal()
-
-const updateChoosenDate = (date) => {    
-    document.querySelectorAll("input[type='radio'][name='time-slot']").forEach(slot => slot.addEventListener("change", (e) => {
+const updateChoosenDate = (date) => { 
+    document.querySelectorAll("input[type='radio'][name='time-slot']").forEach(slot => 
+        slot.addEventListener("change", (e) => {
         currentDate = date
+        /* Sets time to  */
         currentDate.setHours(e.target.value, 00, 00)
-        bookingForm.querySelector("p").innerHTML = `You have choosen <strong>${currentDate.toLocaleTimeString()} ${currentDate.toLocaleDateString()}</strong>. </br>Make sure to book it to complete the process`
-    }))
+        bookingForm.querySelector("p").innerHTML = `You have choosen <strong>${dateToText(currentDate)}</strong>. </br>Make sure to book it to complete the process`
+        }
+    ))
 }
 
 bookingForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    // Disabled booked radio
+    // Disables booked radio
     e.target.querySelector("input[type='radio']:checked").disabled = true;    
+    //!todo check so the booking is ok, then push to local array
+    //!todo check so the booking is ok - then disable booked radio btn
     addBooking(currentList, currentDate)
     // Adds the recently booked date to global bookings-arr - avoiding another API-request - which is looped when the day-view is rendered
     bookings.push(currentDate)
+    //todo! Add booked class on the li-tag directly after succesfull booking
 });
 
 // ----------------------- ALTER MONTH -----------------------
@@ -183,17 +199,25 @@ const alterMonth = (str) => {
     }
     renderMonthCal()
 }
-prevMonth.addEventListener("click", () => { alterMonth("prev") })
-nextMonth.addEventListener("click", () => { alterMonth("add") })
 
 // ----------------------- DISABLE PASSED DATES -----------------------
 
-let hasDatePassed = (year, month, day) => {
+const hasDatePassed = (year, month, day) => {
     date = new Date(year, month, day)
     // Create a new date of the existing dates to cancel out the time
     return new Date(date.toDateString()) < new Date(today.toDateString()) ? "deactivated" : "";
 }
 
-let checkIfDayisToday = (year, month, day) => {
-    return today.toDateString() === new Date(year, month, day).toDateString() ? "today" : ""
+const checkIfDayisToday = (year, month, day) => {
+    return areDatesEqual(today, new Date(year, month, day)) ? "today" : ""
+}
+
+const isDayBooked = (bookedTime, year, month, day) => {
+    if(bookedTime) {
+        return areDatesEqual(bookedTime, new Date(year, month, day)) ? "booked" : ""
+    }
+}
+
+const areDatesEqual = (d1, d2) => {
+    return d1.toDateString() === d2.toDateString()
 }

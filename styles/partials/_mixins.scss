@@ -7,6 +7,7 @@
     // background-color: transparent !important;
 
     border: none;
+    border-radius: $radius-max;
     -webkit-appearance: none;
     appearance: none; 
     font-family: $font;
@@ -29,3 +30,12 @@
         inset 0 0 0.75em 0 $color,
         0 0 1em 0.2em $color;
 };
+
+@mixin dot($color) {
+    content: "";
+    display: block;
+    width: 0.35rem;
+    height: 0.35rem;
+    background-color: $color;
+    border-radius: $radius-max;
+}
