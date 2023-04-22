@@ -83,7 +83,7 @@ const renderMonthCal = async() => {
     //todo! bryt ut
     // Fetches all bookings from API
     const arr = await fetchData(currentList)
-    console.log("bookings array", arr);
+    // console.log("bookings array", arr);
 
     //!todo limit signed in user to book multiple times?
     usersBooking = findUsersBooking(arr)

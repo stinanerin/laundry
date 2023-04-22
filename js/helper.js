@@ -39,7 +39,6 @@ const setItem = (key, value) => localStorage.setItem(key, JSON.stringify(value))
 const getitem = key => JSON.parse(localStorage.getItem(key));
 
 const dateToText = (dateObj) => {
-    console.log("dateObj", dateObj);
     return new Intl.DateTimeFormat("en-GB", {
         dateStyle: "full",
         timeStyle: "short",

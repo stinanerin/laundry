@@ -31,8 +31,10 @@ const welcomeMsg = (booking) => {
 }
 
 const delBooking = (date) => {
-    document.querySelector("#delBooking").addEventListener("click", () => {
-        
+    document.querySelector("#delBooking").addEventListener("click", async() => {
+        const arr = await fetchData(currentList)
+        console.log(arr);
         console.log(date);
+        //!todo - make usersBooking false - så man kan boka igen
     })
 }
