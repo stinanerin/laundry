@@ -34,5 +34,6 @@ const delBooking = async() => {
     if(res.status === 200) {
         /* If deletion of booking is ok, set global usersBooking variable to false as to ot disable booking-form again */
         usersBooking = false;
+        //!todo if cancel is ok - change text in btn to cancelled
     }
 }

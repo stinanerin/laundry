@@ -14,30 +14,6 @@ const fetchData = async(id) => {
         return error
     }
 }
-
-const addBooking = async(listId, dateObject) => {
-    console.log(dateObject);
-    if(!usersBooking) {
-        try {
-            const res = await fetch(`${API_BASE_URL}lists/${listId}/items`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    booking: dateObject,
-                    user_id: getitem("user").id
-                }),
-            })
-            const { list } = await res.json();
-            
-        } catch(error) {
-            //todo! display errror
-            console.log(error);
-        }
-    }
-}
-
 // ----------------------- CREATE USER IN API -----------------------
 const createUser = async(name, email, pwd) => {
     try {
@@ -64,6 +40,27 @@ const createUser = async(name, email, pwd) => {
         console.log(error);
     }
 }
+
+const addBooking = async(listId, dateObject) => {
+    if(!usersBooking) {
+        try {
+            return await fetch(`${API_BASE_URL}lists/${listId}/items`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    booking: dateObject,
+                    user_id: getitem("user").id
+                }),
+            })   
+        } catch(error) {
+            //todo! display errror
+            console.log(error);
+        }
+    }
+}
+
 const deleteBooking = async(listId, item) => {
     try {
         return await fetch(`${API_BASE_URL}lists/${listId}/items/${item._id}`,

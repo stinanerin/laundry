@@ -83,11 +83,11 @@ const renderMonthCal = async() => {
     //todo! bryt ut
     // Fetches all bookings from API
     const arr = await fetchData(currentList)
-    // console.log("bookings array", arr);
+    console.log("bookings array", arr);
 
     //!todo limit signed in user to book multiple times?
     usersBooking = findUsersBooking(arr)
-    console.log("userBookedTime", usersBooking);
+    console.log("usersBooking", usersBooking);
 
     bookings = arr.map(date => new Date(date.booking))
     // console.log("bookings", bookings);
@@ -169,18 +169,22 @@ const updateChoosenDate = (date) => {
     ))
 }
 
-bookingForm.addEventListener('submit', (e) => {
+bookingForm.addEventListener('submit', async(e) => {
     e.preventDefault();
-    // Disables booked radio
-    e.target.querySelector("input[type='radio']:checked").disabled = true;    
-    //!todo check so the booking is ok, then push to local array
-    //!todo check so the booking is ok - then disable booked radio btn
-    addBooking(currentList, currentDate)
-    //!todo - make usersBooking with the jsut booked time - så man itne kan boka fler
-
-    // Adds the recently booked date to global bookings-arr - avoiding another API-request - which is looped when the day-view is rendered
-    bookings.push(currentDate)
     //todo! Add booked class on the li-tag directly after succesfull booking
+    const res = await addBooking(currentList, currentDate)
+    if(res.ok) {
+        /* If booking is added correctly - set global usersBooking variable to new booking, 
+        which prevents the user from booking another time 
+        Disable the currently viewed form-btn & radio-btn
+        */
+        usersBooking = currentDate
+        e.target.querySelector("input[type='radio']:checked").disabled = true;    
+        e.target.querySelector("button[type='submit']").disabled = true
+        e.target.querySelector("button[type='submit']").innerText = "Booked"
+        // Adds the recently booked date to global bookings-arr - avoiding another API-request - which is looped when the day-view is rendered
+        bookings.push(currentDate)
+    }
 });
 
 // ----------------------- ALTER MONTH -----------------------
