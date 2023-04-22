@@ -11,6 +11,7 @@ const createElement = (type, aClass, str, arr) => {
     }
     return elem;
 }
+
 //! todo - make dynamic
 const diasableElem = (arr) => {
     document.querySelectorAll("input[type='radio'][name='time-slot']")
@@ -18,24 +19,35 @@ const diasableElem = (arr) => {
         arr.includes(+radio.value) ? radio.disabled = true : "";
     })
 }
+
 const toggleClass = (arr, aClass) => {
     arr.forEach(elem => elem.classList.toggle(aClass))
 }
+
 const addClass = (arr, aClass) => {
     arr.forEach(elem => elem.classList.add(aClass))
 }
+
 const removeClass = (arr, aClass) => {
     arr.forEach(elem => elem.classList.remove(aClass))
 }
+
 const clearElem = (arr) => {
     arr.forEach(elem => elem.innerHTML = "")
 }
+
 const clearValue = (arr) => {
     arr.forEach(elem => elem.value = "")
 }
-const toUpperCaseStr = (str) => str.split(" ").map(word => {return word[0].toUpperCase() + word.slice(1)}).join(" ")
+
+const toUpperCaseStr = (str) => str.split(" ")
+    .map(word => {
+        return word[0].toUpperCase() + word.slice(1)
+    }).join(" ")
+
 // ----------------------- LOCAL STORAGE - SET & GET -----------------------
 const setItem = (key, value) => localStorage.setItem(key, JSON.stringify(value));
+
 const getitem = key => JSON.parse(localStorage.getItem(key));
 
 const dateToText = (dateObj) => {
