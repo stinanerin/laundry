@@ -164,7 +164,7 @@ const updateChoosenDate = (date) => {
         currentDate = date
         /* Sets time to  */
         currentDate.setHours(e.target.value, 00, 00)
-        bookingForm.querySelector("p").innerHTML = `You have choosen <strong>${dateToText(currentDate)}</strong>. </br>Make sure to book it to complete the process`
+        bookingForm.querySelector("p").innerHTML = `You have chosen <strong>${dateToText(currentDate)}</strong>. </br>Make sure to book it to complete the process`
         }
     ))
 }
