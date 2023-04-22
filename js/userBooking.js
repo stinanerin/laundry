@@ -19,21 +19,25 @@ const welcomeMsg = (booking) => {
     // console.log(new Date(booking));
     div.innerHTML =`
         <p>Welcome back <b>${toUpperCaseStr(userObj.name)}</b>!</p>
-       ${booking 
+        <div id="usersBookingInfo">
+            ${booking 
             ? " <p>Your next laundry time is <b>" + dateToText(booking) + "</b></p>" + 
             "<p>Do you want to book another time? Cancel your scheduled time below first.</p>"
             : " <p>You have no booked times"}</p>
-        ${booking ? "<button id='delBooking' onclick='delBooking()' class='button danger-btn' >Cancel</button>" : ""}`
+        </div>
+        ${booking ? "<button  onclick='delBooking(this)' class='button danger-btn' >Cancel</button>" : ""}`
     loginContainer.insertAdjacentElement("afterend", div)
 }
 
-const delBooking = async() => {
+const delBooking = async(btn) => {
     const arr = await fetchData(currentList)
     const signedInUserBooking = arr.find(booking => booking.user_id === userObj.id)
     const res = await deleteBooking(currentList, signedInUserBooking)
     if(res.status === 200) {
-        /* If deletion of booking is ok, set global usersBooking variable to false as to ot disable booking-form again */
+        /* If deletion of booking is ok, set global usersBooking variable to false
+         as to not disable booking-form submit btns again */
         usersBooking = false;
-        //!todo if cancel is ok - change text in btn to cancelled
+        btn.innerText = "Cancelled"
+        document.querySelector("#usersBookingInfo").innerHTML = `<p>Booking succesfully deleted</p>`
     }
 }
