@@ -25,10 +25,10 @@ i {
     display: none;
 }
 .button {
+    border-radius: $radius-max;
     padding: 0.5rem 1rem;
     min-width: 12rem;
     border: none;
-    border-radius: $radius;
     font-weight: 700;
     &.primary-btn {
         background-color: $accent-100;

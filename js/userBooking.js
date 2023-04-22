@@ -14,17 +14,17 @@ const findUsersBooking = (arr) => {
     return
 }
 const welcomeMsg = (booking) => {
-    const div = createElement("div", "text-center")
+    const div = document.querySelector("#welcomeMsg")
+    div.className = "my-5 text-center"
     // console.log(new Date(booking));
-    div.innerHTML =
-    `<div class="my-5">
+    div.innerHTML =`
         <p>Welcome back <b>${toUpperCaseStr(userObj.name)}</b>!</p>
        ${booking 
             ? " <p>Your next laundry time is <b>" + dateToText(booking) + "</b></p>" + 
             "<p>Do you want to book another time? Cancel your scheduled time below first.</p>"
             : " <p>You have no booked times"}</p>
-        ${booking ? "<button id='delBooking' class='button danger-btn' >Cancel</button>" : ""}
-    </div>`
+        ${booking ? "<button id='delBooking' class='button danger-btn' >Cancel</button>" + 
+        "<p class='p-3'><i class='fa-solid fa-arrow-up'></i> This feature is not working yet heheh</p>" : ""}`
     loginContainer.insertAdjacentElement("afterend", div)
     /* Initate delBooking function */
     delBooking(booking)

@@ -36,10 +36,10 @@
     display: none;
   }
   .button {
+    border-radius: 50px;
     padding: 0.5rem 1rem;
     min-width: 12rem;
     border: none;
-    border-radius: 0.5rem;
     font-weight: 700;
   }
   .button.primary-btn {
@@ -78,6 +78,7 @@ input:-webkit-autofill:active:not([type=radio]), input[data-autocompleted]:not([
     background: linear-gradient(270deg, rgba(255, 255, 255, 0.46) 0%, rgba(253, 253, 253, 0) 100%);
     background: -webkit-linear-gradient(270deg, rgba(255, 255, 255, 0.46) 0%, rgba(253, 253, 253, 0) 100%);
     border: none;
+    border-radius: 50px;
     -webkit-appearance: none;
     appearance: none;
     font-family: system-ui;
@@ -110,6 +111,7 @@ input:-webkit-autofill:active:not([type=radio]):not(select), input[data-autocomp
     background: linear-gradient(270deg, rgba(255, 255, 255, 0.46) 0%, rgba(253, 253, 253, 0) 100%);
     background: -webkit-linear-gradient(270deg, rgba(255, 255, 255, 0.46) 0%, rgba(253, 253, 253, 0) 100%);
     border: none;
+    border-radius: 50px;
     -webkit-appearance: none;
     -moz-appearance: none;
          appearance: none;
