@@ -27,11 +27,20 @@ const displayUserIcons = () => {
     userIcons.innerHTML =` 
     <div class="d-flex align-items-center ">
         <p class="m-0 pe-2" id="userName"><b>${toUpperCaseStr(userObj.name)}</b></p>
-        <i class="fa-regular fa-user"></i>
+        <button onclick="renderAccountPage()" class="btn border-0" aria-label="Account page button">
+            <i class="fa-regular fa-user"></i>
+        </button>
     </div>
     <div id="logoutWrapper" >
         <button onclick="logout()" class="btn border-0" aria-label="Log out button">
             <img class="logout" src="assets/icons/logout.svg"  aria-hidden="true" alt=""/>
         </button>
     </div>`
+}
+
+const renderAccountPage = () => {
+    console.log("account");
+    clearElem([calender])
+
+    welcomeMsg(usersBooking);
 }

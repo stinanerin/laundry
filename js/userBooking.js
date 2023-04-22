@@ -9,7 +9,6 @@ const findUsersBooking = (arr) => {
         const bookingDateObj = new Date(signedInUserBooking.booking)
         // console.log("bookingDateObj",bookingDateObj);
         // console.log(bookingDateObj.toLocaleTimeString(), bookingDateObj.toLocaleDateString());
-        welcomeMsg(bookingDateObj);
         return bookingDateObj;
     }
     return
