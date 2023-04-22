@@ -16,21 +16,23 @@ const fetchData = async(id) => {
 
 const addBooking = async(listId, dateObject) => {
     console.log(dateObject);
-    try {
-        const res = await fetch(`${API_BASE_URL}lists/${listId}/items`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                booking: dateObject,
-                user_id: getitem("user").id
-            }),
-        })
-        const { list } = await res.json();
-        
-    } catch(error) {
-        console.log(error);
+    if(!usersBooking) {
+        try {
+            const res = await fetch(`${API_BASE_URL}lists/${listId}/items`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    booking: dateObject,
+                    user_id: getitem("user").id
+                }),
+            })
+            const { list } = await res.json();
+            
+        } catch(error) {
+            console.log(error);
+        }
     }
 }
 

@@ -45,14 +45,14 @@ const renderDayView = () => {
                 </h2>
                 <div class="row gx-0 text-center">
                     <div class="col d-flex justify-content-center align-items-center">
-                        <input type="radio" name="time-slot" id="morning" value="08" required>
+                        <input type="radio" name="time-slot" id="morning" value="08" required/>
                         <label for="morning">08</label>
                     </div>
-                    <div class="col d-flex justify-content-center align-items-center">
+                    <div class="col d-flex justify-content-center align-items-center"/>
                         <input type="radio" name="time-slot" id="noon" value="12">
                         <label for="noon">12</label>
                     </div>
-                    <div class="col d-flex justify-content-center align-items-center">
+                    <div class="col d-flex justify-content-center align-items-center"/>
                         <input type="radio" name="time-slot" id="evening" value="17">
                         <label for="evening">17</label>
                     </div>

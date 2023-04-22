@@ -51,8 +51,8 @@ i {
         }
     }
     &:disabled {
-        background-color: rgb(112, 112, 112);
-        color: rgb(231, 228, 228);
+        background-color: $disabled-500;
+        color: $disabled-50;
     }
 }
 
