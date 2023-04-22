@@ -176,6 +176,8 @@ bookingForm.addEventListener('submit', (e) => {
     //!todo check so the booking is ok, then push to local array
     //!todo check so the booking is ok - then disable booked radio btn
     addBooking(currentList, currentDate)
+    //!todo - make usersBooking with the jsut booked time - så man itne kan boka fler
+
     // Adds the recently booked date to global bookings-arr - avoiding another API-request - which is looped when the day-view is rendered
     bookings.push(currentDate)
     //todo! Add booked class on the li-tag directly after succesfull booking
