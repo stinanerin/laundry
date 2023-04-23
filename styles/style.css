@@ -300,6 +300,9 @@ input:-webkit-autofill:active:not([type=radio]):not(select), input[data-autocomp
     width: 1rem;
   }
   @media (width >= 576px) {
+    .header {
+      background-color: pink;
+    }
     .header .header-child {
       display: flex;
       justify-content: center;
