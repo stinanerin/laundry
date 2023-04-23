@@ -64,13 +64,16 @@ const addBooking = async(listId, dateObject) => {
 
 const deleteBooking = async(listId, item) => {
     try {
-        return await fetch(`${API_BASE_URL}lists/${listId}/items/${item._id}`,
+        const res = await fetch(`${API_BASE_URL}li5sts/${listId}/items/${item._id}`,
             {
-            method: "DELETE",
+                method: "DELETE",
             }
-        );
+        )
+        if(!res.ok) {
+            throw new Error(res.statusText)
+        } 
+        return res
     } catch(error) {
-        //todo! display errror
-        console.log(error);
+        displayModal(error.message)
     }
 }

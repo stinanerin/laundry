@@ -33,9 +33,9 @@ const delBooking = async(btn) => {
     const arr = await fetchData(currentList)
     const signedInUserBooking = arr.find(booking => booking.user_id === userObj.id)
     const res = await deleteBooking(currentList, signedInUserBooking)
-    if(res.status === 200) {
+    if(res) {
         /* If deletion of booking is ok, set global usersBooking variable to false
-         as to not disable booking-form submit btns again */
+        as to not disable booking-form submit btns again */
         usersBooking = false;
         btn.innerText = "Cancelled"
         addClass([btn], "no-hover")
