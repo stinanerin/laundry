@@ -5,7 +5,7 @@ const findUsersBooking = (arr) => {
     // Returns the booking object of the signed in user if it exists - otherwise undefined
     const signedInUserBooking = arr.find(booking => booking.user_id === userObj.id)
     if(signedInUserBooking) {
-        console.log("booking from api",signedInUserBooking.booking);
+        // console.log("booking from api",signedInUserBooking.booking);
         const bookingDateObj = new Date(signedInUserBooking.booking)
         // console.log("bookingDateObj",bookingDateObj);
         // console.log(bookingDateObj.toLocaleTimeString(), bookingDateObj.toLocaleDateString());

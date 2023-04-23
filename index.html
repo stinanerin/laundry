@@ -29,6 +29,7 @@
     <script src="js/dayView.js" defer></script>
     <script src="js/userSession.js" defer></script>
     <script src="js/userBooking.js" defer></script>
+    <script src="js/modal.js" defer></script>
     <script src="js/main.js" defer></script>
 </head>
 <body>
@@ -44,6 +45,19 @@
         </div>
     </header>
     <main>
+                
+        <!--! MODAL -->
+        <button class="button open-button">open modal</button>
+        <dialog id="modal" >
+            <div class="round">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+            <h2>Oops! Something went wrong...</h2>
+            <p id="error">ERROROROROE</p>
+            <div class="cancel-modal">
+                <button id="closeModal" class="btn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+        </dialog>
 
         <div class="mt-5">
             <!--! REGISTER FORM -->
