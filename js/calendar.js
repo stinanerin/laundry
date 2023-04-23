@@ -161,10 +161,14 @@ const renderMonthCal = async() => {
 const updateChoosenDate = (date) => { 
     document.querySelectorAll("input[type='radio'][name='time-slot']").forEach(slot => 
         slot.addEventListener("change", (e) => {
-        currentDate = date
-        /* Sets time to  */
-        currentDate.setHours(e.target.value, 00, 00)
-        bookingForm.querySelector("p").innerHTML = `You have choosen <strong>${dateToText(currentDate)}</strong>. </br>Make sure to book it to complete the process`
+            console.log(usersBooking);
+            currentDate = date
+            /* Sets currentDate's time to the selected radio buttons time slot value */
+            currentDate.setHours(e.target.value, 00, 00)
+            bookingForm.querySelector("p").innerHTML = `
+            ${!usersBooking ? "You've selected <strong>" + dateToText(currentDate) + "</strong>. </br>To complete the process, please book this date."
+            : "You already have a laundry booking. </br>Please cancel it on your account page before making a new one. "}
+            `
         }
     ))
 }
