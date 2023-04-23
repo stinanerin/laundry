@@ -3,15 +3,18 @@ const API_BASE_URL = "https://nackademin-item-tracker.herokuapp.com/"
 const fetchData = async(id) => {
     try {
         const res = await fetch(`${API_BASE_URL}lists/${id}`)
+        if(!res.ok) {
+            throw new Error(res.statusText)
+        }
         const data = await res.json();
         let arr = data.itemList
         let  objBooking  = arr[arr.length -1];
         // console.log("latest booking", objBooking);
         return arr
     } catch(error) {
-        //todo! display errror
         console.log(error);
-        return error
+        displayModal(error.message)
+
     }
 }
 
@@ -30,6 +33,9 @@ const createUser = async(name, email, pwd) => {
                 password: pwd,
             }),
         });
+        if(!res.ok) {
+            throw new Error(res.statusText)
+        } 
         const { list } = await res.json();
     
         // Find latest registered user and adds to local storage as signed in
@@ -37,15 +43,14 @@ const createUser = async(name, email, pwd) => {
         addSession(user)
         
     } catch (error) {
-        //todo! display errror
-        console.log(error);
+        displayModal(error.message)
     }
 }
 
 const addBooking = async(listId, dateObject) => {
     if(!usersBooking) {
         try {
-            return await fetch(`${API_BASE_URL}lists/${listId}/items`, {
+            const res = await fetch(`${API_BASE_URL}lists/${listId}/items`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -55,22 +60,28 @@ const addBooking = async(listId, dateObject) => {
                     user_id: getitem("user").id
                 }),
             })   
+            if(!res.ok) {
+                throw new Error(res.statusText)
+            } 
+            return res
         } catch(error) {
-            //todo! display errror
-            console.log(error);
+            displayModal(error.message)
         }
     }
 }
 
 const deleteBooking = async(listId, item) => {
     try {
-        return await fetch(`${API_BASE_URL}lists/${listId}/items/${item._id}`,
+        const res = await fetch(`${API_BASE_URL}lists/${listId}/items/${item._id}`,
             {
-            method: "DELETE",
+                method: "DELETE",
             }
-        );
+        )
+        if(!res.ok) {
+            throw new Error(res.statusText)
+        } 
+        return res
     } catch(error) {
-        //todo! display errror
-        console.log(error);
+        displayModal(error.message)
     }
 }

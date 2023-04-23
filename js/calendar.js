@@ -32,11 +32,11 @@ const renderMonthCal = async() => {
     //todo! bryt ut
     // Fetches all bookings from API
     const arr = await fetchData(currentList)
-    console.log("bookings array", arr);
+    // console.log("bookings array", arr);
 
     //!todo limit signed in user to book multiple times?
     usersBooking = findUsersBooking(arr)
-    console.log("usersBooking", usersBooking);
+    // console.log("usersBooking", usersBooking);
 
     bookings = arr.map(date => new Date(date.booking))
     // console.log("bookings", bookings);

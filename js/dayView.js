@@ -81,7 +81,6 @@ bookingForm.addEventListener('submit', async(e) => {
        e.target.querySelector("input[type='radio']:checked").disabled = true;    
        e.target.querySelector("button[type='submit']").disabled = true
        e.target.querySelector("button[type='submit']").innerText = "Booked"
-       console.log(bookingForm.querySelector("p"));
        bookingForm.querySelector("p").innerHTML = `Congratulations! Your booking is confirmed for <b>${dateToText(currentDate)}</b>.`
        // Adds the recently booked date to global bookings-arr - avoiding another API-request - which is looped when the day-view is rendered
        bookings.push(currentDate)

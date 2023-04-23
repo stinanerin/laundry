@@ -120,6 +120,7 @@ input:-webkit-autofill:active:not([type=radio]):not(select), input[data-autocomp
     box-shadow: inset 0 0 0.75em 0 #909ec9, 0 0 1em 0.2em #909ec9;
     -webkit-box-shadow: inset 0 0 0.75em 0 #909ec9, 0 0 1em 0.2em #909ec9;
     background-color: transparent;
+    cursor: none;
   }
   .button.danger-btn {
     background-color: hsl(354deg, 100%, 51%);
@@ -134,6 +135,9 @@ input:-webkit-autofill:active:not([type=radio]):not(select), input[data-autocomp
     background-color: rgb(112, 112, 112);
     color: rgb(231, 228, 228);
   }
+  .button.no-hover {
+    cursor: not-allowed;
+  }
   .calendar {
     border-radius: 0.5rem;
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.133) 0%, rgba(255, 255, 255, 0) 100%);
@@ -143,16 +147,26 @@ input:-webkit-autofill:active:not([type=radio]):not(select), input[data-autocomp
   }
   .calendar .day {
     position: relative;
-    min-height: 50px;
-    margin: 0.5rem;
+    height: 30px;
+    width: 30px;
+    margin: 0.2rem;
     border-radius: 50px;
   }
   .calendar .day:hover:not(.deactivated), .calendar .day.active, .calendar .day.today:not(.deactivated) {
     cursor: pointer;
     font-weight: 900;
     font-size: 1rem;
-    min-width: 50px;
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.133) 0%, rgba(255, 255, 255, 0.113) 100%);
+  }
+  @media (width >= 360px) {
+    .calendar .day:hover:not(.deactivated), .calendar .day.active, .calendar .day.today:not(.deactivated) {
+      min-width: 40px;
+    }
+  }
+  @media (width >= 576px) {
+    .calendar .day:hover:not(.deactivated), .calendar .day.active, .calendar .day.today:not(.deactivated) {
+      min-width: 50px;
+    }
   }
   .calendar .day:hover:not(.deactivated), .calendar .day.active {
     box-shadow: inset 0 0 0.75em 0 #909ec9, 0 0 1em 0 #909ec9;
@@ -170,11 +184,39 @@ input:-webkit-autofill:active:not([type=radio]):not(select), input[data-autocomp
     background-color: rgb(173, 97, 227);
     border-radius: 50px;
     position: absolute;
-    top: 0.7rem;
-    right: 0.4rem;
+    top: 0.2rem;
+    right: 0.2rem;
+  }
+  @media (width >= 360px) {
+    .calendar .day.booked:after {
+      top: 0.4rem;
+      right: 0.3rem;
+    }
+  }
+  @media (width >= 576px) {
+    .calendar .day.booked:after {
+      top: 0.7rem;
+      right: 0.4rem;
+    }
+  }
+  @media (width >= 360px) {
+    .calendar .day {
+      min-height: 40px;
+      margin: 0.5rem;
+    }
+  }
+  @media (width >= 576px) {
+    .calendar .day {
+      min-height: 50px;
+    }
   }
   .calendar .weekdays div {
-    padding: 0 1rem;
+    padding: 0 0.5rem;
+  }
+  @media (width >= 360px) {
+    .calendar .weekdays div {
+      padding: 0 0.8rem;
+    }
   }
   .calendar .weekdays div h3 {
     font-size: 1rem;
@@ -240,30 +282,40 @@ input:-webkit-autofill:active:not([type=radio]):not(select), input[data-autocomp
   }
   .header {
     display: flex;
+    justify-content: space-evenly;
     align-items: center;
-    justify-content: space-between;
     height: 100px;
     padding: 0 1rem;
   }
   .header .header-child {
     display: flex;
-    justify-content: center;
     align-items: center;
-    min-width: 20%;
   }
-  .header .header-child:first-child {
-    justify-content: flex-start;
-    padding: 0 12px;
-  }
-  .header .header-child:first-child p {
+  .header .header-child p {
     margin: 0;
     padding-left: 1rem;
   }
-  .header .header-child:last-child {
-    justify-content: flex-end;
-  }
   .header .header-child button img {
+    padding-bottom: 5px;
     width: 1rem;
+  }
+  @media (width >= 576px) {
+    .header .header-child {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-width: 20%;
+    }
+    .header .header-child:first-child {
+      justify-content: flex-start;
+      padding: 0 12px;
+    }
+    .header .header-child:nth-of-type(2) {
+      justify-content: center;
+    }
+    .header .header-child:last-child {
+      justify-content: flex-end;
+    }
   }
   footer {
     background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.233) 100%);
@@ -272,5 +324,53 @@ input:-webkit-autofill:active:not([type=radio]):not(select), input[data-autocomp
     display: flex;
     justify-content: center;
     align-items: flex-end;
+  }
+  :modal {
+    max-width: 50ch;
+    border: 0;
+    box-shadow: 0 5px 1rem rgba(0, 0, 0, 0.53);
+    padding: 3rem 2rem;
+    background-color: #909ec9;
+    border-radius: 0.5rem;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  :modal * {
+    color: hsl(0deg, 0%, 100%);
+  }
+  :modal::-webkit-backdrop {
+    -webkit-backdrop-filter: blur(3px);
+            backdrop-filter: blur(3px);
+  }
+  :modal::backdrop {
+    -webkit-backdrop-filter: blur(3px);
+            backdrop-filter: blur(3px);
+  }
+  :modal .round {
+    background-color: #2d3d6a;
+    border-radius: 50px;
+    width: 5rem;
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  :modal .round .fa-xmark {
+    font-size: 2.5rem;
+  }
+  :modal p {
+    margin: 0;
+  }
+  :modal .cancel-modal {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+  }
+  :modal .cancel-modal .fa-xmark {
+    font-size: 1.5rem;
   }
 }/*# sourceMappingURL=style.css.map */
