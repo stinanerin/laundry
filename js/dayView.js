@@ -83,7 +83,7 @@ bookingForm.addEventListener('submit', async(e) => {
        e.target.querySelector("button[type='submit']").innerText = "Booked"
        // Adds the recently booked date to global bookings-arr - avoiding another API-request - which is looped when the day-view is rendered
        bookings.push(currentDate)
-       // Adds pruple dot on the booked cal. day
+       // Adds purple dot on the booked cal. day
        addClass([document.querySelector("li.active")], "booked")
     }
 });

@@ -38,6 +38,7 @@ const delBooking = async(btn) => {
          as to not disable booking-form submit btns again */
         usersBooking = false;
         btn.innerText = "Cancelled"
+        addClass([btn], "no-hover")
         document.querySelector("#usersBookingInfo").innerHTML = `<p>Booking succesfully deleted</p>`
     }
 }
