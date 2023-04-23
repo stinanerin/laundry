@@ -23,58 +23,7 @@ let today = new Date(),
     bookings,
     usersBooking;
 
-const renderDayView = () => {
-    dayGrid.querySelectorAll(".day:not(.deactivated)").forEach(li => {
-        li.addEventListener("click", () => {
-            // If another day has the active class - remove it
-            dayGrid.querySelector(".active") ? dayGrid.querySelector(".active").classList.remove("active") : "";
-           
-            addClass([li], "active")
-            
-            const monthName = li.classList.contains("prevMonth") ? months[month - 1]
-            : li.classList.contains("nextMonth") ? months[month + 1]
-            : months[month]
-            
-            const currentDate = new Date(year, months.indexOf(monthName), li.innerText)
 
-            dayView.innerHTML = `
-            <div class="mb-5">
-                <h2 class="row gx-0 mb-4">
-                    <span class="weekday col">${weekdays[currentDate.getDay()]}</span>
-                    <span class="date col text-end">${li.innerText} ${monthName}</span>
-                </h2>
-                <div class="row gx-0 text-center">
-                    <div class="col d-flex justify-content-center align-items-center">
-                        <input type="radio" name="time-slot" id="morning" value="08" required/>
-                        <label for="morning">08</label>
-                    </div>
-                    <div class="col d-flex justify-content-center align-items-center"/>
-                        <input type="radio" name="time-slot" id="noon" value="12">
-                        <label for="noon">12</label>
-                    </div>
-                    <div class="col d-flex justify-content-center align-items-center"/>
-                        <input type="radio" name="time-slot" id="evening" value="17">
-                        <label for="evening">17</label>
-                    </div>
-                    <div class="mt-4">
-                        <p class="m-0"></p>
-                    </div>
-                    <div class="mt-4"><button type="submit" class="button primary-btn" ${usersBooking ? "disabled" : ""}>Book</button></div>
-                </div>
-            </div>`
-            updateChoosenDate(currentDate)
-            //todo - break out as function
-            let bookedTimes;
-            // Checks if currentDate is already booked
-            // Returns every date obj that matches the current looped date - otherwise []
-            const match = bookings.filter(date => date.toLocaleDateString() === currentDate.toLocaleDateString())
-            // If bookings exists in currentDate - get the time slots
-            match.length > 0 ? bookedTimes = match.map(date => date.getHours()) : ""
-            // If current date is already booked - disable radio for booked time slots
-            bookedTimes ? diasableElem(bookedTimes) : ""
-        })
-    })
-}
 
 const renderMonthCal = async() => {
     // Clears calender & booking form when month changes
@@ -158,37 +107,7 @@ const renderMonthCal = async() => {
     renderDayView()
 }
 
-const updateChoosenDate = (date) => { 
-    document.querySelectorAll("input[type='radio'][name='time-slot']").forEach(slot => 
-        slot.addEventListener("change", (e) => {
-        currentDate = date
-        /* Sets time to  */
-        currentDate.setHours(e.target.value, 00, 00)
-        bookingForm.querySelector("p").innerHTML = `You have chosen <strong>${dateToText(currentDate)}</strong>. </br>Make sure to book it to complete the process`
-        }
-    ))
-}
-
-bookingForm.addEventListener('submit', async(e) => {
-    e.preventDefault();
-    //todo! Add booked class on the li-tag directly after succesfull booking
-    const res = await addBooking(currentList, currentDate)
-    if(res.ok) {
-        /* If booking is added correctly - set global usersBooking variable to new booking, 
-        which prevents the user from booking another time 
-        Disable the currently viewed form-btn & radio-btn
-        */
-        usersBooking = currentDate
-        e.target.querySelector("input[type='radio']:checked").disabled = true;    
-        e.target.querySelector("button[type='submit']").disabled = true
-        e.target.querySelector("button[type='submit']").innerText = "Booked"
-        // Adds the recently booked date to global bookings-arr - avoiding another API-request - which is looped when the day-view is rendered
-        bookings.push(currentDate)
-    }
-});
-
 // ----------------------- ALTER MONTH -----------------------
-
 const alterMonth = (str) => {
     if(str === "add") {
         if(month === 11) {
@@ -207,23 +126,25 @@ const alterMonth = (str) => {
 }
 
 // ----------------------- DISABLE PASSED DATES -----------------------
-
 const hasDatePassed = (year, month, day) => {
     date = new Date(year, month, day)
     // Create a new date of the existing dates to cancel out the time
     return new Date(date.toDateString()) < new Date(today.toDateString()) ? "deactivated" : "";
 }
 
+// ----------------------- CHECK IF DAY IS TODAY -----------------------
 const checkIfDayisToday = (year, month, day) => {
     return areDatesEqual(today, new Date(year, month, day)) ? "today" : ""
 }
 
+// ----------------------- CHECK IF DAY IS BOOKED -----------------------
 const isDayBooked = (bookedTime, year, month, day) => {
     if(bookedTime) {
         return areDatesEqual(bookedTime, new Date(year, month, day)) ? "booked" : ""
     }
 }
 
+// ----------------------- CHECK IF TWO DATES ARE EQUAL -----------------------
 const areDatesEqual = (d1, d2) => {
     return d1.toDateString() === d2.toDateString()
 }

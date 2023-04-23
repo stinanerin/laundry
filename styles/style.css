@@ -35,35 +35,6 @@
   .hidden {
     display: none;
   }
-  .button {
-    border-radius: 50px;
-    padding: 0.5rem 1rem;
-    min-width: 12rem;
-    border: none;
-    font-weight: 700;
-  }
-  .button.primary-btn {
-    background-color: #909ec9;
-    color: hsl(0deg, 0%, 100%);
-  }
-  .button.primary-btn:hover:not(.button.primary-btn:hover:disabled) {
-    box-shadow: inset 0 0 0.75em 0 #909ec9, 0 0 1em 0.2em #909ec9;
-    -webkit-box-shadow: inset 0 0 0.75em 0 #909ec9, 0 0 1em 0.2em #909ec9;
-    background-color: transparent;
-  }
-  .button.danger-btn {
-    background-color: hsl(354deg, 100%, 51%);
-    color: hsl(0deg, 0%, 100%);
-  }
-  .button.danger-btn:hover:not(.button.danger-btn:hover:disabled) {
-    box-shadow: inset 0 0 0.75em 0 hsl(354deg, 100%, 51%), 0 0 1em 0.2em hsl(354deg, 100%, 51%);
-    -webkit-box-shadow: inset 0 0 0.75em 0 hsl(354deg, 100%, 51%), 0 0 1em 0.2em hsl(354deg, 100%, 51%);
-    background-color: transparent;
-  }
-  .button:disabled {
-    background-color: rgb(112, 112, 112);
-    color: rgb(231, 228, 228);
-  }
   .link {
     text-decoration: underline;
     color: #909ec9;
@@ -133,6 +104,35 @@ input:-webkit-autofill:active:not([type=radio]):not(select), input[data-autocomp
   }
   input[data-autocompleted]:not(select) {
     padding: 0.5rem 1.5rem;
+  }
+  .button {
+    border-radius: 50px;
+    padding: 0.5rem 1rem;
+    min-width: 12rem;
+    border: none;
+    font-weight: 700;
+  }
+  .button.primary-btn {
+    background-color: #909ec9;
+    color: hsl(0deg, 0%, 100%);
+  }
+  .button.primary-btn:hover:not(.button.primary-btn:hover:disabled, .button.primary-btn:hover.no-hover) {
+    box-shadow: inset 0 0 0.75em 0 #909ec9, 0 0 1em 0.2em #909ec9;
+    -webkit-box-shadow: inset 0 0 0.75em 0 #909ec9, 0 0 1em 0.2em #909ec9;
+    background-color: transparent;
+  }
+  .button.danger-btn {
+    background-color: hsl(354deg, 100%, 51%);
+    color: hsl(0deg, 0%, 100%);
+  }
+  .button.danger-btn:hover:not(.button.danger-btn:hover:disabled, .button.danger-btn:hover.no-hover) {
+    box-shadow: inset 0 0 0.75em 0 hsl(354deg, 100%, 51%), 0 0 1em 0.2em hsl(354deg, 100%, 51%);
+    -webkit-box-shadow: inset 0 0 0.75em 0 hsl(354deg, 100%, 51%), 0 0 1em 0.2em hsl(354deg, 100%, 51%);
+    background-color: transparent;
+  }
+  .button:disabled {
+    background-color: rgb(112, 112, 112);
+    color: rgb(231, 228, 228);
   }
   .calendar {
     border-radius: 0.5rem;
