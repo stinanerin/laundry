@@ -71,18 +71,19 @@ const updateSelectedDateTime = (date) => {
 // ----------------------- EVENTLISTENER - FORM TO BOOK TIME SLOT -----------------------
 bookingForm.addEventListener('submit', async(e) => {
     e.preventDefault();
-    //todo! Add booked class on the li-tag directly after succesfull booking
     const res = await addBooking(currentList, currentDate)
     if(res.ok) {
         /* If booking is added correctly - set global usersBooking variable to new booking, 
         which prevents the user from booking another time 
         Disable the currently viewed form-btn & radio-btn
         */
-        usersBooking = currentDate
-        e.target.querySelector("input[type='radio']:checked").disabled = true;    
-        e.target.querySelector("button[type='submit']").disabled = true
-        e.target.querySelector("button[type='submit']").innerText = "Booked"
-        // Adds the recently booked date to global bookings-arr - avoiding another API-request - which is looped when the day-view is rendered
-        bookings.push(currentDate)
+       usersBooking = currentDate
+       e.target.querySelector("input[type='radio']:checked").disabled = true;    
+       e.target.querySelector("button[type='submit']").disabled = true
+       e.target.querySelector("button[type='submit']").innerText = "Booked"
+       // Adds the recently booked date to global bookings-arr - avoiding another API-request - which is looped when the day-view is rendered
+       bookings.push(currentDate)
+       // Adds pruple dot on the booked cal. day
+       addClass([document.querySelector("li.active")], "booked")
     }
 });
