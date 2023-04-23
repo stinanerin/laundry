@@ -120,6 +120,7 @@ input:-webkit-autofill:active:not([type=radio]):not(select), input[data-autocomp
     box-shadow: inset 0 0 0.75em 0 #909ec9, 0 0 1em 0.2em #909ec9;
     -webkit-box-shadow: inset 0 0 0.75em 0 #909ec9, 0 0 1em 0.2em #909ec9;
     background-color: transparent;
+    cursor: none;
   }
   .button.danger-btn {
     background-color: hsl(354deg, 100%, 51%);
@@ -133,6 +134,9 @@ input:-webkit-autofill:active:not([type=radio]):not(select), input[data-autocomp
   .button:disabled {
     background-color: rgb(112, 112, 112);
     color: rgb(231, 228, 228);
+  }
+  .button.no-hover {
+    cursor: not-allowed;
   }
   .calendar {
     border-radius: 0.5rem;

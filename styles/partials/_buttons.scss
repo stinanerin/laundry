@@ -11,6 +11,7 @@
             &:not(&:disabled, &.no-hover ) {
                 @include glow($accent-100);
                 background-color: transparent;
+                cursor: none;
             }  
         }
     }
@@ -27,5 +28,8 @@
     &:disabled {
         background-color: $disabled-500;
         color: $disabled-50;
+    }
+    &.no-hover {
+        cursor: not-allowed;
     }
 }
