@@ -26,7 +26,7 @@ const checkSession = () => {
 const displayUserIcons = () => {
     userIcons.innerHTML =` 
     <div class="d-flex align-items-center ">
-        <p class="m-0 pe-2" id="userName"><b>${toUpperCaseStr(userObj.name)}</b></p>
+        <p class="m-0 p-sm-2 text-center" id="userName"><b>${toUpperCaseStr(userObj.name)}</b></p>
         <button onclick="renderAccountPage()" class="btn border-0" aria-label="Account page button">
             <i class="fa-regular fa-user"></i>
         </button>
