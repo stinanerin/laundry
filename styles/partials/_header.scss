@@ -1,16 +1,24 @@
 .header {
-    // background-color: purple;
+    background-color: purple;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    // justify-content: space-evenly;
     align-items: center;
     height: 100px;
     padding: 0 1rem;
-    .header-child {
+    .header-child:not(.not) {
         display: flex;
         align-items: center;
+        justify-content: center;
+        background-color: rgb(2, 6, 109);
+        &:nth-of-type(2) {
+            width: 1000px;
+            justify-content: flex-start;
+            background-color: rgb(9, 79, 56);
+        }
         p {
             margin: 0;
-            padding-left: 1rem;
+            padding: 0 0.5rem;
         }
         button {
             img {
@@ -26,16 +34,13 @@
             justify-content: center;
             align-items: center;
             min-width: 20%;
-            &:first-child {
-                justify-content: flex-start;
-                padding: 0 12px;
-            }
-            &:nth-of-type(2){
+            background-color: green;
+            &:nth-of-type(2) {
+                width: 0px;
                 justify-content: center;
+                background-color: rgb(99, 197, 164);
             }
-            &:last-child {
-                justify-content: flex-end;
-            }
+           
         }
     }
 }
