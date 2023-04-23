@@ -23,7 +23,7 @@ const welcomeMsg = (booking) => {
             ${booking 
             ? " <p>Your next laundry time is <b>" + dateToText(booking) + "</b></p>" + 
             "<p>Do you want to book another time? Cancel your scheduled time below first.</p>"
-            : " <p>You have no booked times"}</p>
+            : " <p>You have no booked laundry times"}</p>
         </div>
         ${booking ? "<button  onclick='delBooking(this)' class='button danger-btn' >Cancel</button>" : ""}`
     loginContainer.insertAdjacentElement("afterend", div)
@@ -38,6 +38,7 @@ const delBooking = async(btn) => {
         as to not disable booking-form submit btns again */
         usersBooking = false;
         btn.innerText = "Cancelled"
+        btn.disabled = true
         addClass([btn], "no-hover")
         document.querySelector("#usersBookingInfo").innerHTML = `<p>Booking succesfully deleted</p>`
     }
