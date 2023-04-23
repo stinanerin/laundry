@@ -22,51 +22,181 @@
     <!-- JS -->
     <script src="js/helper.js" defer></script>
     <script src="js/api.js" defer></script>
-    <script src="js/index.js" defer></script>
+    <script src="js/register.js" defer></script>
+    <script src="js/login.js" defer></script>
+    <script src="js/logout.js" defer></script>
+    <script src="js/calendar.js" defer></script>
+    <script src="js/dayView.js" defer></script>
+    <script src="js/userSession.js" defer></script>
+    <script src="js/userBooking.js" defer></script>
+    <script src="js/modal.js" defer></script>
+    <script src="js/main.js" defer></script>
 </head>
 <body>
     <header class="header">
-        <h1>Laundry</h1>
+        <div class="header-child">
+            
+        </div>
+        <div class="header-child">
+            <h1 onclick="window.location.reload()">Laundry</h1>
+        </div>
+        <div class="header-child" id="userIcons">
+            
+        </div>
     </header>
     <main>
-        <div class="container main">
-            <div class="row">
-                <!-- CALENDER-->
-                <div class="calendar container pb-5">
-                    <!-- HEADER MONTH - CONTROLLER-->
-                    <header class="row d-flex align-items-center m-0 my-5">
-                        <div class="col-auto text-start"><button class="btn border-0" id="prevMonth"><i class="fas fa-angle-left"></i></button></div>
-                        <div class="month-header col text-center"></div>
-                        <div class="col-auto text-end"><button class="btn border-0" id="nextMonth"><i class="fas fa-angle-right"></i></button></div>
-                    </header>
-                    <!-- WEEKDAYS-->
-                    <div class="weekdays row text-center mb-3 gx-0">
-                        <div class="col"><h3>M</h3></div>
-                        <div class="col"><h3>T</h3></div>
-                        <div class="col"><h3>W</h3></div>
-                        <div class="col"><h3>T</h3></div>
-                        <div class="col"><h3>F</h3></div>
-                        <div class="col"><h3>S</h3></div>
-                        <div class="col"><h3>S</h3></div>
-                    </div>
-                    <!-- CALENDER DAYS GRID-->
-                    <ul class="calender-days-grid text-center p-0">
-                        <!-- Grid inserted via JS -->                        
-                    </ul>
-                </div>
+
+        <!--! MODAL -->
+        <dialog id="modal" >
+            <div class="round">
+                <i class="fa-solid fa-xmark"></i>
             </div>
-            <div class="row">
-                <!-- DAY VIEW -->
-                <form id="bookTime" class="container">
-                    <div class="day-view">
-                        <!-- Time-slots inserted via JS -->
+            <h2>Oops! Something went wrong...</h2>
+            <p id="error"></p>
+            <div class="cancel-modal">
+                <button id="closeModal" class="btn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+        </dialog>
+
+        <div class="mt-5">
+            <!--! REGISTER FORM -->
+            <div id="registerWrapper" class="hidden">
+                <form class="container main" id="registerUser">
+                    <h2 class="text-center">Create an account</h2>
+                    <div class="row gy-3">
+                        <!-- NAME -->
+                        <div class="form-group">
+                            <label for="FullName" class="form-label">Full name</label>
+                            <input class="form-control input" id="FullName" type="text" placeholder="Enter full name" required/>
+                        </div>
+                        <!-- EMAIL -->
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email address</label>
+                            <input class="form-control input " id="email" type="email" placeholder="Enter email" required/>
+                        </div>
+                         <!-- ALERT EMAIL -->
+                         <div id="emailAlert" class="m-0 hidden">
+                            <div class="alert alert-danger container m-0 mt-3" role="alert">
+                                <div class="row">
+                                    <div class="col-auto">
+                                        <i class="fa-solid fa-triangle-exclamation"></i>
+                                    </div>
+                                    <div class="col">
+                                        <span class="error">This email is already registered</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- PWD -->
+                        <div class="form-group">
+                            <label for="pwd" class="form-label">Password</label>
+                            <input class="form-control input" id="pwd" type="password" placeholder="Enter password" required/>
+                        </div>
+                        <!-- ALERT PWD -->
+                        <div id="passwordAlert" class="m-0 hidden">
+                            <div class="alert alert-danger container m-0 mt-3" role="alert">
+                                <div class="row">
+                                    <div class="col-auto">
+                                        <i class="fa-solid fa-triangle-exclamation"></i>
+                                    </div>
+                                    <div class="col">
+                                        <span class="error">The password confirmation does not match</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- CONF. PWD -->
+                        <div class="form-group">
+                            <label for="pwdConf" class="form-label">Password confirmation</label>
+                            <input class="form-control input" id="pwdConf" type="password" placeholder="Confirm password" required/>
+                        </div>
+                        <!-- SUBMIT -->
+                        <div class="d-flex justify-content-center my-5">
+                            <button class="button primary-btn" type="submit">Sign up</button>
+                        </div>
                     </div>
                 </form>
+                 <!-- LINK LOGIN -->
+                 <div class="text-center pb-5">
+                    <p>Already registered? <span class="link" id="loginLink">Log in here</span></p>
+                </div>
             </div>
-        </div>
+            <!--! LOGIN FORM -->
+            <div id="loginWrapper" >
+                <form class="container main" id="loginForm">
+                    <h2 class="text-center">Welcome back</h2>
+                    <div class="row gy-3 ">
+                        <!-- EMAIL -->
+                        <div class="form-group">
+                            <label for="loginEmail" class="form-label">Email address</label>
+                            <input class="form-control input" id="loginEmail" type="email" placeholder="Enter email" required/>
+                        </div>
+                        <!--! ALERT -->
+                        <div class="login-alert-container"></div>
+                        <!-- PWD -->
+                        <div class="form-group">
+                            <label for="loginPWD" class="form-label">Password</label>
+                            <input class="form-control input" id="loginPWD" type="password" placeholder="Enter password" required/>
+                        </div>
+                        <!-- <p class="text-end">Forgot password?</p> -->
+                    </div>
+                    
+                    <!-- SUBMIT -->
+                    <div class="d-flex justify-content-center my-5">
+                        <button class="button primary-btn" type="submit">Log in</button>
+                    </div>
+                </form>
+                <!-- LINK REGISTER FORM  -->
+                <div class="text-center pb-5">
+                    <p>Don't have an account? <span class="link" id="registerLink">Register now</span></p>
+                </div>
+            </div>
+            <div id="welcomeMsg">
+                
+            </div>
+
+            <div id="calenderWrapper" class="container main hidden">
+                <div class="row">
+                    <!--! CALENDER-->
+                    <div class="calendar container pb-5">
+                        <!-- HEADER MONTH - CONTROLLER-->
+                        <header class="row d-flex align-items-center m-0 my-5">
+                            <div class="col-auto text-start"><button class="btn border-0" id="prevMonth"><i class="fas fa-angle-left"></i></button></div>
+                            <div class="month-header col text-center"></div>
+                            <div class="col-auto text-end"><button class="btn border-0" id="nextMonth"><i class="fas fa-angle-right"></i></button></div>
+                        </header>
+                        <!-- WEEKDAYS-->
+                        <div class="weekdays row text-center mb-3 gx-0">
+                            <div class="col"><h3>M</h3></div>
+                            <div class="col"><h3>T</h3></div>
+                            <div class="col"><h3>W</h3></div>
+                            <div class="col"><h3>T</h3></div>
+                            <div class="col"><h3>F</h3></div>
+                            <div class="col"><h3>S</h3></div>
+                            <div class="col"><h3>S</h3></div>
+                        </div>
+                        <!-- CALENDER DAYS GRID-->
+                        <ul class="calender-days-grid text-center p-0">
+                            <!-- Grid inserted via JS -->                        
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- DAY VIEW -->
+                    <form id="bookTime" class="container">
+                        <div class="day-view">
+                            <!-- Time-slots inserted via JS -->
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>  
+
     </main>
+
     <footer>
         <p>Copyright © 2023</p>
     </footer>
+
 </body>
 </html>
