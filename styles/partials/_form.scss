@@ -24,7 +24,7 @@ form {
             color: $disabled-50;
         }
     }
-    input[type="radio"] + label {
+    input[type="radio"] + label, .form-text  {
         color: $p-white;
     }
     label {

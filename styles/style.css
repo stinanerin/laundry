@@ -249,7 +249,7 @@ input:-webkit-autofill:active:not([type=radio]):not(select), input[data-autocomp
     cursor: not-allowed;
     color: rgb(231, 228, 228);
   }
-  form input[type=radio] + label {
+  form input[type=radio] + label, form .form-text {
     color: hsl(0deg, 0%, 100%);
   }
   form label {
