@@ -90,9 +90,7 @@ const deleteBooking = async(listId, item) => {
         if(!res.ok) {
             throw new Error(res.statusText)
         } 
-        /* If deletion of booking is ok, set global usersBooking variable to false
-        as to not disable booking-form submit btns again */
-        usersBooking = false;
+        
         return res
     } catch(error) {
         displayModal(error.message)
