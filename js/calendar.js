@@ -34,7 +34,6 @@ const renderMonthCal = async() => {
     const arr = await fetchData(currentList)
     // console.log("bookings array", arr);
 
-    //!todo limit signed in user to book multiple times?
     usersBooking = findUsersBooking(arr)
     // console.log("usersBooking", usersBooking);
 
@@ -71,7 +70,7 @@ const renderMonthCal = async() => {
             row = createElement("div", "row mb-2 g-0");
             dayGrid.append(row);
         }
-        row.append(createElement("li", `${hasDatePassed(year, currentMonth, prevMontshLastDate - x + 1)} ${isDayBooked(usersBooking, year, month, x)} day prevMonth col d-flex justify-content-center align-items-center`, prevMontshLastDate - x + 1));
+        row.append(createElement("li", `${deactivatePassedDates(year, currentMonth, prevMontshLastDate - x + 1)} ${isDayBooked(usersBooking, year, month, x)} day prevMonth col d-flex justify-content-center align-items-center`, prevMontshLastDate - x + 1));
         weekDays ++;
     }
 
@@ -83,7 +82,7 @@ const renderMonthCal = async() => {
             dayGrid.append(row);
         }
 
-        row.append(createElement("li", `${checkIfDayisToday(year, month, x)} ${hasDatePassed(year, month, x)} ${isDayBooked(usersBooking, year, month, x)} day col d-flex justify-content-center align-items-center`, x));
+        row.append(createElement("li", `${checkIfDayisToday(year, month, x)} ${deactivatePassedDates(year, month, x)} ${isDayBooked(usersBooking, year, month, x)} day col d-flex justify-content-center align-items-center`, x));
         weekDays ++;
     }
 
@@ -97,7 +96,7 @@ const renderMonthCal = async() => {
             row = createElement("div", "row g-0");
             dayGrid.append(row);
         }
-        row.append(createElement("li", `${checkIfDayisToday(year, currentMonth, x)} ${hasDatePassed(year, currentMonth, x)} ${isDayBooked(usersBooking, year, month, x)} day nextMonth col d-flex justify-content-center align-items-center`, x));
+        row.append(createElement("li", `${checkIfDayisToday(year, currentMonth, x)} ${deactivatePassedDates(year, currentMonth, x)} ${isDayBooked(usersBooking, year, month, x)} day nextMonth col d-flex justify-content-center align-items-center`, x));
         weekDays ++;
     }
 
@@ -125,11 +124,17 @@ const alterMonth = (str) => {
     renderMonthCal()
 }
 
-// ----------------------- DISABLE PASSED DATES -----------------------
-const hasDatePassed = (year, month, day) => {
+// ----------------------- CHECKS IF D1 IS PASSED D2 -----------------------
+const hasDatePassed = (d1, d2) => {
+    // Create a new date of the existing dates to cancel out the time
+    return new Date(d1.toDateString()) < new Date(d2.toDateString())
+}
+
+// ----------------------- DISABLES PASSED DATES -----------------------
+const deactivatePassedDates = (year, month, day) => {
     date = new Date(year, month, day)
     // Create a new date of the existing dates to cancel out the time
-    return new Date(date.toDateString()) < new Date(today.toDateString()) ? "deactivated" : "";
+    return hasDatePassed(date, today) ? "deactivated" : "";
 }
 
 // ----------------------- CHECK IF DAY IS TODAY -----------------------
