@@ -8,8 +8,8 @@ const fetchData = async(id) => {
         }
         const data = await res.json();
         let arr = data.itemList
-        console.log(arr);
-        let  objBooking  = arr[arr.length -1];
+        deletePassedBookings(arr)
+        // let  objBooking  = arr[arr.length -1];
         // console.log("latest booking", objBooking);
         return arr
     } catch(error) {
@@ -19,10 +19,19 @@ const fetchData = async(id) => {
     }
 }
 
+const deletePassedBookings = (arr) => {
+    arr.forEach(element => {
+        // console.log(hasDatePassed(new Date(element.booking), today));
+        if(hasDatePassed(new Date(element.booking), today)) {
+            deleteBooking(currentList, element)
+        }
+    });
+}
+
 // ----------------------- CREATE USER IN API -----------------------
 const createUser = async(name, email, pwd) => {
     try {
-        //todo! Change lsit
+        //todo! Change list
         const res = await fetch(`${API_BASE_URL}lists/6429d84525fc8200e0300328/items`, {
             method: "POST",
             headers: {
@@ -81,6 +90,9 @@ const deleteBooking = async(listId, item) => {
         if(!res.ok) {
             throw new Error(res.statusText)
         } 
+        /* If deletion of booking is ok, set global usersBooking variable to false
+        as to not disable booking-form submit btns again */
+        usersBooking = false;
         return res
     } catch(error) {
         displayModal(error.message)
