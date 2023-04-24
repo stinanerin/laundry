@@ -20,8 +20,8 @@
         color: $p-white;
         &:hover {
             &:not(&:disabled, &.no-hover ) {
-                @include glow($danger-500);
                 background-color: transparent;
+                border: 2px solid $danger-500;
             }  
         }
     }
