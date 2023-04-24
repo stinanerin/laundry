@@ -1,46 +1,30 @@
-.header {
-    background-color: purple;
+header {
     display: flex;
-    justify-content: space-between;
-    // justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
-    height: 100px;
-    padding: 0 1rem;
-    .header-child:not(.not) {
+    .header {
+        // background-color: purple;
         display: flex;
+        justify-content: space-between;
         align-items: center;
-        justify-content: center;
-        background-color: rgb(2, 6, 109);
-        &:nth-of-type(2) {
-            width: 1000px;
-            justify-content: flex-start;
-            background-color: rgb(9, 79, 56);
-        }
-        p {
-            margin: 0;
-            padding: 0 0.5rem;
-        }
-        button {
-            img {
-                padding-bottom: 5px;
-                width: 1rem;
-            }
-        }
-    }
-    @media($sm) {
-        background-color: pink;
+        height: 100px;
+        width: 100%;
+        max-width: 90rem;
+        padding: 0 1rem;
         .header-child {
             display: flex;
-            justify-content: center;
             align-items: center;
-            min-width: 20%;
-            background-color: green;
-            &:nth-of-type(2) {
-                width: 0px;
-                justify-content: center;
-                background-color: rgb(99, 197, 164);
+            justify-content: center;
+            p {
+                margin: 0;
+                padding: 0 0.5rem;
             }
-           
+            button {
+                img {
+                    padding-bottom: 3px;
+                    width: 1rem;
+                }
+            }
         }
     }
 }

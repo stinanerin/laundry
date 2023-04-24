@@ -279,49 +279,32 @@ input:-webkit-autofill:active:not([type=radio]):not(select), input[data-autocomp
     box-shadow: 0 0 0px 1000px hsl(354deg, 100%, 51%) inset;
     -webkit-box-shadow: 0 0 0px 1000px hsl(355deg, 70%, 91%) inset;
   }
-  .header {
-    background-color: purple;
+  header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  header .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 100px;
+    width: 100%;
+    max-width: 90rem;
     padding: 0 1rem;
   }
-  .header .header-child:not(.not) {
+  header .header .header-child {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgb(2, 6, 109);
   }
-  .header .header-child:not(.not):nth-of-type(2) {
-    width: 1000px;
-    justify-content: flex-start;
-    background-color: rgb(9, 79, 56);
-  }
-  .header .header-child:not(.not) p {
+  header .header .header-child p {
     margin: 0;
     padding: 0 0.5rem;
   }
-  .header .header-child:not(.not) button img {
-    padding-bottom: 5px;
+  header .header .header-child button img {
+    padding-bottom: 3px;
     width: 1rem;
-  }
-  @media (width >= 576px) {
-    .header {
-      background-color: pink;
-    }
-    .header .header-child {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-width: 20%;
-      background-color: green;
-    }
-    .header .header-child:nth-of-type(2) {
-      width: 0px;
-      justify-content: center;
-      background-color: rgb(99, 197, 164);
-    }
   }
   footer {
     background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.233) 100%);
