@@ -33,6 +33,7 @@ form {
         font-family: $heading-primary;
     }
     .alert-danger {
+        border-radius: $radius-max;  
         border-color: $danger-500;
         color: $danger-500;
         padding: 0.5rem 1rem;
@@ -41,7 +42,7 @@ form {
             color: $danger-500;
         }
     }
-    .error {  
+    .error {
         color: $danger-500;
         border-color: $danger-500;
         -webkit-text-fill-color: $danger-500;

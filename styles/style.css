@@ -257,6 +257,7 @@ input:-webkit-autofill:active:not([type=radio]):not(select), input[data-autocomp
     font-family: "Poppins", sans-serif;
   }
   form .alert-danger {
+    border-radius: 50px;
     border-color: hsl(354deg, 100%, 51%);
     color: hsl(354deg, 100%, 51%);
     padding: 0.5rem 1rem;
