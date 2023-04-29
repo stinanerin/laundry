@@ -42,45 +42,11 @@ const renderMonthCal = async() => {
     bookings = arr.map(date => new Date(date.booking))
     console.log("bookings", bookings);
 
-    // The previous months last date
-    let prevLastDay = new Date(year, month, 0),
-        prevMonthsLastDate = prevLastDay.getDate(),
-        // The spill over dates from the month before
-        prevDays = prevLastDay.getDay(),
-        // Current months last date
-        lastDay = new Date(year, month + 1, 0),
-        lastDate = lastDay.getDate(),
-        /* The remaining dates, from the next month, which happen in the current months last week.
-        If the last date is a sunday - set nexDays to a zero, as to not render any days from the next month */
-        nextDays = 7 - (lastDay.getDay() === 0 ? 7 : lastDay.getDay());
 
     // Updates month header 
     dateHeader.innerHTML =  `<h2>${months[month]} ${year}</h2>`;
 
-    // Create an empty array to store the dates
-    const dates = [];
-
-    // Loops through the days of the previous month and adds them to the dates array
-    for (let day = prevMonthsLastDate - prevDays + 1; day <= prevMonthsLastDate; day++) {
-        dates.push({ 
-                date: day, 
-                month: month -1
-            });
-    }
-    // Loops through the days of the current month and adds them to the dates array
-    for (let day = 1; day <= lastDate ; day++) {
-        dates.push({ 
-            date: day, 
-            month: month,
-        });
-    }
-    // Loops through the days of the next month and adds them to the dates array
-    for (let day = 1; day <= nextDays; day++) {
-        dates.push({ 
-                date: day, 
-                month: month +1
-        });
-    }
+    const dates = generateDatesArray(year, month)
 
     // Loops through the dates array and renders them to the DOM
     dates.forEach(({date, month}, index) => {
@@ -100,6 +66,48 @@ const renderMonthCal = async() => {
 
     // Iniates day view function for each calender button
     renderDayView()
+}
+
+
+const generateDatesArray = (year, month) => {
+     // The previous months last date
+     let prevLastDay = new Date(year, month, 0),
+     prevMonthsLastDate = prevLastDay.getDate(),
+     // The spill over dates from the month before
+     prevDays = prevLastDay.getDay(),
+     // Current months last date
+     lastDay = new Date(year, month + 1, 0),
+     lastDate = lastDay.getDate(),
+     /* The remaining dates, from the next month, which happen in the current months last week.
+     If the last date is a sunday - set nexDays to a zero, as to not render any days from the next month */
+     nextDays = 7 - (lastDay.getDay() === 0 ? 7 : lastDay.getDay());
+
+    // Create an empty array to store the dates
+    const dates = [];
+
+    // Loops through the days of the previous month and adds them to the dates array
+    for (let day = prevMonthsLastDate - prevDays + 1; day <= prevMonthsLastDate; day++) {
+        dates.push({ 
+            date: day, 
+            month: month -1
+        });
+    }
+    // Loops through the days of the current month and adds them to the dates array
+    for (let day = 1; day <= lastDate ; day++) {
+        dates.push({ 
+            date: day, 
+            month: month,
+        });
+    }
+    // Loops through the days of the next month and adds them to the dates array
+    for (let day = 1; day <= nextDays; day++) {
+        dates.push({ 
+            date: day, 
+            month: month +1
+        });
+    }
+    return dates;
+
 }
 
 
