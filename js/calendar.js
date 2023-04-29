@@ -9,7 +9,6 @@ const calendar = document.querySelector(".calendar"),
     nextMonth = document.querySelector("#nextMonth");
 
 // ----------------------- GLOBAL VARIABLES -----------------------
-
 // Courtesy of https://gist.github.com/seripap/9eb809268eb8026abd9f
 const months = Array.from({length: 12}, (e, i) => {
         return new Date(null, i + 1, null).toLocaleDateString("en", {month: "long"});
@@ -24,8 +23,6 @@ let today = new Date(),
     year = today.getFullYear(),
     currentDate,
     currentList = "63fd07e82a491a4d0882d577";
-    //! bookings;
-    //! usersBooking;
 
 const renderMonthCal = async() => {
     // Clears calender & booking form when month changes
@@ -33,13 +30,12 @@ const renderMonthCal = async() => {
     dayView.innerHTML = "";
 
     const { bookings, usersBooking } = await fetchBookings(currentList);
-    console.log("usersBooking", usersBooking);
-    console.log("bookings", bookings);
+    console.log("usersBooking", usersBooking, "bookings", bookings);
 
     // Updates month header 
     dateHeader.innerHTML =  `<h2>${months[month]} ${year}</h2>`;
 
-    const dates = generateDatesArray(year, month)
+    const dates = generateMonthViewDates(year, month)
 
     // Loops through the dates array and renders them to the DOM
     dates.forEach(({date, month}, index) => {
@@ -72,7 +68,7 @@ const fetchBookings = async (list) => {
     };
 };
 
-const generateDatesArray = (year, month) => {
+const generateMonthViewDates = (year, month) => {
     // The previous months last date
     let prevLastDay = new Date(year, month, 0),
         prevMonthsLastDate = prevLastDay.getDate(),
