@@ -23,25 +23,18 @@ let today = new Date(),
     month = today.getMonth(),
     year = today.getFullYear(),
     currentDate,
-    currentList = "63fd07e82a491a4d0882d577",
-    bookings,
-    usersBooking;
-
+    currentList = "63fd07e82a491a4d0882d577";
+    //! bookings;
+    //! usersBooking;
 
 const renderMonthCal = async() => {
     // Clears calender & booking form when month changes
     dayGrid.innerHTML = "";
     dayView.innerHTML = "";
-    //todo! bryt ut
 
-    // Fetches all bookings from API
-    const arr = await fetchData(currentList)
-    // Finds the signed in user's booking from the api bookings
-    usersBooking = findUsersBooking(arr)
-    // Creates a new array with a Date object for each booked date
-    bookings = arr.map(date => new Date(date.booking))
+    const { bookings, usersBooking } = await fetchBookings(currentList);
+    console.log("usersBooking", usersBooking);
     console.log("bookings", bookings);
-
 
     // Updates month header 
     dateHeader.innerHTML =  `<h2>${months[month]} ${year}</h2>`;
@@ -65,22 +58,32 @@ const renderMonthCal = async() => {
     })
 
     // Iniates day view function for each calender button
-    renderDayView()
+    renderDayView(bookings, usersBooking)
 }
 
+const fetchBookings = async (list) => {
+    // Fetches all bookings from API
+    const bookings = await fetchData(list);
+    return {
+        // Creates a new array with a Date object for each booked date
+        bookings: bookings.map(date => new Date(date.booking)),
+        // Finds the signed in user's booking from the api bookings
+        usersBooking: findUsersBooking(bookings),
+    };
+};
 
 const generateDatesArray = (year, month) => {
-     // The previous months last date
-     let prevLastDay = new Date(year, month, 0),
-     prevMonthsLastDate = prevLastDay.getDate(),
-     // The spill over dates from the month before
-     prevDays = prevLastDay.getDay(),
-     // Current months last date
-     lastDay = new Date(year, month + 1, 0),
-     lastDate = lastDay.getDate(),
-     /* The remaining dates, from the next month, which happen in the current months last week.
-     If the last date is a sunday - set nexDays to a zero, as to not render any days from the next month */
-     nextDays = 7 - (lastDay.getDay() === 0 ? 7 : lastDay.getDay());
+    // The previous months last date
+    let prevLastDay = new Date(year, month, 0),
+        prevMonthsLastDate = prevLastDay.getDate(),
+        // The spill over dates from the month before
+        prevDays = prevLastDay.getDay(),
+        // Current months last
+        lastDay = new Date(year, month + 1, 0),
+        lastDate = lastDay.getDate(),
+        /* The remaining dates, from the next month, which happen in the current months last week.
+        If the last date is a sunday - set nexDays to a zero, as to not render any days from the next month */
+        nextDays = 7 - (lastDay.getDay() === 0 ? 7 : lastDay.getDay());
 
     // Create an empty array to store the dates
     const dates = [];
@@ -107,9 +110,7 @@ const generateDatesArray = (year, month) => {
         });
     }
     return dates;
-
 }
-
 
 // ----------------------- ALTER MONTH -----------------------
 const alterMonth = (str) => {

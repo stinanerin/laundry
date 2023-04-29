@@ -1,6 +1,6 @@
 
 // ----------------------- DAY VIEW WHEN YOU CLICK A CAL. DATE -----------------------
-const renderDayView = () => {
+const renderDayView = (bookings, usersBooking) => {
     dayGrid.querySelectorAll(".day:not(.deactivated)").forEach(li => {
         li.addEventListener("click", () => {
             // If another cal-day has the active class - remove it
