@@ -1,4 +1,4 @@
-// ----------------------- GLOBAL VARIABLES -----------------------
+// ----------------------- DOM ELEMENTS -----------------------
 const calendar = document.querySelector(".calendar"),
     dayGrid = document.querySelector(".calender-days-grid"),
     bookingForm = document.querySelector("#bookTime"),
@@ -6,15 +6,19 @@ const calendar = document.querySelector(".calendar"),
     timeBooking = document.querySelector(".booking"),
     dateHeader = document.querySelector(".month-header"),
     prevMonth = document.querySelector("#prevMonth"),
-    nextMonth = document.querySelector("#nextMonth"),
-    // courtesy of https://gist.github.com/seripap/9eb809268eb8026abd9f
-    months = Array.from({length: 12}, (e, i) => {
+    nextMonth = document.querySelector("#nextMonth");
+
+// ----------------------- GLOBAL VARIABLES -----------------------
+
+// Courtesy of https://gist.github.com/seripap/9eb809268eb8026abd9f
+const months = Array.from({length: 12}, (e, i) => {
         return new Date(null, i + 1, null).toLocaleDateString("en", {month: "long"});
-    });
+    }),
     weekdays = Array.from({length: 7}, (e, i) => {
         return new Date(null, null , i).toLocaleDateString("en", {weekday: "long"});
-    })
+    }),
     timeslots = ["08", "12", "17"];
+
 let today = new Date(),
     month = today.getMonth(),
     year = today.getFullYear(),
@@ -22,7 +26,6 @@ let today = new Date(),
     currentList = "63fd07e82a491a4d0882d577",
     bookings,
     usersBooking;
-
 
 
 const renderMonthCal = async() => {
@@ -52,7 +55,7 @@ const renderMonthCal = async() => {
         lastDay = new Date(year, month + 1, 0),
         lastDate = lastDay.getDate(),
         /* The remaining dates, from the next month, which happen in the current months last week.
-        If the last date is a sunday - do not render any days from the next month */
+        If the last date is a sunday - set nexDays to a zero, as to not render any days from the next month */
         nextDays = 7 - (lastDay.getDay() === 0 ? 7 : lastDay.getDay());
     
     // Initates week days counter and container
@@ -87,7 +90,6 @@ const renderMonthCal = async() => {
 
     // Renders the dates from the next month
     currentMonth = month + 1
-    console.log(nextDays);
     for(let x = 1; x <= nextDays ; x++) {
         // Creates new row for cal days for each week
         //todo! bryt ut
@@ -130,26 +132,26 @@ const hasDatePassed = (d1, d2) => {
     return new Date(d1.toDateString()) < new Date(d2.toDateString())
 }
 
-// ----------------------- DISABLES PASSED DATES -----------------------
+// ----------------------- DEACTIVATES LI CAL DATE IF DATE HAS ALREADY PASSED -----------------------
 const deactivatePassedDates = (year, month, day) => {
     date = new Date(year, month, day)
     // Create a new date of the existing dates to cancel out the time
     return hasDatePassed(date, today) ? "deactivated" : "";
 }
 
-// ----------------------- CHECK IF DAY IS TODAY -----------------------
+// ----------------------- DETERMINES IF A DAY IS TODAY' DATE -----------------------
 const checkIfDayisToday = (year, month, day) => {
     return areDatesEqual(today, new Date(year, month, day)) ? "today" : ""
 }
 
-// ----------------------- CHECK IF DAY IS BOOKED -----------------------
+// ----------------------- DETERMINES IF DAY IS BOOKED -----------------------
 const isDayBooked = (bookedTime, year, month, day) => {
     if(bookedTime) {
         return areDatesEqual(bookedTime, new Date(year, month, day)) ? "booked" : ""
     }
 }
 
-// ----------------------- CHECK IF TWO DATES ARE EQUAL -----------------------
+// ----------------------- DETERMINES IF TWO DATES ARE EQUAL -----------------------
 const areDatesEqual = (d1, d2) => {
     return d1.toDateString() === d2.toDateString()
 }
