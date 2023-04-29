@@ -1,8 +1,8 @@
 
 checkSession()
 
-prevMonth.addEventListener("click", () => { alterMonth("prev") })
-nextMonth.addEventListener("click", () => { alterMonth("add") })
+document.querySelector("#prevMonthBtn").addEventListener("click", () => { alterMonth("prev") })
+document.querySelector("#nextMonthBtn").addEventListener("click", () => { alterMonth("add") })
 
 // ----------------------- TOGGLE BETWEEN REGISTER / LOGIN VIEW -----------------------
 loginUserLink.addEventListener("click", () => { toggleClass([registerContainer, loginContainer], "hidden") })

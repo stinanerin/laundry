@@ -4,9 +4,7 @@ const calendar = document.querySelector(".calendar"),
     bookingForm = document.querySelector("#bookTime"),
     dayView = document.querySelector(".day-view"),
     timeBooking = document.querySelector(".booking"),
-    dateHeader = document.querySelector(".month-header"),
-    prevMonth = document.querySelector("#prevMonth"),
-    nextMonth = document.querySelector("#nextMonth");
+    dateHeader = document.querySelector(".month-header");
 
 // ----------------------- GLOBAL VARIABLES -----------------------
 // Courtesy of https://gist.github.com/seripap/9eb809268eb8026abd9f
@@ -36,18 +34,21 @@ const renderMonthCal = async() => {
     dateHeader.innerHTML =  `<h2>${months[month]} ${year}</h2>`;
 
     const dates = generateMonthViewDates(year, month)
+    console.log(dates);
 
     // Loops through the dates array and renders them to the DOM
-    dates.forEach(({date, month}, index) => {
+    dates.forEach(({date, month, prevMonth, nextMonth}, index) => {
         // Checks if a new row needs to be created
         if(index++ % 7 === 0) {
             row = createElement("div", "row g-0")
             dayGrid.append(row);
         }
-        row.append(createElement("li", ` 
-            ${isDayBooked(usersBooking, year, month, date)} 
+
+        row.append(createElement("li", 
+            `${isDayBooked(usersBooking, year, month, date)} 
             ${checkIfDayisToday(year, month, date)}
             ${deactivatePassedDates(year, month, date)}
+            ${prevMonth ? "prevMonth" : nextMonth ? "nextMonth" : ""}
             day col d-flex justify-content-center align-items-center`, 
             date)
         )
@@ -88,7 +89,8 @@ const generateMonthViewDates = (year, month) => {
     for (let day = prevMonthsLastDate - prevDays + 1; day <= prevMonthsLastDate; day++) {
         dates.push({ 
             date: day, 
-            month: month -1
+            month: month -1,
+            prevMonth: true,
         });
     }
     // Loops through the days of the current month and adds them to the dates array
@@ -102,7 +104,8 @@ const generateMonthViewDates = (year, month) => {
     for (let day = 1; day <= nextDays; day++) {
         dates.push({ 
             date: day, 
-            month: month +1
+            month: month + 1,
+            nextMonth: true,
         });
     }
     return dates;
