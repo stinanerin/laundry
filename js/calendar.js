@@ -1,4 +1,4 @@
-// ----------------------- GLOBAL VARIABLES -----------------------
+// ----------------------- DOM ELEMENTS -----------------------
 const calendar = document.querySelector(".calendar"),
     dayGrid = document.querySelector(".calender-days-grid"),
     bookingForm = document.querySelector("#bookTime"),
@@ -6,15 +6,19 @@ const calendar = document.querySelector(".calendar"),
     timeBooking = document.querySelector(".booking"),
     dateHeader = document.querySelector(".month-header"),
     prevMonth = document.querySelector("#prevMonth"),
-    nextMonth = document.querySelector("#nextMonth"),
-    // curtesy of https://gist.github.com/seripap/9eb809268eb8026abd9f
-    months = Array.from({length: 12}, (e, i) => {
+    nextMonth = document.querySelector("#nextMonth");
+
+// ----------------------- GLOBAL VARIABLES -----------------------
+
+// Courtesy of https://gist.github.com/seripap/9eb809268eb8026abd9f
+const months = Array.from({length: 12}, (e, i) => {
         return new Date(null, i + 1, null).toLocaleDateString("en", {month: "long"});
-    });
+    }),
     weekdays = Array.from({length: 7}, (e, i) => {
         return new Date(null, null , i).toLocaleDateString("en", {weekday: "long"});
-    })
+    }),
     timeslots = ["08", "12", "17"];
+
 let today = new Date(),
     month = today.getMonth(),
     year = today.getFullYear(),
@@ -24,21 +28,19 @@ let today = new Date(),
     usersBooking;
 
 
-
 const renderMonthCal = async() => {
     // Clears calender & booking form when month changes
     dayGrid.innerHTML = "";
     dayView.innerHTML = "";
     //todo! bryt ut
+
     // Fetches all bookings from API
     const arr = await fetchData(currentList)
-    // console.log("bookings array", arr);
-
+    // Finds the signed in user's booking from the api bookings
     usersBooking = findUsersBooking(arr)
-    // console.log("usersBooking", usersBooking);
-
+    // Creates a new array with a Date object for each booked date
     bookings = arr.map(date => new Date(date.booking))
-    // console.log("bookings", bookings);
+    console.log("bookings", bookings);
 
     const firstDay = new Date(year, month, 1),
         // The day of the week for the current date
@@ -46,23 +48,23 @@ const renderMonthCal = async() => {
         // day = firstDay.getDay() === 0 ? firstDay.getDay() : firstDay.getDay() - 1,
         // The previous months last date
         prevLastDay = new Date(year, month, 0),
-        prevMontshLastDate = prevLastDay.getDate(),
+        prevMonthsLastDate = prevLastDay.getDate(),
         // The spill over dates from the month before
-        prevDays = prevLastDay.getDay();
+        prevDays = prevLastDay.getDay(),
         // Current months last date
         lastDay = new Date(year, month + 1, 0),
         lastDate = lastDay.getDate(),
-        // The remaining dates, from the next month, which happen in the current months last week
-        nextDays = 7 - lastDay.getDay();
+        /* The remaining dates, from the next month, which happen in the current months last week.
+        If the last date is a sunday - set nexDays to a zero, as to not render any days from the next month */
+        nextDays = 7 - (lastDay.getDay() === 0 ? 7 : lastDay.getDay());
     
     // Initates week days counter and container
     let weekDays = 0;
     let row;
 
-    // Renders the dates from previous month
-    // "day" = the amount of days from the current week that belong to the previous month
+    /* Renders the dates from previous month,
+    "prevDays" = the amount of days from the current week that belong to the previous month */
     let currentMonth = month - 1
-
     //!todo break out each rendering of days by pushing the dates to three arrays.
     for (let x = 1; x <= prevDays; x++) {
         // Creates new row for cal days for each week
@@ -70,7 +72,7 @@ const renderMonthCal = async() => {
             row = createElement("div", "row mb-2 g-0");
             dayGrid.append(row);
         }
-        row.append(createElement("li", `${deactivatePassedDates(year, currentMonth, prevMontshLastDate - x + 1)} ${isDayBooked(usersBooking, year, month, x)} day prevMonth col d-flex justify-content-center align-items-center`, prevMontshLastDate - x + 1));
+        row.append(createElement("li", `${deactivatePassedDates(year, currentMonth, prevMonthsLastDate - x + 1)} ${isDayBooked(usersBooking, year, month, x)} day prevMonth col d-flex justify-content-center align-items-center`, prevMonthsLastDate - prevDays + x));
         weekDays ++;
     }
 
@@ -88,7 +90,7 @@ const renderMonthCal = async() => {
 
     // Renders the dates from the next month
     currentMonth = month + 1
-    for(let x = 1; x <= nextDays && nextDays !== 7; x++) {
+    for(let x = 1; x <= nextDays ; x++) {
         // Creates new row for cal days for each week
         //todo! bryt ut
         if(weekDays % 7 === 0) {
@@ -130,26 +132,26 @@ const hasDatePassed = (d1, d2) => {
     return new Date(d1.toDateString()) < new Date(d2.toDateString())
 }
 
-// ----------------------- DISABLES PASSED DATES -----------------------
+// ----------------------- DEACTIVATES LI CAL DATE IF DATE HAS ALREADY PASSED -----------------------
 const deactivatePassedDates = (year, month, day) => {
     date = new Date(year, month, day)
     // Create a new date of the existing dates to cancel out the time
     return hasDatePassed(date, today) ? "deactivated" : "";
 }
 
-// ----------------------- CHECK IF DAY IS TODAY -----------------------
+// ----------------------- DETERMINES IF A DAY IS TODAY' DATE -----------------------
 const checkIfDayisToday = (year, month, day) => {
     return areDatesEqual(today, new Date(year, month, day)) ? "today" : ""
 }
 
-// ----------------------- CHECK IF DAY IS BOOKED -----------------------
+// ----------------------- DETERMINES IF DAY IS BOOKED -----------------------
 const isDayBooked = (bookedTime, year, month, day) => {
     if(bookedTime) {
         return areDatesEqual(bookedTime, new Date(year, month, day)) ? "booked" : ""
     }
 }
 
-// ----------------------- CHECK IF TWO DATES ARE EQUAL -----------------------
+// ----------------------- DETERMINES IF TWO DATES ARE EQUAL -----------------------
 const areDatesEqual = (d1, d2) => {
     return d1.toDateString() === d2.toDateString()
 }

@@ -3,14 +3,17 @@
 const renderDayView = () => {
     dayGrid.querySelectorAll(".day:not(.deactivated)").forEach(li => {
         li.addEventListener("click", () => {
-            // If another day has the active class - remove it
-            dayGrid.querySelector(".active") ? dayGrid.querySelector(".active").classList.remove("active") : "";
+            // If another cal-day has the active class - remove it
+            dayGrid.querySelector(".active")?.classList.remove("active");
            
             addClass([li], "active")
             
-            const monthName = li.classList.contains("prevMonth") ? months[month - 1]
-            : li.classList.contains("nextMonth") ? months[month + 1]
-            : months[month]
+            //todo! comment
+            const monthName = li.classList.contains("prevMonth") 
+                ? months[month - 1]
+                : li.classList.contains("nextMonth") ?
+                months[month + 1]
+                : months[month]
             
             const currentDate = new Date(year, months.indexOf(monthName), li.innerText)
 
@@ -60,10 +63,8 @@ const updateSelectedDateTime = (date) => {
             currentDate = date
             /* Sets currentDate's time to the selected radio buttons time slot value */
             currentDate.setHours(e.target.value, 00, 00)
-            bookingForm.querySelector("p").innerHTML = `
-            ${!usersBooking ? "You've selected <b>" + dateToText(currentDate) + "</b>. </br>To complete the process, please book this date."
-            : "You already have a laundry booking. </br>Please cancel it on your account page before making a new one. "}
-            `
+            bookingForm.querySelector("p").innerHTML = !usersBooking ? `You've selected <b>${dateToText(currentDate)}</b>. To complete the process, please book this date.`
+            : "You already have a laundry booking. </br>Please cancel it on your account page before making a new one. "
         }
     ))
 }
