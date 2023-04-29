@@ -51,8 +51,9 @@ const renderMonthCal = async() => {
         // Current months last date
         lastDay = new Date(year, month + 1, 0),
         lastDate = lastDay.getDate(),
-        // The remaining dates, from the next month, which happen in the current months last week
-        nextDays = 7 - lastDay.getDay();
+        /* The remaining dates, from the next month, which happen in the current months last week.
+        If the last date is a sunday - do not render any days from the next month */
+        nextDays = 7 - (lastDay.getDay() === 0 ? 7 : lastDay.getDay());
     
     // Initates week days counter and container
     let weekDays = 0;
@@ -60,7 +61,6 @@ const renderMonthCal = async() => {
 
     /* Renders the dates from previous month,
     "prevDays" = the amount of days from the current week that belong to the previous month */
-
     let currentMonth = month - 1
     //!todo break out each rendering of days by pushing the dates to three arrays.
     for (let x = 1; x <= prevDays; x++) {
@@ -87,7 +87,8 @@ const renderMonthCal = async() => {
 
     // Renders the dates from the next month
     currentMonth = month + 1
-    for(let x = 1; x <= nextDays && nextDays !== 7; x++) {
+    console.log(nextDays);
+    for(let x = 1; x <= nextDays ; x++) {
         // Creates new row for cal days for each week
         //todo! bryt ut
         if(weekDays % 7 === 0) {
