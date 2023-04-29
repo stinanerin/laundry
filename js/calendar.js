@@ -7,7 +7,7 @@ const calendar = document.querySelector(".calendar"),
     dateHeader = document.querySelector(".month-header"),
     prevMonth = document.querySelector("#prevMonth"),
     nextMonth = document.querySelector("#nextMonth"),
-    // curtesy of https://gist.github.com/seripap/9eb809268eb8026abd9f
+    // courtesy of https://gist.github.com/seripap/9eb809268eb8026abd9f
     months = Array.from({length: 12}, (e, i) => {
         return new Date(null, i + 1, null).toLocaleDateString("en", {month: "long"});
     });
@@ -30,15 +30,14 @@ const renderMonthCal = async() => {
     dayGrid.innerHTML = "";
     dayView.innerHTML = "";
     //todo! bryt ut
+
     // Fetches all bookings from API
     const arr = await fetchData(currentList)
-    // console.log("bookings array", arr);
-
+    // Finds the signed in user's booking from the api bookings
     usersBooking = findUsersBooking(arr)
-    // console.log("usersBooking", usersBooking);
-
+    // Creates a new array with a Date object for each booked date
     bookings = arr.map(date => new Date(date.booking))
-    // console.log("bookings", bookings);
+    console.log("bookings", bookings);
 
     const firstDay = new Date(year, month, 1),
         // The day of the week for the current date
@@ -46,9 +45,9 @@ const renderMonthCal = async() => {
         // day = firstDay.getDay() === 0 ? firstDay.getDay() : firstDay.getDay() - 1,
         // The previous months last date
         prevLastDay = new Date(year, month, 0),
-        prevMontshLastDate = prevLastDay.getDate(),
+        prevMonthsLastDate = prevLastDay.getDate(),
         // The spill over dates from the month before
-        prevDays = prevLastDay.getDay();
+        prevDays = prevLastDay.getDay(),
         // Current months last date
         lastDay = new Date(year, month + 1, 0),
         lastDate = lastDay.getDate(),
@@ -59,10 +58,10 @@ const renderMonthCal = async() => {
     let weekDays = 0;
     let row;
 
-    // Renders the dates from previous month
-    // "day" = the amount of days from the current week that belong to the previous month
-    let currentMonth = month - 1
+    /* Renders the dates from previous month,
+    "prevDays" = the amount of days from the current week that belong to the previous month */
 
+    let currentMonth = month - 1
     //!todo break out each rendering of days by pushing the dates to three arrays.
     for (let x = 1; x <= prevDays; x++) {
         // Creates new row for cal days for each week
@@ -70,7 +69,7 @@ const renderMonthCal = async() => {
             row = createElement("div", "row mb-2 g-0");
             dayGrid.append(row);
         }
-        row.append(createElement("li", `${deactivatePassedDates(year, currentMonth, prevMontshLastDate - x + 1)} ${isDayBooked(usersBooking, year, month, x)} day prevMonth col d-flex justify-content-center align-items-center`, prevMontshLastDate - x + 1));
+        row.append(createElement("li", `${deactivatePassedDates(year, currentMonth, prevMonthsLastDate - x + 1)} ${isDayBooked(usersBooking, year, month, x)} day prevMonth col d-flex justify-content-center align-items-center`, prevMonthsLastDate - prevDays + x));
         weekDays ++;
     }
 
