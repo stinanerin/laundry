@@ -70,9 +70,9 @@ const createUser = async(name, email, pwd) => {
     }
 }
 
-const addBooking = async(listId, date) => {
-    if (!getItem("user").hasBooking) {
-        try {
+const addBooking = async (listId, date) => {
+    try {
+        if (!getItem("user").hasBooking) {
             const res = await fetch(`${API_BASE_URL}lists/${listId}/items`, {
                 method: "POST",
                 headers: {
@@ -87,13 +87,15 @@ const addBooking = async(listId, date) => {
                 throw new Error(res.statusText);
             }
             return res;
-        } catch (error) {
-            displayModal(error.message);
+        } else {
+            throw new Error(
+                "You already have a booking, please cancel it or wait until the booked day ahs passed to book a new laundry time."
+            );
         }
-    } else {
-        //todo maybe move if isnide and throw error?
+    } catch (error) {
+        displayModal(error.message);
     }
-}
+};
 
 const deleteBooking = async(listId, item) => {
     try {

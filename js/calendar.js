@@ -28,7 +28,6 @@ const renderMonthCal = async() => {
     dayView.innerHTML = "";
 
     const { bookings, usersBooking } = await fetchBookings(currentList);
-    // console.log("usersBooking", usersBooking, "bookings", bookings);
 
     // Updates month header 
     dateHeader.innerHTML =  `<h2>${months[month]} ${year}</h2>`;
