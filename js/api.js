@@ -70,28 +70,32 @@ const createUser = async(name, email, pwd) => {
     }
 }
 
-const addBooking = async(listId, dateObject) => {
-    if(!usersBooking) {
-        try {
+const addBooking = async (listId, date) => {
+    try {
+        if (!getItem("user").hasBooking) {
             const res = await fetch(`${API_BASE_URL}lists/${listId}/items`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    booking: dateObject,
-                    user_id: getitem("user").id
+                    booking: date,
+                    user_id: getItem("user").id,
                 }),
-            })   
-            if(!res.ok) {
-                throw new Error(res.statusText)
-            } 
-            return res
-        } catch(error) {
-            displayModal(error.message)
+            });
+            if (!res.ok) {
+                throw new Error(res.statusText);
+            }
+            return res;
+        } else {
+            throw new Error(
+                "You already have a booking, please cancel it or wait until the booked day ahs passed to book a new laundry time."
+            );
         }
+    } catch (error) {
+        displayModal(error.message);
     }
-}
+};
 
 const deleteBooking = async(listId, item) => {
     try {

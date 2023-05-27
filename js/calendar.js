@@ -1,15 +1,12 @@
 // ----------------------- DOM ELEMENTS -----------------------
 const calendar = document.querySelector(".calendar"),
     dayGrid = document.querySelector(".calender-days-grid"),
-    bookingForm = document.querySelector("#bookTime"),
-    dayView = document.querySelector(".day-view"),
+    dayView = document.querySelector("#dayView"),
     timeBooking = document.querySelector(".booking"),
     dateHeader = document.querySelector(".month-header"),
-    prevMonth = document.querySelector("#prevMonth"),
-    nextMonth = document.querySelector("#nextMonth");
+    welcomeMsgDiv = document.querySelector("#welcomeMsg");
 
 // ----------------------- GLOBAL VARIABLES -----------------------
-
 // Courtesy of https://gist.github.com/seripap/9eb809268eb8026abd9f
 const months = Array.from({length: 12}, (e, i) => {
         return new Date(null, i + 1, null).toLocaleDateString("en", {month: "long"});
@@ -23,89 +20,95 @@ let today = new Date(),
     month = today.getMonth(),
     year = today.getFullYear(),
     currentDate,
-    currentList = "63fd07e82a491a4d0882d577",
-    bookings,
-    usersBooking;
-
+    currentList = "63fd07e82a491a4d0882d577";
 
 const renderMonthCal = async() => {
     // Clears calender & booking form when month changes
     dayGrid.innerHTML = "";
     dayView.innerHTML = "";
-    //todo! bryt ut
 
+    const { bookings, usersBooking } = await fetchBookings(currentList);
+
+    // Updates month header 
+    dateHeader.innerHTML =  `<h2>${months[month]} ${year}</h2>`;
+
+    const dates = generateMonthViewDates(year, month)
+    // console.log(dates);
+
+    // Loops through the dates array and renders them to the DOM
+    dates.forEach(({date, month, prevMonth, nextMonth}, index) => {
+        // Checks if a new row needs to be created
+        if(index++ % 7 === 0) {
+            row = createElement("div", "row g-0")
+            dayGrid.append(row);
+        }
+
+        row.append(createElement("li", 
+            `${isDayBooked(usersBooking, year, month, date)} 
+            ${checkIfDayisToday(year, month, date)}
+            ${deactivatePassedDates(year, month, date)}
+            ${prevMonth ? "prevMonth" : nextMonth ? "nextMonth" : ""}
+            day col d-flex justify-content-center align-items-center`, 
+            date)
+        )
+    })
+
+    // Iniates day view function for each calender button
+    renderDayView(bookings, usersBooking)
+}
+
+const fetchBookings = async (list) => {
     // Fetches all bookings from API
-    const arr = await fetchData(currentList)
-    // Finds the signed in user's booking from the api bookings
-    usersBooking = findUsersBooking(arr)
-    // Creates a new array with a Date object for each booked date
-    bookings = arr.map(date => new Date(date.booking))
-    console.log("bookings", bookings);
+    const bookings = await fetchData(list);
+    
+    return {
+        // Creates a new array with a Date object for each booked date
+        bookings: bookings.map(date => new Date(date.booking)),
+        // Finds the signed in user's booking from the api bookings
+        usersBooking: findUsersBooking(bookings),
+    };
+};
 
-    const firstDay = new Date(year, month, 1),
-        // The day of the week for the current date
-        day = firstDay.getDay() - 1,
-        // day = firstDay.getDay() === 0 ? firstDay.getDay() : firstDay.getDay() - 1,
-        // The previous months last date
-        prevLastDay = new Date(year, month, 0),
+const generateMonthViewDates = (year, month) => {
+    // The previous months last date
+    let prevLastDay = new Date(year, month, 0),
         prevMonthsLastDate = prevLastDay.getDate(),
         // The spill over dates from the month before
         prevDays = prevLastDay.getDay(),
-        // Current months last date
+        // Current months last
         lastDay = new Date(year, month + 1, 0),
         lastDate = lastDay.getDate(),
         /* The remaining dates, from the next month, which happen in the current months last week.
         If the last date is a sunday - set nexDays to a zero, as to not render any days from the next month */
         nextDays = 7 - (lastDay.getDay() === 0 ? 7 : lastDay.getDay());
-    
-    // Initates week days counter and container
-    let weekDays = 0;
-    let row;
 
-    /* Renders the dates from previous month,
-    "prevDays" = the amount of days from the current week that belong to the previous month */
-    let currentMonth = month - 1
-    //!todo break out each rendering of days by pushing the dates to three arrays.
-    for (let x = 1; x <= prevDays; x++) {
-        // Creates new row for cal days for each week
-        if(weekDays % 7 === 0) {
-            row = createElement("div", "row mb-2 g-0");
-            dayGrid.append(row);
-        }
-        row.append(createElement("li", `${deactivatePassedDates(year, currentMonth, prevMonthsLastDate - x + 1)} ${isDayBooked(usersBooking, year, month, x)} day prevMonth col d-flex justify-content-center align-items-center`, prevMonthsLastDate - prevDays + x));
-        weekDays ++;
+    // Create an empty array to store the currently rendered months dates
+    const dates = [];
+
+    // Loops through the days of the previous month and adds them to the dates array
+    for (let day = prevMonthsLastDate - prevDays + 1; day <= prevMonthsLastDate; day++) {
+        dates.push({ 
+            date: day, 
+            month: month -1,
+            prevMonth: true,
+        });
     }
-
-    // Renders the dates from the current month
-    for (let x = 1 ; x <= lastDate ; x++) {
-        // Creates new row for cal days for each week
-        if(weekDays % 7 === 0) {
-            row = createElement("div", "row mb-2 g-0");
-            dayGrid.append(row);
-        }
-
-        row.append(createElement("li", `${checkIfDayisToday(year, month, x)} ${deactivatePassedDates(year, month, x)} ${isDayBooked(usersBooking, year, month, x)} day col d-flex justify-content-center align-items-center`, x));
-        weekDays ++;
+    // Loops through the days of the current month and adds them to the dates array
+    for (let day = 1; day <= lastDate ; day++) {
+        dates.push({ 
+            date: day, 
+            month: month,
+        });
     }
-
-    // Renders the dates from the next month
-    currentMonth = month + 1
-    for(let x = 1; x <= nextDays ; x++) {
-        // Creates new row for cal days for each week
-        //todo! bryt ut
-        if(weekDays % 7 === 0) {
-            console.log("tja");
-            row = createElement("div", "row g-0");
-            dayGrid.append(row);
-        }
-        row.append(createElement("li", `${checkIfDayisToday(year, currentMonth, x)} ${deactivatePassedDates(year, currentMonth, x)} ${isDayBooked(usersBooking, year, month, x)} day nextMonth col d-flex justify-content-center align-items-center`, x));
-        weekDays ++;
+    // Loops through the days of the next month and adds them to the dates array
+    for (let day = 1; day <= nextDays; day++) {
+        dates.push({ 
+            date: day, 
+            month: month + 1,
+            nextMonth: true,
+        });
     }
-
-    // Updates DOM
-    dateHeader.innerHTML =  `<h2>${months[month]} ${year}</h2>`;
-    // Iniates day view function for each calender button
-    renderDayView()
+    return dates;
 }
 
 // ----------------------- ALTER MONTH -----------------------

@@ -35,8 +35,8 @@
 <body>
     <header>
         <div class="header">
-            <div class="header-child">
-                <h1 onclick="window.location.reload()">Laundry</h1>
+            <div id="logo" class="header-child">
+                <h1 >Laundry</h1>
             </div>
             <div class="header-child" id="userIcons"></div>
         </div>
@@ -159,9 +159,9 @@
                     <div class="calendar container pb-5">
                         <!-- HEADER MONTH - CONTROLLER-->
                         <header class="row d-flex align-items-center m-0 my-5">
-                            <div class="col-auto text-start"><button class="btn border-0" id="prevMonth"><i class="fas fa-angle-left"></i></button></div>
+                            <div class="col-auto text-start"><button class="btn border-0" id="prevMonthBtn"><i class="fas fa-angle-left"></i></button></div>
                             <div class="month-header col text-center"></div>
-                            <div class="col-auto text-end"><button class="btn border-0" id="nextMonth"><i class="fas fa-angle-right"></i></button></div>
+                            <div class="col-auto text-end"><button class="btn border-0" id="nextMonthBtn"><i class="fas fa-angle-right"></i></button></div>
                         </header>
                         <!-- WEEKDAYS-->
                         <div class="weekdays row text-center mb-3 gx-0">
@@ -181,11 +181,10 @@
                 </div>
                 <div class="row">
                     <!-- DAY VIEW -->
-                    <form id="bookTime" class="container">
-                        <div class="day-view">
-                            <!-- Time-slots inserted via JS -->
-                        </div>
-                    </form>
+                    <div class="day-view" id="dayView">
+                        <!-- Form inserted via JS -->
+                    </div>
+                    
                 </div>
             </div>
         </div>  
