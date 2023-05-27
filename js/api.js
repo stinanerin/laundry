@@ -70,8 +70,8 @@ const createUser = async(name, email, pwd) => {
     }
 }
 
-const addBooking = async(listId, dateObject) => {
-    if(!usersBooking) {
+const addBooking = async(listId, date) => {
+    if (!getItem("user").hasBooking) {
         try {
             const res = await fetch(`${API_BASE_URL}lists/${listId}/items`, {
                 method: "POST",
@@ -79,17 +79,19 @@ const addBooking = async(listId, dateObject) => {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    booking: dateObject,
-                    user_id: getitem("user").id
+                    booking: date,
+                    user_id: getItem("user").id,
                 }),
-            })   
-            if(!res.ok) {
-                throw new Error(res.statusText)
-            } 
-            return res
-        } catch(error) {
-            displayModal(error.message)
+            });
+            if (!res.ok) {
+                throw new Error(res.statusText);
+            }
+            return res;
+        } catch (error) {
+            displayModal(error.message);
         }
+    } else {
+        //todo maybe move if isnide and throw error?
     }
 }
 

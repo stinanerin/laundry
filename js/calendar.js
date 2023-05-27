@@ -1,10 +1,10 @@
 // ----------------------- DOM ELEMENTS -----------------------
 const calendar = document.querySelector(".calendar"),
     dayGrid = document.querySelector(".calender-days-grid"),
-    bookingForm = document.querySelector("#bookTime"),
-    dayView = document.querySelector(".day-view"),
+    dayView = document.querySelector("#dayView"),
     timeBooking = document.querySelector(".booking"),
-    dateHeader = document.querySelector(".month-header");
+    dateHeader = document.querySelector(".month-header"),
+    welcomeMsgDiv = document.querySelector("#welcomeMsg");
 
 // ----------------------- GLOBAL VARIABLES -----------------------
 // Courtesy of https://gist.github.com/seripap/9eb809268eb8026abd9f
@@ -28,13 +28,13 @@ const renderMonthCal = async() => {
     dayView.innerHTML = "";
 
     const { bookings, usersBooking } = await fetchBookings(currentList);
-    console.log("usersBooking", usersBooking, "bookings", bookings);
+    // console.log("usersBooking", usersBooking, "bookings", bookings);
 
     // Updates month header 
     dateHeader.innerHTML =  `<h2>${months[month]} ${year}</h2>`;
 
     const dates = generateMonthViewDates(year, month)
-    console.log(dates);
+    // console.log(dates);
 
     // Loops through the dates array and renders them to the DOM
     dates.forEach(({date, month, prevMonth, nextMonth}, index) => {
@@ -61,6 +61,7 @@ const renderMonthCal = async() => {
 const fetchBookings = async (list) => {
     // Fetches all bookings from API
     const bookings = await fetchData(list);
+    
     return {
         // Creates a new array with a Date object for each booked date
         bookings: bookings.map(date => new Date(date.booking)),
@@ -82,7 +83,7 @@ const generateMonthViewDates = (year, month) => {
         If the last date is a sunday - set nexDays to a zero, as to not render any days from the next month */
         nextDays = 7 - (lastDay.getDay() === 0 ? 7 : lastDay.getDay());
 
-    // Create an empty array to store the dates
+    // Create an empty array to store the currently rendered months dates
     const dates = [];
 
     // Loops through the days of the previous month and adds them to the dates array
